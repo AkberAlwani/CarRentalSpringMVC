@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cs544.carrental.domain.Customer;
 import cs544.carrental.service.CustomerService;
-import cs544.carrental.service.MemberService;
 
 @Controller
 @RequestMapping({ "/customers" })
@@ -23,36 +22,36 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@RequestMapping
-	public String listMembers(Model model) {
-		model.addAttribute("members", customerService.findAll());
-		return "members";
+	public String listCustomers(Model model) {
+		model.addAttribute("customers", customerService.findAll());
+		return "customers";
 	}
 
 	@RequestMapping("/{id}")
-	public String getMemberById(@PathVariable("id") Long id, Model model) {
-		Customer member = customerService.findOne(id);
-		model.addAttribute("member", member);
+	public String getCustomerById(@PathVariable("id") Long id, Model model) {
+		Customer customer = customerService.findOne(id);
+		model.addAttribute("customer", customer);
 
-		return "member";
+		return "customer";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewMemberForm(@ModelAttribute("newMember") Customer newMember) {
-		return "addMember";
+	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
+		return "addCustomer";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewMemberForm(@ModelAttribute("newMember") @Valid Customer memberToBeAdded,
+	public String processAddNewCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customerToBeAdded,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "addMember";
+			return "addCustomer";
 		}
 
 		// Error caught by ControllerAdvice IF no authorization...
-		customerService.saveFull(memberToBeAdded);
+		customerService.saveFull(customerToBeAdded);
 		
-		return "redirect:/members";
+		return "redirect:/customers";
 
 	}
 

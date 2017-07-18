@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.carrental.dao.CustomerDao;
 import cs544.carrental.domain.Account;
@@ -13,6 +14,7 @@ import cs544.carrental.service.CustomerService;
 
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired 
