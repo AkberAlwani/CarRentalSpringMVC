@@ -1,8 +1,12 @@
 package cs544.carrental.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -38,7 +42,11 @@ public class Vehicle {
 	
 	private boolean isAvailable;
 
-	
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//  @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
+//  inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
+//  Set<Vehicle> vehicles = new HashSet<Vehicle>();
+    private VehicleType vehicleType;
 	
 	
 	public long getVehicleId() {
@@ -111,6 +119,16 @@ public class Vehicle {
 
 	public void setIsAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	
+	
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 
 	@Override

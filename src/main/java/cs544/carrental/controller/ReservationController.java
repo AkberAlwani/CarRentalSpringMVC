@@ -33,6 +33,14 @@ import cs544.carrental.service.VehicleService;
 @RequestMapping("/reservation/")
 @Controller
 public class ReservationController {
+	private Logger logger = Logger.getLogger(ReservationController.class);
+	
+	@Autowired
+	VehicleService vehicleService;
+	@Autowired
+	CustomerService personService;
+	@Autowired
+	ReservationService reservationService;
 	
 	@RequestMapping(value="list",method=RequestMethod.GET)
 	public String showList(Model model) {
@@ -51,13 +59,7 @@ public class ReservationController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
 
-	private Logger logger = Logger.getLogger(ReservationController.class);
-	@Autowired
-	ReservationService reservationService;
-	@Autowired
-	VehicleService vehicleService;
-	@Autowired
-	CustomerService personService;
+
 
 	@RequestMapping("add/{carid}")
 	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
