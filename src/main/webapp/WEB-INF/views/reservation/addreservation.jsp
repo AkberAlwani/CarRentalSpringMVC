@@ -21,19 +21,19 @@
 <!-- 				</select></p> -->
 <!--         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p> -->
 <!--     </form> -->
-    <form:form modelAttribute="reservation" action="/reservation/add/${carNumber}" method="post">
+    <form:form modelAttribute="reservation" action="${carNumber}" method="post">
     	<p><form:label path="pickUpDateTime">Pickup Date:</form:label>
     		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" />
     	</p>
         <p><form:label path="returnDateTime">Return Date:</form:label>
     		<form:input path="returnDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Return Date" />
     	</p>
-		<p>Add Payment: 
-			<select name="addPayment">
-				<option value="Yes">Yes</option>
-				<option value="No">No</option>
-			</select>
-		</p>
+<!-- 		<p>Add Payment:  -->
+<!-- 			<select name="addPayment"> -->
+<!-- 				<option value="Yes">Yes</option> -->
+<!-- 				<option value="No">No</option> -->
+<!-- 			</select> -->
+<!-- 		</p> -->
 		<p>
 			<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 		</p>	

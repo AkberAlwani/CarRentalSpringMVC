@@ -17,7 +17,7 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 		super.setDaoType(Payment.class );
 	}
 	@Override
-	public List<Payment> findByPaymentId(int paymentId) {
+	public List<Payment> findByPaymentId(long paymentId) {
 		
 		Query query = entityManager.createQuery("select p from Payment p  where p.paymentId =:paymentId");
 		return query.setParameter("paymentId", paymentId).getResultList();

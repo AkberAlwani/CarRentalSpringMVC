@@ -6,7 +6,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cs544.carrental.domain.Account;
 import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Payment;
 import cs544.carrental.domain.Reservation;
+import cs544.carrental.service.AccountService;
 import cs544.carrental.service.PaymentService;
 
 @Controller
@@ -26,7 +29,9 @@ import cs544.carrental.service.PaymentService;
 public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
-
+	@Autowired
+	AccountService accountService;
+	
 	@RequestMapping(value = "/admin/allPayment", method = RequestMethod.GET)
 	public String allPayment(Model model, HttpSession viewSession) {
 		List<Payment> paymentLst = paymentService.findAllPayment();
@@ -52,9 +57,9 @@ public class PaymentController {
 	
 	@RequestMapping(value = "/add-payment", method = RequestMethod.GET)
 	public String addPayment(Payment payment, HttpSession sessionAdd, Model model) {
-		System.out.println("shova" + sessionAdd.getAttribute("totalPriceSession"));
+		System.out.println("shova"+sessionAdd.getAttribute("totalPriceSession"));
 		sessionAdd.setAttribute("amountValue", sessionAdd.getAttribute("totalPriceSession"));
-
+		
 		return "payment/add-payment";
 	}
 
@@ -62,21 +67,26 @@ public class PaymentController {
 	public String payBill(@Valid Payment payment, BindingResult bindingResult, HttpSession sessionReservation) {
 		if (bindingResult.hasErrors())
 			return "payment/add-payment";
-		Reservation reservationObject = (Reservation) sessionReservation.getAttribute("reservationObject");
+		Reservation reservationObject = (Reservation) sessionReservation.getAttribute("reservationObject");		
 		paymentService.addPayment(payment, reservationObject);
 		return "redirect:view-all-payment";
 	}
 
 	@RequestMapping(value = "/view-payment/{paymentid}", method = RequestMethod.GET)
-	public String viewPayment(@PathVariable("paymentid") String paymentid, Model model, HttpSession mySession) {
-		Customer p = (Customer) mySession.getAttribute("customer");
-
-		if (mySession.getAttribute("customer") != null) {
-			model.addAttribute("isAdmin", ((Customer) mySession.getAttribute("customer")).isAdmin());
+	public String viewPayment(@PathVariable("paymentid") long paymentid, Model model, HttpSession mySession) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+		Account acct = accountService.findByUserName(userDetails.getUsername());
+		Customer p = acct.getCustomer();
+		//Customer p=(Customer) mySession.getAttribute("customer");
+		
+		if (p.isAdmin()) {
+			model.addAttribute("isAdmin", p.isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-
+		
 		List<Payment> paymentList = paymentService.findPaymentByID(paymentid);
 		model.addAttribute("paymentList", paymentList);
 		return "payment/view-payment";
@@ -84,16 +94,27 @@ public class PaymentController {
 
 	@RequestMapping(value = "/view-all-payment", method = RequestMethod.GET)
 	public String viewAllPayment(Model model, HttpSession viewSession) {
+		System.out.println("view-all-payment");
 		List<Payment> paymentLst = paymentService.findAllPayment();
-		Customer p = (Customer) viewSession.getAttribute("customer");
-		System.out.println("First Name" + p.getFirstName());
-		System.out.println("Account Role" + p.getAccount().getAuthority());
+		
+		for(Payment payment : paymentLst)
+			System.out.print("Amount" + payment.getAmount());
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+//		Customer p=(Customer) viewSession.getAttribute("customer");	
+		Account acct = accountService.findByUserName(userDetails.getUsername());
+		Customer p = acct.getCustomer();
+		
+		System.out.println("First Name"+ p.getFirstName());
+		System.out.println("Account Role"+ p.getAccount().getAuthority());
 		if (viewSession.getAttribute("person") != null) {
-			model.addAttribute("isAdmin", ((Customer) viewSession.getAttribute("customer")).isAdmin());
+			model.addAttribute("isAdmin", p.isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		System.out.println("Checking " + p);
+		System.out.println("Checking "+ p);
 		model.addAttribute("paymentList", paymentLst);
 		model.addAttribute("totalAmount", paymentService.findTotalAmount(paymentLst));
 		return "payment/view-all-payments";

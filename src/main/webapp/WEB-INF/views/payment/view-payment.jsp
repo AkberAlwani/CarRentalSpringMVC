@@ -1,8 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta charset="ISO-8859-1" />
 <title>View Individual Payment</title>
-
+<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
+<link href="/css/main.css" rel="stylesheet" media="screen" />
 <style>
 table {
 	border-collapse: collapse;
@@ -34,7 +38,7 @@ h3 {
 <body>
 	<h1>Payment Information Page</h1>
 	<table>
-		<thead>
+		<tr>
 			<th>Reservation ID</th>
 			<th>Amount</th>
 			<th>Status</th>
@@ -44,36 +48,35 @@ h3 {
 			<th>Brand</th>
 			<th>Type</th>
 			<th>Model</th>
-		</thead>
+		</tr>
 		<tbody>
-			<tr th:each="list: ${paymentList}">
-
-				<td th:text="${list.reservation.reservationId}" />
-				<td th:text="${list.amount}" />
-				<td th:text="${list.isConfirm}" />
-				<td th:text="${list.reservation.person.personId}" />
-				<td th:text="${list.reservation.person.name}" />
-				<td th:text="${list.reservation.vehicle.vehiclePlateNumber}" />
-				<td th:text="${list.reservation.vehicle.brand}" />
-				<td th:text="${list.reservation.vehicle.type}" />
-				<td th:text="${list.reservation.vehicle.model}" />
-
-				<td th:if="${isAdmin}"><a href="#"
-					data-th-href="@{~/payment/cancel-payment/{id}(id=${list.paymentId})}">Delete</a></td>
-
+			
+			<c:forEach items="${paymentList}" var="list">
+				<tr>
+					<td>${list.paymentDateTime}</td>
+					<td>${list.paymentType}</td>
+					<td>${list.amount}</td>
+					<td>${list.reservation.reservationId}</td>
+					<td>${list.reservation.customer.firstName} ${list.reservation.customer.lastName}</td>
+					<td>${list.reservation.vehicle.plateNumber}</td>
+					<td>${list.reservation.vehicle.make}</td>
+					<td>${list.reservation.vehicle.vehicleType.name}</td>
+					<td>${list.reservation.vehicle.model}</td>
+<%-- 				<c:if test="${isAdmin}"> --%>
+<%-- 					<td><a href="<%=request.getContextPath() %>/payment/cancel-payment/${list.paymentId}">Delete</a></td> --%>
+<%-- 				</c:if> --%>
 
 				<!-- <td><a	th:href="@{~/payment/cancel-payment/{id}(id=${list.paymentId})}">Delete</a></td> -->
 				<!-- <td><a	th:href="@{~/payment/update-payment/{id}(id=${list.paymentId})}">Update</a></td> -->
+<%-- 				<c:if test="${isAdmin}"> --%>
+<%-- 					<td><a href="<%=request.getContextPath() %>/payment/update-payment/${list.paymentId}">Update</a></td> --%>
+<%-- 				</c:if> --%>
 
-				<td th:if="${isAdmin}"><a href="#"
-					data-th-href="@{~/payment/update-payment/{id}(id=${list.paymentId})}">Update</a></td>
 
-
-
-				<td><a th:href="@{~/payment/view-all-payment}">View all
+				<td><a href="<%=request.getContextPath() %>/payment/view-all-payment">View all
 						Payments</a></td>
 			</tr>
-
+			</c:forEach>
 		</tbody>
 	</table>
 </body>

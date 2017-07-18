@@ -2,6 +2,7 @@ package cs544.carrental.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Reservation {
 	private double pricePerDay;
 	private double finePerDay;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Vehicle vehicle;
 	
 	@OneToOne

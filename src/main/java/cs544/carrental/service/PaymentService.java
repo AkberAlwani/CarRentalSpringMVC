@@ -9,7 +9,7 @@ import cs544.carrental.domain.Reservation;
 public interface PaymentService {
 	public void addPayment(Payment payment, Reservation reservation);
 
-	public List<Payment> findPaymentByID(String paymentId);
+	public List<Payment> findPaymentByID(long paymentId);
 
 	public List<Payment> findAllPayment();
 
