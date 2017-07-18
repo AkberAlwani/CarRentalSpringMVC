@@ -21,9 +21,8 @@ import cs544.carrental.domain.VehicleSpec;
 import cs544.carrental.service.VehicleService;
 
 
-
-@RequestMapping("/vehicle/")
 @Controller
+@RequestMapping("/vehicle/")
 public class VehicleController {
 
 	final private String URL = "/vehicle/";
@@ -120,7 +119,8 @@ public class VehicleController {
 	private void setRole(HttpSession session, Model model) {
 		/*
 		 * if (testing) { model.addAttribute("isAdmin", true); }
-		 */ if (session.getAttribute("person") != null) {
+		 */ 
+		if (session.getAttribute("person") != null) {
 			model.addAttribute("isAdmin", ((Person) session.getAttribute("person")).isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);

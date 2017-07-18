@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -34,10 +33,10 @@
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<a href="<spring:url value="/members/add" />"
-						class="btn btn-default pull-right">Add Member</a>
-					<a href="<spring:url value="/members" />"
-						class="btn btn-default pull-right">Member List</a>
+					<a href="<spring:url value="/vehicle/add" />"
+						class="btn btn-default pull-right">Add Vehicle</a>
+					<a href="<spring:url value="/vehicle" />"
+						class="btn btn-default pull-right">Vehicle List</a>
 					<br>
 					<a href="<spring:url value="/products/add" />"
 						class="btn btn-default pull-right">Add Product</a>
