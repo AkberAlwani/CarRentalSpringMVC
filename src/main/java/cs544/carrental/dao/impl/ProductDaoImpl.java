@@ -14,15 +14,12 @@ import cs544.carrental.dao.ProductDao;
 import cs544.carrental.domain.Member;
 import cs544.carrental.domain.Product;
 
-	@Repository
-	public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao
-	{
-		
-		public ProductDaoImpl() {
-			super.setDaoType(Product.class );
-			}
-
-
-  
+@Repository
+public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao
+{
+	
+	public ProductDaoImpl() {
+		super.setDaoType(Product.class);
 	}
+}
 

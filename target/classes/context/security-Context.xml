@@ -53,13 +53,16 @@
  <!-- Database security "custom queries are because we have used our own schema...	-->
  <!-- users-by-username-query="select username,password,enabled from credentials where username=?"
 				authorities-by-username-query="select u1.username, u2.authority from credentials u1, authority u2 where u1.username = u2.username and u1.username =?" /> -->
+		<!--  		users-by-username-query="select username as username, password as password, active as active from account where username=?"
+				authorities-by-username-query="select username as username, accountType as role from account where username=?" /> -->
+
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider>
 			<security:password-encoder hash="bcrypt" />
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select username as username, password as password, active as active from account where username=?"
-				authorities-by-username-query="select username as username, accountType as role from account where username=?" />
+				users-by-username-query="select username,password,enabled from credentials where username=?"
+				authorities-by-username-query="select u1.username, u2.authority from credentials u1, authority u2 where u1.username = u2.username and u1.username =?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

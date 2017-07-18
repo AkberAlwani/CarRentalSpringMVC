@@ -1,5 +1,6 @@
 package cs544.carrental.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,9 +32,14 @@ public class VehicleController {
 	private VehicleService vehicleService;
 
 	@RequestMapping({ "", "/all" })
-	public String list(Model model, HttpSession session) {
+	public String list(Model model) {
 //		setRole(session, model);
-		model.addAttribute("vehicles", vehicleService.getAllVehicles());
+		List<Vehicle> list = new ArrayList<Vehicle>();
+		list = vehicleService.getAllVehicles();
+		for(Vehicle v: list){
+			System.out.println(v);
+		}
+		model.addAttribute("vehicles", list);
 		return "vehicles";
 	}
 
@@ -49,12 +55,7 @@ public class VehicleController {
 	// return URL + "vehicles";
 	// }
 
-	@RequestMapping(value = "vehicle/{vehicleId}", method = RequestMethod.GET)
-	public String vehicleDetail(@PathVariable Integer vehicleId, Model model) {
-		Vehicle vehicle = vehicleService.findByVehicleId(vehicleId);
-		model.addAttribute("vehicle", vehicle);
-		return "vehicle";
-	}
+	
 
 	// @Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -94,71 +95,76 @@ public class VehicleController {
 		// }
 		// return URL + "add";
 	}
-
-	private void setRole(HttpSession session, Model model) {
-
-		if (session.getAttribute("person") != null) {
-			model.addAttribute("isAdmin", ((Person) session.getAttribute("person")).isAdmin());
-		} else {
-			model.addAttribute("isAdmin", false);
-		}
-	}
-
-	private void authenticate(HttpSession mySession) {
-		if (mySession.getAttribute("person") == null || !((Person) mySession.getAttribute("person")).isAdmin()) {
-			throw new RuntimeException("Not authenticated to do the operation.");
-		}
-	}
-
-	// @Secured("ROLE_ADMIN")
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody String delete(int vehicleId, HttpSession session) {
-		authenticate(session);
-		vehicleService.delete(vehicleId);
-//		return "redirect:" + URL + "vehicles";
-		return "redirect:/vehicles";
-	}
-
-	// @Secured("ROLE_ADMIN")
-	@RequestMapping(value = "update/{vehicleId}", method = RequestMethod.GET)
-	public String update(@PathVariable int vehicleId, HttpSession session, Model model) {
-		// authenticate(session);
-		Vehicle vehicle = this.vehicleService.findByVehicleId(vehicleId);
-		model.addAttribute("updated", false);
+	@RequestMapping(value = "vehicle/{vehicleId}", method = RequestMethod.GET)
+	public String vehicleDetail(@PathVariable Integer vehicleId, Model model) {
+		Vehicle vehicle = vehicleService.findByVehicleId(vehicleId);
 		model.addAttribute("vehicle", vehicle);
-//		return URL + "update";
-		return "redirect:/vehicles";
+		return "vehicle";
 	}
+//	private void setRole(HttpSession session, Model model) {
+//
+//		if (session.getAttribute("person") != null) {
+//			model.addAttribute("isAdmin", ((Person) session.getAttribute("person")).isAdmin());
+//		} else {
+//			model.addAttribute("isAdmin", false);
+//		}
+//	}
+
+//	private void authenticate(HttpSession mySession) {
+//		if (mySession.getAttribute("person") == null || !((Person) mySession.getAttribute("person")).isAdmin()) {
+//			throw new RuntimeException("Not authenticated to do the operation.");
+//		}
+//	}
 
 	// @Secured("ROLE_ADMIN")
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid Vehicle vehicle, BindingResult result, HttpSession session, Model model) {
+//	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+//	public @ResponseBody String delete(int vehicleId, HttpSession session) {
+//		authenticate(session);
+//		vehicleService.delete(vehicleId);
+////		return "redirect:" + URL + "vehicles";
+//		return "redirect:/vehicles";
+//	}
 
-		authenticate(session);
+	// @Secured("ROLE_ADMIN")
+//	@RequestMapping(value = "update/{vehicleId}", method = RequestMethod.GET)
+//	public String update(@PathVariable int vehicleId, HttpSession session, Model model) {
+//		// authenticate(session);
+//		Vehicle vehicle = this.vehicleService.findByVehicleId(vehicleId);
+//		model.addAttribute("updated", false);
+//		model.addAttribute("vehicle", vehicle);
+////		return URL + "update";
+//		return "redirect:/vehicles";
+//	}
 
-		if (!result.hasErrors()) {
-			vehicleService.update(vehicle);
-			model.addAttribute("updated", true);
-			model.addAttribute("vehicle", vehicle);
-			model.addAttribute("available", vehicle.getIsAvailable() ? "YES" : "NO");
-			//return "redirect:" + URL + "vehicles";
-			return "redirect:/vehicles";
-		}
-		model.addAttribute("updated", false);
-		model.addAttribute("vehicle", vehicle);
-		//return URL + "update";
-		return "redirect:/vehicles";
-	}
-
-	@RequestMapping(value = "/search", method = { RequestMethod.POST, RequestMethod.GET })
-	public String searchVehicles(@ModelAttribute("vs") VehicleSpec vs, BindingResult result, HttpSession session,
-			Model model) {
-		setRole(session, model);
-
-		List<Vehicle> found = this.vehicleService.search(vs.getMinSeats(), vs.getMinPrice(), vs.getMaxPrice(), null);
-		model.addAttribute("vehicles", found);
-
-		return "search";
-	}
+	// @Secured("ROLE_ADMIN")
+//	@RequestMapping(value = "update", method = RequestMethod.POST)
+//	public String update(@Valid Vehicle vehicle, BindingResult result, HttpSession session, Model model) {
+//
+//		authenticate(session);
+//
+//		if (!result.hasErrors()) {
+//			vehicleService.update(vehicle);
+//			model.addAttribute("updated", true);
+//			model.addAttribute("vehicle", vehicle);
+//			model.addAttribute("available", vehicle.getIsAvailable() ? "YES" : "NO");
+//			//return "redirect:" + URL + "vehicles";
+//			return "redirect:/vehicles";
+//		}
+//		model.addAttribute("updated", false);
+//		model.addAttribute("vehicle", vehicle);
+//		//return URL + "update";
+//		return "redirect:/vehicles";
+//	}
+//
+//	@RequestMapping(value = "/search", method = { RequestMethod.POST, RequestMethod.GET })
+//	public String searchVehicles(@ModelAttribute("vs") VehicleSpec vs, BindingResult result, HttpSession session,
+//			Model model) {
+//		setRole(session, model);
+//
+//		List<Vehicle> found = this.vehicleService.search(vs.getMinSeats(), vs.getMinPrice(), vs.getMaxPrice(), null);
+//		model.addAttribute("vehicles", found);
+//
+//		return "search";
+//	}
 
 }

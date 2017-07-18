@@ -24,8 +24,16 @@ public class Reservation {
 	private Date pickUpDateTime;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date returnDateTime;
+
+	private int mileageIn;
+	private int mileageOut;
+	private double dailyRate;
+	private double pricePerDay;
+	private double finePerDay;
+	
 	@OneToOne
 	private Vehicle vehicle;
+	
 	@OneToOne
 	private Person person;
 
@@ -75,6 +83,46 @@ public class Reservation {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public int getMileageIn() {
+		return mileageIn;
+	}
+
+	public void setMileageIn(int mileageIn) {
+		this.mileageIn = mileageIn;
+	}
+
+	public int getMileageOut() {
+		return mileageOut;
+	}
+
+	public void setMileageOut(int mileageOut) {
+		this.mileageOut = mileageOut;
+	}
+
+	public double getDailyRate() {
+		return dailyRate;
+	}
+
+	public void setDailyRate(double dailyRate) {
+		this.dailyRate = dailyRate;
+	}
+
+	public double getPricePerDay() {
+		return pricePerDay;
+	}
+
+	public void setPricePerDay(double pricePerDay) {
+		this.pricePerDay = pricePerDay;
+	}
+
+	public double getFinePerDay() {
+		return finePerDay;
+	}
+
+	public void setFinePerDay(double finePerDay) {
+		this.finePerDay = finePerDay;
 	}
 
 	@Override

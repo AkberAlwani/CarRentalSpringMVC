@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Vehicle {
+	
 	@Id
 	@GeneratedValue
 	private long vehicleId;	
@@ -104,9 +105,6 @@ public class Vehicle {
 		this.dailyFine = dailyFine;
 	}
 
-	
-
-	
 	public boolean getIsAvailable() {
 		return isAvailable;
 	}

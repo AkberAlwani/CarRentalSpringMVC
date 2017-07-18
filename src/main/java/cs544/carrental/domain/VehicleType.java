@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -22,14 +23,15 @@ public class VehicleType {
 	@GeneratedValue(strategy=GenerationType.AUTO)
  	private long id;
     
-    String name;
-    String description;
+    private String name;
+    private String description;
     
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
-    inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
-    Set<Vehicle> vehicles = new HashSet<Vehicle>();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
+//    inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
+//    Set<Vehicle> vehicles = new HashSet<Vehicle>();
+      private Vehicle vehicle;
 
 	public long getId() {
 		return id;
@@ -55,17 +57,11 @@ public class VehicleType {
 		this.description = description;
 	}
 
-	public Set<Vehicle> getVehicles() {
-		return vehicles;
-	}
 
-	public void setProducts(Set<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
-
- 	public void addProduct(Vehicle vehicle) {
-		this.vehicles.add(vehicle);
-//		product.getCategories().add(this);
-	}
+	
+// 	public void addProduct(Vehicle vehicle) {
+//		this.vehicles.add(vehicle);
+////		product.getCategories().add(this);
+//	}
 
 }
