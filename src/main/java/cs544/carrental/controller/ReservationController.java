@@ -43,8 +43,10 @@ public class ReservationController {
 
 		List<Reservation> list = reservationService.getAll();
 		model.addAttribute("reservations", list);
+		System.out.println(list.size()+"---------");
+
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
+			System.out.println("==="+list.get(i));
 
 		}
 		return "reservation/reservationList";

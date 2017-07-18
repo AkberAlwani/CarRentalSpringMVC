@@ -38,21 +38,18 @@ tr:nth-child(even) {
 				<th>Person Name</th>
 				<th>Vehicle Name</th>
 			</tr>
-			<c:forEach items="${reservations}">
-			
+			<c:forEach items="${reservations}" var="res">
+				<tr>
+					<td>${res.reservationId}</td>
+					<td>${res.pickUpDateTime}</td>
+					<td>${res.returnDateTime}</td>
+					<td>${res.reservationDateTime}</td>
+					<td>${res.person.name}</td>
+					<td>${res.vehicle.brand} + ${res.vehicle.type} + ${res.vehicle.model}</td>
+					<td><a href="/reservation/edit/${res.reservationId}">Edit</a>
+					| <a href="/reservation/delete/${res.reservationId}" onclick="return confirm('Are you sure?')">Delete</a></td>
+				</tr>
 			</c:forEach>
-<%-- 			<tr th:each="res : ${reservations}"> --%>
-<%-- 				<td th:text="${res.reservationId}"></td> --%>
-<%-- 				<td th:text="${res.pickUpDateTime}"></td> --%>
-<%-- 				<td th:text="${res.returnDateTime}"></td> --%>
-<%-- 				<td th:text="${res.reservationDateTime}"></td> --%>
-<%-- 				<td th:text="${res.person.name}"></td> --%>
-<!-- 				<td -->
-<%-- 					th:text="${res.vehicle.brand} + ${res.vehicle.type} + ${res.vehicle.model}"></td> --%>
-<%-- 				<td><a th:href="@{/reservation/edit/} + ${res.reservationId}">Edit</a> --%>
-<%-- 					| <a th:href="@{/reservation/delete/} + ${res.reservationId}" --%>
-<!-- 					onclick="return confirm('Are you sure?')">Delete</a></td> -->
-<!-- 			</tr> -->
 		</table>
 	</div>
 </body>
