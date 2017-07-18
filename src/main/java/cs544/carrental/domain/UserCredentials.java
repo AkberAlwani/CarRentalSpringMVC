@@ -24,12 +24,12 @@ public class UserCredentials {
 	String verifyPassword;
 	Boolean enabled;
 
-	@OneToOne(mappedBy = "userCredentials", cascade = CascadeType.PERSIST)
-	private Customer member;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "credentials_id")
-	List<Authority> authority = new ArrayList<Authority>();
+//	@OneToOne(mappedBy = "userCredentials", cascade = CascadeType.PERSIST)
+//	private Customer member;
+//
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "credentials_id")
+//	List<Authority> authority = new ArrayList<Authority>();
 
 	public String getUsername() {
 		return username;
@@ -63,20 +63,20 @@ public class UserCredentials {
 		this.enabled = enabled;
 	}
 
-	public List<Authority> getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(List<Authority> authority) {
-		this.authority = authority;
-	}
-
-	public Customer getMember() {
-		return member;
-	}
-
-	public void setMember(Customer member) {
-		this.member = member;
-	}
+//	public List<Authority> getAuthority() {
+//		return authority;
+//	}
+//
+//	public void setAuthority(List<Authority> authority) {
+//		this.authority = authority;
+//	}
+//
+//	public Customer getMember() {
+//		return member;
+//	}
+//
+//	public void setMember(Customer member) {
+//		this.member = member;
+//	}
 
 }
