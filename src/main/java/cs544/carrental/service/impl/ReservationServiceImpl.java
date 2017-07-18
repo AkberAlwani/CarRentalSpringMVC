@@ -4,9 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.carrental.dao.ReservationDao;
 import cs544.carrental.domain.Reservation;
@@ -14,6 +15,7 @@ import cs544.carrental.service.ReservationService;
 
 
 @Service
+@Transactional
 public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired 
