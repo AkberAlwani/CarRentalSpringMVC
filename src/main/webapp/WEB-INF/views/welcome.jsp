@@ -26,7 +26,7 @@
 			<div class="container">
 
 				<security:authorize access="isAnonymous()">
-					<a href="<spring:url value='/Register' />"
+					<a href="<spring:url value='/login/add' />"
 						class="btn btn-default pull-right"> Register</a>
 					<a href="<spring:url value='/login' />"
 						class="btn btn-default pull-right"> Login</a>
@@ -48,7 +48,7 @@
 				</security:authorize>
 
 				<a href="<spring:url value='/members' />" class="btn btn-default">
-					<span class="glyphicon-hand-left glyphicon"></span> Go to Community
+					<span class="glyphicon-hand-left glyphicon"></span>Go to Guest!
 				</a>
 			</div>
 			<div class="pull-left">
