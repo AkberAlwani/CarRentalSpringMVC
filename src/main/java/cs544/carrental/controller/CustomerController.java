@@ -3,6 +3,8 @@ package cs544.carrental.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +33,6 @@ public class CustomerController {
 	public String getCustomerById(@PathVariable("id") Long id, Model model) {
 		Customer customer = customerService.findOne(id);
 		model.addAttribute("customer", customer);
-
 		return "customer";
 	}
 
@@ -39,8 +40,42 @@ public class CustomerController {
 	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
 		return "addCustomer";
 	}
+	
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String getUpdateCustomerForm(Model model) {
+		//get the current user	
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+																    .getAuthentication()
+																    .getPrincipal();
+		
+		//System.out.println( userDetails.getUsername() );
+		Customer customer = customerService.findByUsername( userDetails.getUsername() );
+		model.addAttribute("newCustomer", customer);		
+		
+		//return "addCustomer";
+		return "updateCustomer";
+	}
+	
+	@RequestMapping(value = {"/update"}, method = RequestMethod.POST)
+	public String processUpdateCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customerToBeAdded,
+			BindingResult result) {
+
+		if (result.hasErrors()) {
+			return "updateCustomer";
+		}
+		// Error caught by ControllerAdvice IF no authorization...
+		
+		System.out.println( customerToBeAdded.getId() );
+		Customer c = customerService.findByUsername( customerToBeAdded.getAccount().getUsername() );
+		customerToBeAdded.setId(c.getId());
+		customerService.update(customerToBeAdded);
+		
+		return "redirect:/customers/" + customerToBeAdded.getId();
+
+	}
+	
+	@RequestMapping(value = {"/add"}, method = RequestMethod.POST)
 	public String processAddNewCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customerToBeAdded,
 			BindingResult result) {
 
@@ -51,7 +86,7 @@ public class CustomerController {
 		// Error caught by ControllerAdvice IF no authorization...
 		customerService.saveFull(customerToBeAdded);
 		
-		return "redirect:/customers";
+		return "redirect:/customers/" + customerToBeAdded.getId();
 
 	}
 

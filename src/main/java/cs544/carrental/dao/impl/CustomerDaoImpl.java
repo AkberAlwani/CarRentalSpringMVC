@@ -32,19 +32,19 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
 
 	@Override
 	public Customer findByName(String name) {
-		Query query = entityManager.createQuery("select p from Customer p  where where p.name =:name");
+		Query query = entityManager.createQuery("select p from Customer p where p.name =:name");
 		return (Customer) query.setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public Customer findByAccount(Account account) {
-		Query query = entityManager.createQuery("select p from Customer p  where where p.Account =:account");
+		Query query = entityManager.createQuery("select p from Customer p  where p.Account =:account");
 		return (Customer) query.setParameter("account", account).getSingleResult();
 	}
 
 	@Override
 	public Customer getLoggedInPersonByAccount(Account account) {
-		Query query = entityManager.createQuery("select p from Person p  where where p.Account =:account");
+		Query query = entityManager.createQuery("select p from Person p  where p.Account =:account");
 		return (Customer) query.setParameter("account", account).getSingleResult();
 	}
 
@@ -52,13 +52,13 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
 
 	@Override
 	public Customer getLoggedInPersonByName(String name) {
-		Query query = entityManager.createQuery("select p from Customer p  where where p.name =:name");
+		Query query = entityManager.createQuery("select p from Customer p  where p.name =:name");
 		return (Customer) query.setParameter("name", name).getSingleResult();
 	}
 
 	@Override
 	public Customer findByUsername(String userName) {
-		Query query = entityManager.createQuery("select p from Customer p  where where p.username =:userName");
+		Query query = entityManager.createQuery("select p from Customer p where p.account.username =:userName");
 		return (Customer) query.setParameter("userName", userName).getSingleResult();
 	}
 

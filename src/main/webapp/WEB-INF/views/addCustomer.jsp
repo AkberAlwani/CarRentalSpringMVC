@@ -6,28 +6,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Products</title>
+<title>Customer</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Valued Members</h1>
-				<p>Add a new one<p>
+				<h1>Customer Registration</h1>
 			</div>
 		</div>
 	</section>
 	<section class="container">
-		<form:form  modelAttribute="newMember" class="form-horizontal"  >
+		<form:form  modelAttribute="newCustomer" class="form-horizontal"  >
 			<fieldset>
-				<legend>Add new member</legend>
+				<legend>Register new customer</legend>
 
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="memberNumber"> Member Number</label>
+					<label class="control-label col-lg-2 col-lg-2" for="customerNumber"> Customer Number</label>
 					<div class="col-lg-10">
-						<form:input id="memberNumber" path="memberNumber" type="text" class="form:input-large"/>
-						<form:errors path="memberNumber" cssClass="text-danger"/>
+						<form:input id="customerNumber" path="customerNumber" type="text" class="form:input-large"/>
+						<form:errors path="customerNumber" cssClass="text-danger"/>
 					</div>
 				</div>
 
@@ -48,18 +47,19 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="age">Age</label>
+					<label class="control-label col-lg-2" for="age">Phone Number</label>
 					<div class="col-lg-10">
-						<form:input id="age" path="age" type="text" class="form:input-large"/>
-						<form:errors path="age" cssClass="text-danger"/>
+						<form:input id="phoneNumber" path="phoneNumber" type="text" class="form:input-large"/>
+						<form:errors path="phoneNumber" cssClass="text-danger"/>
 					</div>
 				</div>
 
+
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="title">Title</label>
+					<label class="control-label col-lg-2" for="age">Email</label>
 					<div class="col-lg-10">
-						<form:input id="title" path="title" type="text" class="form:input-large"/>
-						<form:errors path="title" cssClass="text-danger"/>
+						<form:input id="email" path="email" type="text" class="form:input-large"/>
+						<form:errors path="email" cssClass="text-danger"/>
 					</div>
 				</div>
 
@@ -67,8 +67,8 @@
 					<label class="control-label col-lg-2" for="userName">User Name</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="username" path="userCredentials.username" type="text" class="form:input-large"/>
-							<form:errors path="userCredentials.username" cssClass="text-danger"/>
+							<form:input id="username" path="account.username" type="text" class="form:input-large"/>
+							<form:errors path="account.username" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
@@ -78,8 +78,8 @@
 					<label class="control-label col-lg-2" for="password">Password</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:password id="password" path="userCredentials.password"  class="form:input-large"/>
-							<form:errors path="userCredentials.password" cssClass="text-danger"/>
+							<form:password id="password" path="account.password"  class="form:input-large"/>
+							<form:errors path="account.password" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
@@ -89,23 +89,23 @@
 					<label class="control-label col-lg-2" for="verifyPassword">Verify Password</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:password  path="userCredentials.verifyPassword"  class="form:input-large"/>
-							<form:errors path="userCredentials.verifyPassword" cssClass="text-danger"/>
+							<form:password  path="account.verifyPassword"  class="form:input-large"/>
+							<form:errors path="account.verifyPassword" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 
 					<div class="form-group">
-					<label class="control-label col-lg-2" for="authority">Role</label>
+<!-- 					<label class="control-label col-lg-2" for="authority">Role</label> -->
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input  path="userCredentials.authority[0].authority" type="text" value="ROLE_USER" class="form:input-large"/>
-							<form:errors path="userCredentials.authority[0].authority" cssClass="text-danger"/>
+							<form:input  path="account.authority.authority" type="hidden" value="ROLE_USER" class="form:input-large"/>
+							<form:errors path="account.authority.authority" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
  
- 							<form:hidden path="userCredentials.enabled" value="TRUE"  />
+ 							<form:hidden path="account.enabled" value="TRUE"  />
  
 
 				<div class="form-group">
