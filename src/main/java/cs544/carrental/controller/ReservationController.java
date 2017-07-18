@@ -46,7 +46,7 @@ public class ReservationController {
 	public String showList(Model model) {
 		List<Reservation> list = reservationService.getAll();
 		model.addAttribute("reservations", list);
-		return "reservation/reservationList";
+		return "admin/reservation/reservationList";
 	}
 	
 	
