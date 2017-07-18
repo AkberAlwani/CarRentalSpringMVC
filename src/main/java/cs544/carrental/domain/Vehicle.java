@@ -31,7 +31,7 @@ public class Vehicle {
 	@NotEmpty(message="{NotEmpty.vehicledata}")	
 	private String plateNumber;		
 	
-	@Min(value=1,message="{number.minvalue}")
+	
 	private int numberOfSeats;
 	
 	@Min(value=1,message="{number.minvalue}")
@@ -46,6 +46,7 @@ public class Vehicle {
 //  @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
 //  inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
 //  Set<Vehicle> vehicles = new HashSet<Vehicle>();
+
     private VehicleType vehicleType;
 	
 	

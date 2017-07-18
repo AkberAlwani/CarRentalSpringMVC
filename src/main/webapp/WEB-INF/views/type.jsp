@@ -7,13 +7,13 @@
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 	<script src="<spring:url value="/resource/js/controllers.js"/>"></script>
-<title>Products</title>
+<title>Types</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Products</h1>
+				<h1>Vehicle Types</h1>
 			</div>
 		</div>
 	</section>
@@ -22,15 +22,14 @@
 		<div class="row">
  		
 			<div class="col-md-5">
-				<h3>${product.name}</h3>
-				<p>${product.description}</p>
+				<h3>${type.name}</h3>
+				<p>${type.description}</p>
 				<p>
-					<strong>Item Code : </strong><span class="label label-warning">${product.id}</span>
+					<strong>Vehicle Id: </strong><span class="label label-warning">${type.id}</span>
 				</p>
- 				<h4>${product.price} USD</h4>
-				<p ng-controller="cartCtrl">
+ 				<p ng-controller="cartCtrl">
  
- <a href="<spring:url value="/products" />" class="btn btn-default">
+ <a href="<spring:url value="/types" />" class="btn btn-default">
 						<span class="glyphicon-hand-left glyphicon"></span> back
 					</a>
 
@@ -38,7 +37,7 @@
 
 			</div>
 		</div>
-<!--/div-->
+
 	</section>
 </body>
 </html>

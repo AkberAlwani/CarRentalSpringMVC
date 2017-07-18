@@ -1,6 +1,6 @@
 package cs544.carrental.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cs544.carrental.domain.Customer;
+
 import cs544.carrental.domain.Vehicle;
-import cs544.carrental.domain.VehicleSpec;
+
+
 import cs544.carrental.service.VehicleService;
+import cs544.carrental.service.VehicleTypeService;
 
 @Controller
 @RequestMapping("/vehicles")
@@ -30,37 +33,25 @@ public class VehicleController {
 
 	@Autowired
 	private VehicleService vehicleService;
+	
+	@Autowired
+	private VehicleTypeService vehicleTypeService; 
 
 	@RequestMapping({ "", "/all" })
 	public String list(Model model) {
 //		setRole(session, model);
-		List<Vehicle> list = new ArrayList<Vehicle>();
-		list = vehicleService.getAllVehicles();
-		for(Vehicle v: list){
-			System.out.println(v);
-		}
-		model.addAttribute("vehicles", list);
+		model.addAttribute("vehicles",  vehicleService.getAllVehicles());
 		return "vehicles";
 	}
 
-	// @RequestMapping(value = "vehicles", method = { RequestMethod.GET,
-	// RequestMethod.POST })
-	// public String vehicles(@ModelAttribute("vs") VehicleSpec vs,
-	// BindingResult result, HttpSession session,
-	// Model model) {
-	// setRole(session, model);
-	// List<Vehicle> found = vehicleService.search(vs.getMinSeats(),
-	// vs.getMinPrice(), vs.getMaxPrice(), null);
-	// model.addAttribute("vehicles", found);
-	// return URL + "vehicles";
-	// }
-
-	
-
-	// @Secured("ROLE_ADMIN")
+// @Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewProductForm(@ModelAttribute("newVehicle") Vehicle newVehicle, HttpSession session) {
+//	public String getAddNewProductForm(@ModelAttribute("newVehicle") Vehicle newVehicle, Model model) {
+	public String getAddNewProductForm(Model model) {
 //		authenticate(session);
+		Vehicle vehicle = new Vehicle();
+    	model.addAttribute("newVehicle", vehicle);
+        model.addAttribute("types", vehicleTypeService.findAll());
 		return "addVehicle";
 
 		// public String add(HttpSession session, Model model) {
@@ -73,6 +64,7 @@ public class VehicleController {
 		// return URL + "add";
 	}
 
+	
 	// @Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	// public String add(@Valid Vehicle vehicle, BindingResult result,
@@ -101,6 +93,18 @@ public class VehicleController {
 		model.addAttribute("vehicle", vehicle);
 		return "vehicle";
 	}
+	
+	// @RequestMapping(value = "vehicles", method = { RequestMethod.GET,
+		// RequestMethod.POST })
+		// public String vehicles(@ModelAttribute("vs") VehicleSpec vs,
+		// BindingResult result, HttpSession session,
+		// Model model) {
+		// setRole(session, model);
+		// List<Vehicle> found = vehicleService.search(vs.getMinSeats(),
+		// vs.getMinPrice(), vs.getMaxPrice(), null);
+		// model.addAttribute("vehicles", found);
+		// return URL + "vehicles";
+		// }
 //	private void setRole(HttpSession session, Model model) {
 //
 //		if (session.getAttribute("person") != null) {
