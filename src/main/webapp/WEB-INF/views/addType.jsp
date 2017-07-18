@@ -6,33 +6,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Products</title>
+<title>Vehicle Type</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Products</h1>
-				<p>Add products</p>
+				<h1>Add Type</h1>
 			</div>
  		</div>
 	</section>
 	<section class="container">
-		<form:form  modelAttribute="newProduct" class="form-horizontal" >
+		<form:form  modelAttribute="newType" class="form-horizontal" >
 			<fieldset>
-				<legend>Add new product</legend>
+				<legend>Add new type</legend>
 
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
-				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="productId"><spring:message code="addProduct.form.productId.label"/></label>
+				<!--  div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2" for="Id"><spring:message code="addType.form.Id.label"/></label>
 					<div class="col-lg-10">
-						<form:input id="productId" path="productId" type="text" class="form:input-large"/>
-						<form:errors path="productId" cssClass="text-danger"/>
+						<form:input id="Id" path="Id" type="text" class="form:input-large"/>
+						<form:errors path="Id" cssClass="text-danger"/>
 					</div>
-				</div>
+				</div-->
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="name"><spring:message code="addProduct.form.name.label"/></label>
+					<label class="control-label col-lg-2" for="name"><spring:message code="addType.form.name.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text" class="form:input-large"/>
 						<form:errors path="name" cssClass="text-danger"/>
@@ -40,17 +39,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="price"><spring:message code="addProduct.form.price.label"/></label>
-					<div class="col-lg-10">
-						<div class="form:input-prepend">
-							<form:input id="price" path="price" type="text" class="form:input-large"/>
-							<form:errors path="price" cssClass="text-danger"/>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="description"><spring:message code="addProduct.form.description.label"/></label>
+					<label class="control-label col-lg-2" for="description"><spring:message code="addType.form.description.label"/></label>
 					<div class="col-lg-10">
 						<form:textarea id="description" path="description" rows = "2"/>
 					</div>

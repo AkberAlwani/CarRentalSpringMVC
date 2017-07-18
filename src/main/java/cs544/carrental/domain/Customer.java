@@ -61,7 +61,7 @@ public class Customer {
 	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
 	// @JoinColumn(name = "account_person_id", referencedColumnName =
 	// "accountId")
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "account_id")
 	private Account account;
 	
 

@@ -9,9 +9,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 <script src="<spring:url value="/resource/js/controllers.js"/>"></script>
-<title>Vehicles</title>
+<title>Vehicle</title>
 </head>
 <body>
+
 	<section>
 		<div class="jumbotron">
 			<div class="container">

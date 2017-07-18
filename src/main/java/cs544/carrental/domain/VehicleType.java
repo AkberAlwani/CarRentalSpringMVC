@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class VehicleType {
@@ -23,9 +25,11 @@ public class VehicleType {
 	@GeneratedValue(strategy=GenerationType.AUTO)
  	private long id;
     
+    @NotEmpty(message="{NotEmpty.vehicledata}")
     private String name;
-    private String description;
     
+    @NotEmpty(message="{NotEmpty.vehicledata}")
+    private String description;
     
 	public long getId() {
 		return id;
@@ -50,12 +54,5 @@ public class VehicleType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
-	
-// 	public void addProduct(Vehicle vehicle) {
-//		this.vehicles.add(vehicle);
-////		product.getCategories().add(this);
-//	}
 
 }

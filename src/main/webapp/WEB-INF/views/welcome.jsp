@@ -31,15 +31,15 @@
 			<div class="container">
 
 				<security:authorize access="isAnonymous()">
-					<a href="<spring:url value='/login/add' />"
+					<a href="<spring:url value='/customers/add' />"
 						class="btn btn-default pull-right"> Register</a>
 					<a href="<spring:url value='/login' />"
 						class="btn btn-default pull-right"> Login</a>
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<a href="<spring:url value="/vehicles/add" />"
-						class="btn btn-default pull-right">Add Vehicle</a>
+					<a href="<spring:url value="/types/all" />"
+						class="btn btn-default pull-right">Car Types</a>
 					<a href="<spring:url value="/vehicles/all" />"
 						class="btn btn-default pull-right">Vehicle List</a>
 					<br>
@@ -52,7 +52,7 @@
 						class="btn btn-default pull-right"> Logout</a>
 				</security:authorize>
 
-				<a href="<spring:url value='/members' />" class="btn btn-default">
+				<a href="<spring:url value='/customers' />" class="btn btn-default">
 					<span class="glyphicon-hand-left glyphicon"></span>Go to Guest!
 				</a>
 			</div>

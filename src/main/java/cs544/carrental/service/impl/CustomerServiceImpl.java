@@ -1,9 +1,11 @@
 package cs544.carrental.service.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.carrental.dao.CustomerDao;
 import cs544.carrental.domain.Account;
@@ -13,6 +15,7 @@ import cs544.carrental.service.CustomerService;
 
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired 
@@ -74,6 +77,25 @@ public class CustomerServiceImpl implements CustomerService{
 		accountService.save(customer.getAccount());
 		customerDao.save(customer);
 		
+	}
+
+	@Override
+	public String MD5(String md5) {
+		java.security.MessageDigest md;
+        
+        try {
+            md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array=md.digest(md5.getBytes());
+            StringBuffer sb=new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                  sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+               }
+                return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null; 
 	}
 
 }

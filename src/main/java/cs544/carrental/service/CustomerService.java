@@ -18,5 +18,6 @@ public interface CustomerService {
 	Customer findByCustomerNumber(String customerNo);
 	Customer getLoggedInPersonByAccount(Account account);
 	Customer findByUsername(String userName);
+	String MD5(String md5);
 	
 }

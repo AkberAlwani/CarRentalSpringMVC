@@ -12,17 +12,17 @@
 			<div class="nav">
 				<ul>
 					<li class="home"><a href="../user/homeRedicrect">Home</a></li>
-					<li class="tutorials"><a href="#">Car</a></li>
-					<li class="about"><a href="../vehicle/vehicles">Vehicle</a>
-						<!-- <ul>
-							<li><a href="../vehicle/vehicles">Show All </a></li>
-							<li><a href="../vehicle/add">Add</a></li>
-						</ul> -->
+					<li class="cars"><a href="types/all">Car Types</a></li>
+					<li class="about"><a href="#">Vehicle</a>
+						<ul>
+							<li><a href="vehicles/all">Show All </a></li>
+							<li><a href="vehicles/add">Add</a></li>
+						</ul> 
 					</li>
 					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
-<!-- 						<ul> -->
-<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> --%>
-<!-- 						</ul> -->
+<!-- 						<ul>
+<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
+<!-- 						</ul> 
 					</li>
 					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
 <!-- 						<ul> -->
