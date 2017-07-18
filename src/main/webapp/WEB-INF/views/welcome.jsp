@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -27,17 +26,17 @@
 			<div class="container">
 
 				<security:authorize access="isAnonymous()">
-					<a href="<spring:url value='/Register' />"
+					<a href="<spring:url value='/login/add' />"
 						class="btn btn-default pull-right"> Register</a>
 					<a href="<spring:url value='/login' />"
 						class="btn btn-default pull-right"> Login</a>
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<a href="<spring:url value="/members/add" />"
-						class="btn btn-default pull-right">Add Member</a>
-					<a href="<spring:url value="/members" />"
-						class="btn btn-default pull-right">Member List</a>
+					<a href="<spring:url value="/vehicle/add" />"
+						class="btn btn-default pull-right">Add Vehicle</a>
+					<a href="<spring:url value="/vehicle" />"
+						class="btn btn-default pull-right">Vehicle List</a>
 					<br>
 					<a href="<spring:url value="/products/add" />"
 						class="btn btn-default pull-right">Add Product</a>
@@ -49,7 +48,7 @@
 				</security:authorize>
 
 				<a href="<spring:url value='/members' />" class="btn btn-default">
-					<span class="glyphicon-hand-left glyphicon"></span> Go to Community
+					<span class="glyphicon-hand-left glyphicon"></span>Go to Guest!
 				</a>
 			</div>
 			<div class="pull-left">
