@@ -1,11 +1,10 @@
 package cs544.carrental.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+
+import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,20 +13,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 
 @Entity
-public class Product implements Serializable {
-	private static final long serialVersionUID = 5784L;
+public class VehicleType {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String name;
-	private String description;
-	private String productId;
-	private float price;
+    @Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+ 	private long id;
+    
+    String name;
+    String description;
+    
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
+    inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
+    Set<Vehicle> vehicles = new HashSet<Vehicle>();
 
 	public long getId() {
 		return id;
@@ -53,20 +55,17 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	public String getProductId() {
-		return productId;
+	public Set<Vehicle> getVehicles() {
+		return vehicles;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setProducts(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
+ 	public void addProduct(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
+//		product.getCategories().add(this);
 	}
 
 }

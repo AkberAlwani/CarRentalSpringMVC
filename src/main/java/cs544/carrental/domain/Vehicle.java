@@ -14,21 +14,22 @@ public class Vehicle {
 	@GeneratedValue
 	private long vehicleId;	
 	
-	@NotEmpty
-	private String brand;
+	@NotEmpty(message="{NotEmpty.make}")
+	private String make;
 	
-	@NotEmpty	
-	private String type;
+	@NotNull(message="{number.makeyear}")
+	private int makeyear;
 	
-	@NotEmpty	
-	private String vehiclePlateNumber;		
+	@NotEmpty(message="{NotEmpty.model}")	
+	private String model;
 	
-	private int model;
+	@NotEmpty(message="{NotEmpty.plateNumber}")	
+	private String plateNumber;		
 	
-	@Min(1)
+	@Min(value=1,message="{number.numberOfSeats}")
 	private int numberOfSeats;
 	
-	@Min(0)	
+	@Min(value=0,message="{number.dailyPrice}")
 	private double dailyPrice;
 	
 	private boolean isAvailable;
@@ -42,35 +43,35 @@ public class Vehicle {
 	}
 
 	public String getBrand() {
-		return brand;
+		return make;
 	}
 
 	public void setBrand(String brand) {
-		this.brand = brand;
+		this.make = brand;
 	}
 
 	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getModel() {
 		return model;
 	}
 
+	public void setType(String type) {
+		this.model = type;
+	}
+
+	public int getModel() {
+		return makeyear;
+	}
+
 	public void setModel(int model) {
-		this.model = model;
+		this.makeyear = model;
 	}
 
 	public String getVehiclePlateNumber() {
-		return vehiclePlateNumber;
+		return plateNumber;
 	}
 
 	public void setVehiclePlateNumber(String vehiclePlateNumber) {
-		this.vehiclePlateNumber = vehiclePlateNumber;
+		this.plateNumber = vehiclePlateNumber;
 	}
 
 	public int getNumberOfSeats() {
@@ -99,8 +100,8 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Vehicle [vehicleId=" + vehicleId + ", brand=" + brand + ", type=" + type + ", vehiclePlateNumber="
-				+ vehiclePlateNumber + ", model=" + model + ", numberOfSeats=" + numberOfSeats + ", dailyPrice="
+		return "Vehicle [vehicleId=" + vehicleId + ", brand=" + make + ", type=" + model + ", vehiclePlateNumber="
+				+ plateNumber + ", model=" + makeyear + ", numberOfSeats=" + numberOfSeats + ", dailyPrice="
 				+ dailyPrice + ", isAvailable=" + isAvailable + "]";
 	}
 
