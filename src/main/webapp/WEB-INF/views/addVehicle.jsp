@@ -32,7 +32,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-lg-5 control-label" for="vehicletype">
 					<spring:message code="addVehicle.form.vehicletype.label" /></label>
-					<select class="form-control" name="menu" id="menu">
+					<select class="col-sm-2 col-lg-5" name="menu" id="menu">
 						<c:forEach var="menu" items="${types}">
 							<option value="${menu.id}">${menu.name}
 								<c:if test="${menu.id == newVehicle.vehicleType}">selected
