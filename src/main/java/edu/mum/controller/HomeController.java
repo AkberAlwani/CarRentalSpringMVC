@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
  
-	@RequestMapping({"/","/welcome"})
+	@RequestMapping("/")
 	public String welcome(Model model) {
 		
-		model.addAttribute("greeting", "Welcome to our community, Kimosabe!!");
-		model.addAttribute("tagline", "The one and only place to live, work and play!!");
+		model.addAttribute("greeting", "Welcome to our Car Reservation System!!");
+		model.addAttribute("tagline", "The most convienient way to get a car!");
 		
 		return "welcome";
 	}
