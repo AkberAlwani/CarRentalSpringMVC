@@ -73,7 +73,7 @@ public class ReservationController {
 	@RequestMapping("add/{carid}")
 	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
 		model.addAttribute("carNumber", carNumber);
-		return "addreservation";
+		return "reservation/addreservation";
 	}
 
 	@RequestMapping(value="add/{carid}",method=RequestMethod.POST)
