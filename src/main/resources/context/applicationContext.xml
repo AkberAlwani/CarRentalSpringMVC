@@ -45,7 +45,7 @@
    </bean>
    
    <!-- Scan for  transaction-based resources -->
-   	<context:component-scan base-package="edu.mum.service,edu.mum.dao" />
+   	<context:component-scan base-package="cs544.carrental.service,cs544.carrental.dao" />
   
     <tx:annotation-driven transaction-manager="transactionManager"/>
  
