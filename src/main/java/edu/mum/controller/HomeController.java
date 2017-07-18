@@ -13,7 +13,6 @@ public class HomeController {
 		
 		model.addAttribute("greeting", "Welcome to our Car Reservation System!!");
 		model.addAttribute("tagline", "The most convienient way to get a car!");
-		
 		return "welcome";
 	}
  
