@@ -19,7 +19,7 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 	@Override
 	public Account findByUsername(String username) {
 		Query query = entityManager.createQuery("select a from Account a  where a.username =:username");
-		return (Account) query.setParameter("number", username).getSingleResult();
+		return (Account) query.setParameter("username", username).getSingleResult();
 	}
 
 	@Override
