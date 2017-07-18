@@ -9,6 +9,7 @@
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <title>Car Rental System</title>
+<link rel="shortcut icon" type="image/png" href="/resource/images/favicon.png"/>
 
 </head>
 <body>
