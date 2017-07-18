@@ -39,16 +39,8 @@ public class ReservationController {
 	
 	@RequestMapping(value="list",method=RequestMethod.GET)
 	public String showList(Model model) {
-		System.out.println("---------");
-
 		List<Reservation> list = reservationService.getAll();
 		model.addAttribute("reservations", list);
-		System.out.println(list.size()+"---------");
-
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("==="+list.get(i));
-
-		}
 		return "reservation/reservationList";
 	}
 	
