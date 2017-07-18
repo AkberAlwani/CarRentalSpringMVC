@@ -29,6 +29,8 @@
 <%-- 							<li><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Show All</a></li> --%>
 <!-- 						</ul> -->
 					</li>
+					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
+					
 					<li class="contact"><a href="../user/logout">Logout</a></li>
 				</ul>
 			</div>
