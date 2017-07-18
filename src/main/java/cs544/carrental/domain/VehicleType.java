@@ -27,12 +27,6 @@ public class VehicleType {
     private String description;
     
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
-//    inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
-//    Set<Vehicle> vehicles = new HashSet<Vehicle>();
-      private Vehicle vehicle;
-
 	public long getId() {
 		return id;
 	}
