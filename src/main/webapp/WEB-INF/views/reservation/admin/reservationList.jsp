@@ -44,10 +44,10 @@ tr:nth-child(even) {
 					<td>${res.pickUpDateTime}</td>
 					<td>${res.returnDateTime}</td>
 					<td>${res.reservationDateTime}</td>
-					<td>${res.person.name}</td>
+					<td>${res.customer.firstName}  ${res.customer.lastName}</td>
 					<td>${res.vehicle.make} + ${res.vehicle.vehicleType.name} + ${res.vehicle.model}</td>
 					<td>
-						<a href="<%=request.getContextPath() %>/reservation/delete/${res.reservationId}" onclick="return confirm('Are you sure?')">Delete</a></td>
+						<a href="<%=request.getContextPath() %>/reservation/admin/delete/${res.reservationId}" onclick="return confirm('Are you sure?')">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>
