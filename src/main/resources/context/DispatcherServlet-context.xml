@@ -15,7 +15,7 @@
 
  	<mvc:annotation-driven validator="validator"/>
  
- 	<context:component-scan base-package="cs544.carrental.controller" />
+ 	<context:component-scan base-package="edu.mum.controller" />
  	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
