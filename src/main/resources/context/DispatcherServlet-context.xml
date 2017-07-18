@@ -22,8 +22,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<mvc:default-servlet-handler />
+	
 	<mvc:resources  location="/resources/"  mapping="/resource/**"/>
- 
+  
+  
+  
   
   	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

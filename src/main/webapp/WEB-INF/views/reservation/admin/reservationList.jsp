@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<html>
 <head>
-<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
-<link href="/css/main.css" rel="stylesheet" media="screen" />
+<link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
+<link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
 <style>
+
 
 
 
@@ -25,7 +27,7 @@ tr:nth-child(even) {
 </head>
 <body>
 	<div class="row">
-		<div th:include="../fragments/nav-bar :: header"></div>
+		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
 	</div>
 	<h1>Reservations List</h1>
 	<div class="dataTable">
