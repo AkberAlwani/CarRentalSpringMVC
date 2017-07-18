@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Payment;
-import cs544.carrental.domain.Person;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.service.PaymentService;
 
@@ -46,10 +46,10 @@ public class PaymentController {
 
 	@RequestMapping(value = "/view-payment/{paymentid}", method = RequestMethod.GET)
 	public String viewPayment(@PathVariable("paymentid") String paymentid, Model model, HttpSession mySession) {
-		Person p=(Person) mySession.getAttribute("person");
+		Customer p=(Customer) mySession.getAttribute("customer");
 		
-		if (mySession.getAttribute("person") != null) {
-			model.addAttribute("isAdmin", ((Person) mySession.getAttribute("person")).isAdmin());
+		if (mySession.getAttribute("customer") != null) {
+			model.addAttribute("isAdmin", ((Customer) mySession.getAttribute("customer")).isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
@@ -62,15 +62,15 @@ public class PaymentController {
 	@RequestMapping(value = "/view-all-payment", method = RequestMethod.GET)
 	public String viewAllPayment(Model model, HttpSession viewSession) {
 		List<Payment> paymentLst = paymentService.findAllPayment();
-		Person p=(Person) viewSession.getAttribute("person");	
-		System.out.println("prakaash"+ p.getName());
-		System.out.println("prakaash"+ p.getAccount().getAccountType());
+		Customer p=(Customer) viewSession.getAttribute("customer");	
+		System.out.println("First Name"+ p.getFirstName());
+		System.out.println("Account Role"+ p.getAccount().getAuthority());
 		if (viewSession.getAttribute("person") != null) {
-			model.addAttribute("isAdmin", ((Person) viewSession.getAttribute("person")).isAdmin());
+			model.addAttribute("isAdmin", ((Customer) viewSession.getAttribute("customer")).isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		System.out.println("prakash "+ p);
+		System.out.println("Checking "+ p);
 		model.addAttribute("paymentList", paymentLst);
 		model.addAttribute("totalAmount", paymentService.findTotalAmount(paymentLst));
 		return "payment/view-all-payments";

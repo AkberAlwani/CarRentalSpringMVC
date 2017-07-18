@@ -10,15 +10,15 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import cs544.carrental.dao.MemberDao;
-import cs544.carrental.domain.Member;
+import cs544.carrental.domain.Customer;
 
 
 @SuppressWarnings("unchecked")
 @Repository
-public class MemberDaoImpl extends GenericDaoImpl<Member> implements MemberDao {
+public class MemberDaoImpl extends GenericDaoImpl<Customer> implements MemberDao {
 
 	public MemberDaoImpl() {
-		super.setDaoType(Member.class );
+		super.setDaoType(Customer.class );
 		}
 
  

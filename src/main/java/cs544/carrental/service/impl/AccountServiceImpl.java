@@ -1,6 +1,7 @@
 package cs544.carrental.service.impl;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -57,9 +58,21 @@ public class AccountServiceImpl implements AccountService {
         return null; 
 	}
 
+	
+
 	@Override
-	public Account findByUsername(String username) {
-		return accountDao.findByUsername(username);
+	public List<Account> findAll() {
+		return accountDao.findAll();
+	}
+
+	@Override
+	public Account findOne(Long id) {
+		return accountDao.findOne(id);
+	}
+
+	@Override
+	public Account findByUserName(String userName) {
+		return accountDao.findByUsername(userName);
 	}
 
 	

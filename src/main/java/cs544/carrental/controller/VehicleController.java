@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cs544.carrental.domain.Person;
+import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Vehicle;
 import cs544.carrental.domain.VehicleSpec;
 import cs544.carrental.service.VehicleService;

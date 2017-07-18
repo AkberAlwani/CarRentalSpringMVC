@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import cs544.carrental.dao.ProductDao;
-import cs544.carrental.domain.Member;
+import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Product;
 
 @Repository

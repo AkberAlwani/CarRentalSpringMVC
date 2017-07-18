@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cs544.carrental.dao.MemberDao;
-import cs544.carrental.domain.Member;
+import cs544.carrental.domain.Customer;
+import cs544.carrental.service.AccountService;
 import cs544.carrental.service.UserCredentialsService;
 
 @Service
@@ -19,25 +20,26 @@ public class MemberServiceImpl implements cs544.carrental.service.MemberService 
 	private MemberDao memberDao;
 
  	@Autowired
- 	UserCredentialsService credentialsService;
+// 	UserCredentialsService credentialsService;
+ 	AccountService accountService;
 
-    public void save( Member member) {  		
-		memberDao.save(member);
+    public void save( Customer customer) {  		
+		memberDao.save(customer);
 	}
 	
  	
     @Override
-   	public void saveFull( Member member) {  		
-  		credentialsService.save(member.getUserCredentials());
-  		memberDao.save(member);
+   	public void saveFull( Customer customer) {  		
+    	accountService.save(customer.getAccount());
+  		memberDao.save(customer);
 	}
   	
 
-	public List<Member> findAll() {
-		return (List<Member>)memberDao.findAll();
+	public List<Customer> findAll() {
+		return (List<Customer>)memberDao.findAll();
 	}
 
- 	public Member findOne(Long id) {
+ 	public Customer findOne(Long id) {
 		return memberDao.findOne(id);
 	}
 	

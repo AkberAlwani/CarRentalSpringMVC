@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cs544.carrental.domain.Account;
 import cs544.carrental.domain.AccountType;
 import cs544.carrental.domain.Address;
-import cs544.carrental.domain.Person;
+import cs544.carrental.domain.Customer;
 import cs544.carrental.service.AccountService;
-import cs544.carrental.service.PersonService;
+import cs544.carrental.service.CustomerService;
 
 
 
@@ -33,7 +33,7 @@ import cs544.carrental.service.PersonService;
 // @SessionAttributes("person")
 public class UserController {
 	@Autowired
-	private PersonService personService;
+	private CustomerService customerService;
 	@Autowired
 	private AccountService accountService;
 
@@ -43,8 +43,8 @@ public class UserController {
 	//for the purpose redirecting user or admin
 	@RequestMapping(value = "/homeRedicrect", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-		Person p= (Person) session.getAttribute("person");
-		if(p.getAccount().getAccountType().equals(AccountType.ADMIN))
+		Customer p= (Customer) session.getAttribute("customer");
+		if(p.getAccount().getAuthority().equals(AccountType.ADMIN))
 		  return "redirect:/user/adminHomePage";
 		else
 			 return "redirect:/user/userHomePage";
@@ -53,7 +53,7 @@ public class UserController {
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listUsers(Model model) {
 
-		model.addAttribute("personList", personService.findAll());
+		model.addAttribute("personList", customerService.findAll());
 		return "/users/user/listUser";
 	}
 
@@ -62,49 +62,49 @@ public class UserController {
 		if (userName == "") {
 			return "redirect:/user/users";
 		}
-		model.addAttribute("personList", personService.findByUsername(userName));
+		model.addAttribute("personList", customerService.findByUsername(userName));
 		return "/users/user/listUser";
 	}
 
 	@RequestMapping(value = "update/{PersonId}")
 	public String update(@PathVariable Integer PersonId, Model model) {
-		Person person = this.personService.findOne(PersonId);
-		Address address = person.getAddress();
-		Account account = person.getAccount();
-		model.addAttribute("person", person);
+		Customer customer= this.customerService.findOne(PersonId);
+		Address address = customer.getAddress();
+		Account account = customer.getAccount();
+		model.addAttribute("customer", customer);
 		model.addAttribute("address", address);
 		model.addAttribute("account", account);
 		return "/users/user/updateUser";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid Person person, BindingResult result, Address address, Account account, Model model) {
+	public String update(@Valid Customer customer , BindingResult result, Address address, Account account, Model model) {
 		if (result.hasErrors()) {
-			model.addAttribute("person", person);
+			model.addAttribute("customer", customer);
 			model.addAttribute("address", address);
 			model.addAttribute("account", account);
 			return "/users/user/updateUser";
 		} else {
-			account.setActive(true);
-			if(account.getAccountType().equals(AccountType.ADMIN)){
-				account.setAccountType(AccountType.ADMIN);
+			account.setEnabled(true);
+			if(account.getAuthority().equals(AccountType.ADMIN)){
+//				account.setAuthority(AccountType.ADMIN);
 			}
 			else{
-				account.setAccountType(AccountType.CUSTOMER);
+//				account.setAccountType(AccountType.CUSTOMER);
 			}
 			String password = accountService.MD5(account.getPassword());
 			account.setPassword(password);
 			accountService.update(account);
 
-			System.out.println(person.toString());
+			System.out.println(customer.toString());
 			// personService.updatePerson(person,account.getAccountId());
-			person.setAddress(address);
-			person.setAccount(account);
+			customer.setAddress(address);
+			customer.setAccount(account);
 			System.out.println(account.toString());
 			System.out.println(address.toString());
 			System.out.println(account.getAccountId());
 			//personService.updatePerson(person, account.getAccountId());
-			personService.update(person);
+			customerService.update(customer);
 			return "redirect:/user/users";
 		}
 	}
@@ -129,25 +129,25 @@ public class UserController {
 	}*/
 	@RequestMapping(value = "delete/{PersonId}", method = RequestMethod.GET)
 	public  String delete(@PathVariable Integer PersonId, Model data) {
-		long AccountId = personService.findOne(PersonId).getAccount().getAccountId();
-		personService.delete(PersonId);
+		long AccountId = customerService.findOne(PersonId).getAccount().getAccountId();
+		customerService.delete(PersonId);
 		accountService.delete(AccountId);
 		return "redirect:"+"/user/users"; 
 	}
 
 	@RequestMapping(value = "userHomePage", method = RequestMethod.GET)
 	public String userHomePage(Model model, Principal principal, HttpSession session) {
-		System.out.println("sesssssssssssssssssssssssssssss: " + principal.getName());
-		Account acc = accountService.findByUsername(principal.getName());
-		session.setAttribute("person", personService.getLoggedInPersonByAccount(acc));
+		System.out.println("User Info : " + principal.getName());
+		Account acc = accountService.findByUserName(principal.getName());
+		session.setAttribute("person", customerService.getLoggedInPersonByAccount(acc));
 		// model.addAttribute("user", "sample name");
 		return "users/user/userHomePage";
 	}
 	@RequestMapping(value = "adminHomePage", method = RequestMethod.GET)
 	public String adminHomePage(Model model, Principal principal, HttpSession session) {
 
-		Account acc = accountService.findByUsername(principal.getName());
-		session.setAttribute("person", personService.getLoggedInPersonByAccount(acc));
+		Account acc = accountService.findByUserName(principal.getName());
+		session.setAttribute("person", customerService.getLoggedInPersonByAccount(acc));
 		return "users//admin/HomePage";
 	}
 

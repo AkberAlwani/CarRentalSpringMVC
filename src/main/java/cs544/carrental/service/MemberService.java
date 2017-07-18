@@ -3,14 +3,14 @@ package cs544.carrental.service;
 import java.util.List;
 import java.util.Set;
 
-import cs544.carrental.domain.Member;
+import cs544.carrental.domain.Customer;
  
 public interface MemberService {
 
-	public void save(Member member);
-    	public void saveFull( Member member);  		
+	public void save(Customer member);
+    	public void saveFull( Customer member);  		
 
-	public List<Member> findAll();
- 	public Member findOne(Long id);
+	public List<Customer> findAll();
+ 	public Customer findOne(Long id);
  		
 }

@@ -23,15 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cs544.carrental.domain.Person;
+import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.domain.Vehicle;
-import cs544.carrental.service.PersonService;
+import cs544.carrental.service.CustomerService;
 import cs544.carrental.service.ReservationService;
 import cs544.carrental.service.VehicleService;
-
-
-
 
 @RequestMapping("/reservation/")
 @Controller
@@ -60,7 +57,7 @@ public class ReservationController {
 	@Autowired
 	VehicleService vehicleService;
 	@Autowired
-	PersonService personService;
+	CustomerService personService;
 
 	@RequestMapping("add/{carid}")
 	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
@@ -74,8 +71,8 @@ public class ReservationController {
 		// Person person = (Person) session.getAttribute("person");
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		//Person person = personService.findById(1);
-		Person person = (Person) sessionRev.getAttribute("person");
-		reservation.setPerson(person);
+		Customer customer= (Customer) sessionRev.getAttribute("customer");
+		reservation.setCustomer(customer);
 		reservation.setVehicle(vehicle);
 		reservationService.save(reservation);
 		vehicle.setIsAvailable(false);

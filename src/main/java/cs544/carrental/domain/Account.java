@@ -1,18 +1,24 @@
 package cs544.carrental.domain;
 
  
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
 import org.hibernate.validator.constraints.NotEmpty;  
 
 @Entity
@@ -26,27 +32,33 @@ public class Account {
 	@Size(min=4, max=15)
 	@NotEmpty(message="Please enter Your username")
 	private String username;
-	//@Size(min=6, max=10)
+
 	
 	@NotEmpty(message="Please enter Your password")
 	private String password;
-	private Boolean active;
-	 
-	@Enumerated(EnumType.STRING)
-	private AccountType accountType; 
-	 
-	@OneToOne(mappedBy = "account")
-	@Cascade({CascadeType.SAVE_UPDATE})
-	private Person personOwner;
+	
+	private String verifyPassword;
+	
+	private Boolean enabled;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "authority_id")
+	Authority authority;
+//	List<Authority> authority = new ArrayList<Authority>();
+	
+//	private Boolean active;
+//	@Enumerated(EnumType.STRING)
+//	private AccountType accountType; 
+
+	
+	@OneToOne(mappedBy = "account",cascade=CascadeType.PERSIST)
+//	@Cascade({CascadeType.SAVE_UPDATE})
+	private Customer customer;
 	
 	public long getAccountId() {
 		return accountId;
 	}
-	@Override
-	public String toString() {
-		return "Account [accountId=" + accountId + ", username=" + username + ", password=" + password + ", active="
-				+ active + ", accountType=" + accountType + "]";
-	}
+	
 	public void setAccountId(long accountId) {
 		this.accountId = accountId;
 	}
@@ -62,23 +74,46 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean getActive() {
-		return active;
+
+	public String getVerifyPassword() {
+		return verifyPassword;
 	}
-	public void setActive(Boolean active) {
-		this.active = active;
+
+	public void setVerifyPassword(String verifyPassword) {
+		this.verifyPassword = verifyPassword;
 	}
-	public AccountType getAccountType() {
-		return accountType;
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
-	public Person getPersonOwner() {
-		return personOwner;
+
+	public Authority getAuthority() {
+		return authority;
 	}
-	public void setPersonOwner(Person personOwner) {
-		this.personOwner = personOwner;
+
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accountId=" + accountId + ", username=" + username + ", password=" + password
+				+ ", verifyPassword=" + verifyPassword + ", enabled=" + enabled + ", authority=" + authority
+				+ ", customer=" + customer + "]";
+	}
+	
+	
 
 }

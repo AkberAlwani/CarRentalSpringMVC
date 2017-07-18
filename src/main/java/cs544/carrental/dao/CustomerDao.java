@@ -3,17 +3,17 @@ package cs544.carrental.dao;
 import java.util.List;
 
 import cs544.carrental.domain.Account;
-import cs544.carrental.domain.Person;
+import cs544.carrental.domain.Customer;
 
 
-public interface PersonDao extends  GenericDao<Person> {
+public interface CustomerDao extends  GenericDao<Customer> {
 
-	public abstract List<Person> findByNameIgnoringCase(String name);
+	public abstract List<Customer> findByNameIgnoringCase(String name);
  
-	public abstract Person findByIdentificationNumber(String identificationNumber);
-	public abstract Person findByName(String name);
-	public abstract Person findByAccount(Account account);
-	public abstract Person getLoggedInPersonByAccount(Account account);
+	public abstract Customer findByCustomerNumber(String customerNumber);
+	public abstract Customer findByName(String name);
+	public abstract Customer findByAccount(Account account);
+	public abstract Customer getLoggedInPersonByAccount(Account account);
 
 //	List<Person> findAll();
 //	public abstract void setPersonByPersonId(String name, String identificationNumber, String phoneNumber, String email, String country, String street, String city, String state, String zip, Integer accountId, Integer personId);
@@ -21,7 +21,7 @@ public interface PersonDao extends  GenericDao<Person> {
 //	@Modifying
 //	@Query("update Person p set p.name = ?1, p.identificationNumber = ?2, p.phoneNumber =?3, p.email = ?4, p.address.country = ?5, p.address.street = ?6, p.address.city = ?7, p.address.state = ?8, p.address.zip = ?9 ,p.account.accountId =?10  where PersonId =?11")
 //	public abstract void setPersonByPersonId(String name, String identificationNumber, String phoneNumber, String email, String country, String street, String city, String state, String zip, Integer accountId, Integer personId);
-	Person getLoggedInPersonByName(String name);
+	Customer getLoggedInPersonByName(String name);
 
-	Person findByUsername(String userName);
+	Customer findByUsername(String userName);
 }

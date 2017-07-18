@@ -83,7 +83,7 @@ public class PaymentServiceImpl implements PaymentService {
 	public List<Payment> searchPaymentByCustomerName(String customerName) {
 		List<Payment> paymentList = new ArrayList<>();
 		for (Payment p : paymentDao.findAll()) {
-			if (p.getReservation().getPerson().getName().toLowerCase().startsWith(customerName.toLowerCase()))
+			if (p.getReservation().getCustomer().getFirstName().toLowerCase().startsWith(customerName.toLowerCase()))
 				paymentList.add(p);
 		}
 		return paymentList;

@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 import cs544.carrental.validation.EmptyOrSize;
 
-@Entity
+
 public class Address2 {
 
     @Id
@@ -25,7 +25,7 @@ public class Address2 {
 
   	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn (name="member_id") 
-  	private Member  member;
+  	private Customer  member;
   	
 	public String getStreet() {
 		return street;
@@ -51,10 +51,10 @@ public class Address2 {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public Member getMember() {
+	public Customer getMember() {
 		return member;
 	}
-	public void setMember(Member member) {
+	public void setMember(Customer member) {
 		this.member = member;
 	}
 	

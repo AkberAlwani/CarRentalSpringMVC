@@ -35,7 +35,7 @@ public class Reservation {
 	private Vehicle vehicle;
 	
 	@OneToOne
-	private Person person;
+	private Customer customer;
 
 	public long getReservationId() {
 		return reservationId;
@@ -77,12 +77,12 @@ public class Reservation {
 		this.vehicle = vehicle;
 	}
 
-	public Person getPerson() {
-		return person;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setCustomer(Customer customer) {
+		this.customer= customer;
 	}
 
 	public int getMileageIn() {
@@ -131,7 +131,7 @@ public class Reservation {
 		String str = "";
 		str += "{Id:" + this.getReservationId() + ",ReservationDateTime:" + this.getReservationDateTime()
 				+ ",PickupDateTime:" + this.getPickUpDateTime() + ",ReturnDateTime:" + this.getReturnDateTime()
-				+ ",Person:" + this.getPerson() + ",Vehicle" + this.getVehicle() + "}";
+				+ ",Person:" + this.getCustomer() + ",Vehicle" + this.getVehicle() + "}";
 		return str;
 	}
 
