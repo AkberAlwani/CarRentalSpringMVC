@@ -53,10 +53,6 @@ public class ReservationController {
 	}
 	
 	
-	
-	
-	
-	
 	final private String URL = "/reservation/";
 
 	@InitBinder
@@ -94,7 +90,7 @@ public class ReservationController {
 		vehicleService.save(vehicle);
 		sessionRev.setAttribute("reservationObject", reservation);
 		double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
-		double dayPrice = vehicle.getDailyPrice();
+		double dayPrice = vehicle.getDailyRate();
 		double totalPrice = totalDay * dayPrice;
 		System.out.println("mum"+totalPrice);
 		sessionRev.setAttribute("totalPriceSession", totalPrice);

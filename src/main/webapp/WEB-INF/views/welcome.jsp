@@ -33,9 +33,9 @@
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<a href="<spring:url value="/vehicle/add" />"
+					<a href="<spring:url value="/vehicles/add" />"
 						class="btn btn-default pull-right">Add Vehicle</a>
-					<a href="<spring:url value="/vehicle" />"
+					<a href="<spring:url value="/vehicles/all" />"
 						class="btn btn-default pull-right">Vehicle List</a>
 					<br>
 					<a href="<spring:url value="/products/add" />"

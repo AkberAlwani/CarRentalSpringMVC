@@ -14,26 +14,32 @@ public class Vehicle {
 	@GeneratedValue
 	private long vehicleId;	
 	
-	@NotEmpty(message="{NotEmpty.make}")
+	@NotEmpty(message="{NotEmpty.vehicledata}")
 	private String make;
 	
 	@NotNull(message="{number.makeyear}")
 	private int makeyear;
 	
-	@NotEmpty(message="{NotEmpty.model}")	
+	@NotEmpty(message="{NotEmpty.vehicledata}")	
 	private String model;
 	
-	@NotEmpty(message="{NotEmpty.plateNumber}")	
+	@NotEmpty(message="{NotEmpty.vehicledata}")	
 	private String plateNumber;		
 	
-	@Min(value=1,message="{number.numberOfSeats}")
+	@Min(value=1,message="{number.minvalue}")
 	private int numberOfSeats;
 	
-	@Min(value=0,message="{number.dailyPrice}")
-	private double dailyPrice;
+	@Min(value=1,message="{number.minvalue}")
+	private double dailyRate;
+	
+	@Min(value=0,message="{number.minvalue}")
+	private double dailyFine;
 	
 	private boolean isAvailable;
 
+	
+	
+	
 	public long getVehicleId() {
 		return vehicleId;
 	}
@@ -42,36 +48,36 @@ public class Vehicle {
 		this.vehicleId = vehicleId;
 	}
 
-	public String getBrand() {
+	public String getMake() {
 		return make;
 	}
 
-	public void setBrand(String brand) {
-		this.make = brand;
+	public void setMake(String make) {
+		this.make = make;
 	}
 
-	public String getType() {
-		return model;
-	}
-
-	public void setType(String type) {
-		this.model = type;
-	}
-
-	public int getModel() {
+	public int getMakeyear() {
 		return makeyear;
 	}
 
-	public void setModel(int model) {
-		this.makeyear = model;
+	public void setMakeyear(int makeyear) {
+		this.makeyear = makeyear;
 	}
 
-	public String getVehiclePlateNumber() {
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getPlateNumber() {
 		return plateNumber;
 	}
 
-	public void setVehiclePlateNumber(String vehiclePlateNumber) {
-		this.plateNumber = vehiclePlateNumber;
+	public void setPlateNumber(String plateNumber) {
+		this.plateNumber = plateNumber;
 	}
 
 	public int getNumberOfSeats() {
@@ -82,14 +88,25 @@ public class Vehicle {
 		this.numberOfSeats = numberOfSeats;
 	}
 
-	public double getDailyPrice() {
-		return dailyPrice;
+	public double getDailyRate() {
+		return dailyRate;
 	}
 
-	public void setDailyPrice(double dailyPrice) {
-		this.dailyPrice = dailyPrice;
+	public void setDailyRate(double dailyRate) {
+		this.dailyRate = dailyRate;
 	}
 
+	public double getDailyFine() {
+		return dailyFine;
+	}
+
+	public void setDailyFine(double dailyFine) {
+		this.dailyFine = dailyFine;
+	}
+
+	
+
+	
 	public boolean getIsAvailable() {
 		return isAvailable;
 	}
@@ -100,9 +117,12 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Vehicle [vehicleId=" + vehicleId + ", brand=" + make + ", type=" + model + ", vehiclePlateNumber="
-				+ plateNumber + ", model=" + makeyear + ", numberOfSeats=" + numberOfSeats + ", dailyPrice="
-				+ dailyPrice + ", isAvailable=" + isAvailable + "]";
+		return "Vehicle [vehicleId=" + vehicleId + ", make=" + make + ", makeyear=" + makeyear + ", model=" + model
+				+ ", plateNumber=" + plateNumber + ", numberOfSeats=" + numberOfSeats + ", dailyRate=" + dailyRate
+				+ ", dailyFine=" + dailyFine + ", isAvailable=" + isAvailable + "]";
 	}
+
+	
+	
 
 }
