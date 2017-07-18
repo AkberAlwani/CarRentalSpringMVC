@@ -8,7 +8,7 @@ import cs544.carrental.domain.Vehicle;
 
 public interface VehicleService {
 	public void save(Vehicle vehicle);
-	public List<Vehicle> getAll();
+	public List<Vehicle> getAllVehicles();
 	public void delete(long vehicleId);
 	public void update(Vehicle vehicle);
 	
