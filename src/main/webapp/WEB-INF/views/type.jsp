@@ -25,7 +25,7 @@
 				<h3>${type.name}</h3>
 				<p>${type.description}</p>
 				<p>
-					<strong>Vehicle Id: </strong><span class="label label-warning">${type.id}</span>
+					<strong>Type Id: </strong><span class="label label-warning">${type.id}</span>
 				</p>
  				<p ng-controller="cartCtrl">
  

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -87,8 +88,8 @@ public class VehicleController {
 		// }
 		// return URL + "add";
 	}
-	@RequestMapping(value = "vehicle/{vehicleId}", method = RequestMethod.GET)
-	public String vehicleDetail(@PathVariable Integer vehicleId, Model model) {
+	@RequestMapping(value = "/vehicle", method = RequestMethod.GET)
+	public String vehicleDetail(@RequestParam("id") Long vehicleId, Model model) {
 		Vehicle vehicle = vehicleService.findByVehicleId(vehicleId);
 		model.addAttribute("vehicle", vehicle);
 		return "vehicle";
