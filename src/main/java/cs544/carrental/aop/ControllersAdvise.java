@@ -8,8 +8,9 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class ControllersAdvise {
+	
 	Logger log = Logger.getLogger(getClass());
-	@Before("execution(* edu.mum.reservation.controller.*.*(..))")
+	@Before("execution(* cs544.carretnal.controller.*.*(..))")
 	public void beforeCall(JoinPoint jp)
 	{
 		log.info("A call is about to process");
@@ -20,7 +21,8 @@ public class ControllersAdvise {
 			log.info(arg);
 		}
 	}
-	@After("execution(* com.car.rent.reservation.controller.*.*(..))")
+	
+	@After("execution(* cs544.carretnal.controller.*.*(..))")
 	public void afterCall(JoinPoint jp)
 	{
 		log.info("A call is processed");

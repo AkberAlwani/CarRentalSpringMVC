@@ -22,12 +22,14 @@
       </property>
       <property name="jpaProperties">
          <props>
-            <prop key="hibernate.hbm2ddl.auto">create</prop>
+            <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
             <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
  			<prop key="use_sql_comments">${use_sql_comments}</prop>
+ 			  <prop  key="hibernate.hbm2ddl.import_files_sql_extractor">org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor </prop>
+             <prop key="hibernate.hbm2ddl.import_files">sql/populate.sql</prop>
  			<prop key="hibernate.format_sql">${hibernate.format_sql}</prop> 
-             <prop key="hibernate.hbm2ddl.import_files">populate.sql</prop>
+             <!-- prop key="hibernate.hbm2ddl.import_files">populate.sql</prop-->
           </props>
       </property>
    </bean>

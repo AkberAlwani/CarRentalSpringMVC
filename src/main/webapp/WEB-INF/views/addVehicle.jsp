@@ -18,30 +18,30 @@
  		</div>
 	</section>
 	<section class="container">
-		<form:form  modelAttribute="newVehicle" class="form-horizontal" >
+		<form:form  modelAttribute="newVehicle" class="form-vertical" >
 			<fieldset>
 				<legend>Add New Vehicle</legend>
 
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
-				<div class="form-group">
+				<!--  div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="vehicleId"><spring:message code="addVehicle.form.vehicleId.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="vehicleId" path="vehicleId" type="text" class="form:input-large"/>
 						<form:errors path="vehicleId" cssClass="text-danger"/>
 					</div>
-				</div>
+				</div-->
 
 				<div class="form-group">
-					<label class="col-sm-3 control-label" for="makeyear"><spring:message code="addVehicle.form.year.label"/></label>
-					<div class="col-sm-5">
+					<label class="col-sm-2 col-lg-5 control-label" for="makeyear"><spring:message code="addVehicle.form.year.label"/></label>
+					<div class="col-sm-10">
 						<form:input id="makeyear" path="makeyear" type="text" class="form:input-small"/>
 						<form:errors path="makeyear" cssClass="text-danger"/>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-sm-3" for="make"><spring:message code="addVehicle.form.make.label"/></label>
-					<div class="col-sm-3">
+					<label class="control-label col-sm-10" for="make"><spring:message code="addVehicle.form.make.label"/></label>
+					<div class="col-sm-10">
 						<div class="form:input-prepend">
 							<form:input id="make" path="make" type="text" class="form:input-small"/>
 							<form:errors path="make" cssClass="text-danger"/>
@@ -50,22 +50,25 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="plateNumber"><spring:message code="addVehicle.form.plateNumber.label"/></label>
-					<div class="col-lg-10">
-						<form:textarea id="plateNumber" path="plateNumber" rows = "2"/>
+					<label class="control-label col-sm-10" for="plateNumber"><spring:message code="addVehicle.form.plateNumber.label"/></label>
+					<div class="col-sm-10">
+						<form:textarea id="plateNumber" path="plateNumber" />
+						<form:errors path="plateNumber" cssClass="text-danger"/>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="dailyRate"><spring:message code="addVehicle.form.dailyRate.label"/></label>
-					<div class="col-lg-10">
-						<form:textarea id="dailyRate" path="dailyRate" rows = "2"/>
+					<label class="control-label col-sm-10" for="dailyRate"><spring:message code="addVehicle.form.dailyRate.label"/></label>
+					<div class="col-sm-10">
+						<form:textarea id="dailyRate" path="dailyRate" />
+						<form:errors path="dailyRate" cssClass="text-danger"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="dailyFine"><spring:message code="addVehicle.form.dailyFine.label"/></label>
 					<div class="col-lg-10">
-						<form:textarea id="dailyFine" path="dailyFine" rows = "2"/>
+						<form:textarea id="dailyFine" path="dailyFine"/>
+						<form:errors path="dailyFine" cssClass="text-danger"/>
 					</div>
 				</div>
 				<div class="form-group">

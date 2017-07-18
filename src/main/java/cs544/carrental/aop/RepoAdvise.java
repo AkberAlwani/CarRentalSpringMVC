@@ -9,10 +9,10 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class RepoAdvise {
 	Logger log = Logger.getLogger(getClass());
-	@Before("execution(* com.car.rent.reservation.service.ReservationServiceImpl.*(..))")
+	@Before("execution(* cs544.carretnal.service.ReservationServiceImpl.*(..))")
 	public void beforeCall(JoinPoint jp)
 	{
-		log.info("A call to ReservationDAO is about to process");
+		log.info("A call to ReservationDao is about to process");
 		Object[] args = jp.getArgs();
 		log.info("Arguments are:");
 		for(Object arg:args)
@@ -20,7 +20,7 @@ public class RepoAdvise {
 			log.info(arg);
 		}
 	}
-	@After("execution(* com.car.rent.reservation.service.ReservationServiceImpl.*(..))")
+	@After("execution(* cs544.carretnal.service.ReservationServiceImpl.*(..))")
 	public void afterCall(JoinPoint jp)
 	{
 		log.info("A call to ReservationDAO is processed");

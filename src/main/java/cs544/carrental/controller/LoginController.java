@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import cs544.carrental.domain.Account;
-import cs544.carrental.domain.UserCredentials;
 import cs544.carrental.service.AccountService;
-import cs544.carrental.service.UserCredentialsService;
+
 
 
 
@@ -23,7 +22,7 @@ import cs544.carrental.service.UserCredentialsService;
 public class LoginController {
 
 	@Autowired
-	AccountService credentialsService;
+	AccountService accountService;
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login() {
@@ -34,7 +33,7 @@ public class LoginController {
 	@RequestMapping(value="/postLogin", method = RequestMethod.POST)
 	public String PostLogin(Account credentials, Model model) {
 
-		Account validCredentials = credentialsService.findByUserName(credentials.getUsername());
+		Account validCredentials = accountService.findByUserName(credentials.getUsername());
  
 		if (validCredentials == null)
 			return  "login";
