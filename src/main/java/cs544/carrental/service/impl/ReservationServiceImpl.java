@@ -29,7 +29,8 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public List<Reservation> getAll() {
 		// TODO Auto-generated method stub
-		return reservationDao.findAllOrderbyreservationIdDesc();
+		return reservationDao.findAll();
+//		return reservationDao.findAllOrderbyreservationIdDesc();
 	}
 
 	

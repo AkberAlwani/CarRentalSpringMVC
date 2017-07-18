@@ -2,6 +2,7 @@ package cs544.carrental.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,6 +36,27 @@ import cs544.carrental.service.VehicleService;
 @RequestMapping("/reservation/")
 @Controller
 public class ReservationController {
+	
+	@RequestMapping(value="list",method=RequestMethod.GET)
+	public String showList(Model model) {
+		System.out.println("---------");
+
+		List<Reservation> list = reservationService.getAll();
+		model.addAttribute("reservations", list);
+		System.out.println(list.size()+"---------");
+
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("==="+list.get(i));
+
+		}
+		return "reservation/reservationList";
+	}
+	
+	
+	
+	
+	
+	
 	final private String URL = "/reservation/";
 
 	@InitBinder
@@ -95,11 +117,7 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 
-	@RequestMapping(value="list",method=RequestMethod.GET)
-	public String showList(Model model) {
-		model.addAttribute("reservations", reservationService.getAll());
-		return "reservationList";
-	}
+
 
 	@RequestMapping(value="delete/{resid}",method=RequestMethod.GET)
 	public String delete(@PathVariable("resid") int resId) {
