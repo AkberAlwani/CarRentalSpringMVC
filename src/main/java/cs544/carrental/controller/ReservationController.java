@@ -42,12 +42,29 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
 	
-	@RequestMapping(value="list",method=RequestMethod.GET)
+	@RequestMapping(value="admin/list",method=RequestMethod.GET)
 	public String showList(Model model) {
 		List<Reservation> list = reservationService.getAll();
 		model.addAttribute("reservations", list);
 		return "reservation/reservationList";
 	}
+	
+	
+	@RequestMapping(value="admin/delete/{resid}",method=RequestMethod.GET)
+	public String delete(@PathVariable("resid") long resId) {
+//		Reservation reservation = reservationService.findById(resId);
+//		Vehicle vehicle =  reservation.getVehicle();
+//		vehicle.getVehicleType();
+//		System.out.println(vehicle.toString());
+//		vehicle.setIsAvailable(true);
+//		vehicleService.update(vehicle);
+		reservationService.delete(resId);
+
+		return "redirect:/admin/reservation/list";
+	}
+	
+	
+	
 	
 	
 	final private String URL = "/reservation/";
@@ -106,16 +123,7 @@ public class ReservationController {
 
 
 
-	@RequestMapping(value="delete/{resid}",method=RequestMethod.GET)
-	public String delete(@PathVariable("resid") int resId) {
-		Reservation reservation = reservationService.findById(resId);
-		Vehicle vehicle =  reservation.getVehicle();
-		vehicle.setIsAvailable(true);
-		vehicleService.save(vehicle);
-		reservationService.delete(resId);
 
-		return "redirect:/reservation/list";
-	}
 
 	@RequestMapping(value="edit/{resid}",method=RequestMethod.GET)
 	public String edit(@PathVariable("resid") int resId, Model model) {
