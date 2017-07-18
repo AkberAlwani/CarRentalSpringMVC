@@ -20,9 +20,9 @@
 						</ul> 
 					</li>
 					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
-<!-- 						<ul> -->
-<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> --%>
-<!-- 						</ul> -->
+<!-- 						<ul>
+<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
+<!-- 						</ul> 
 					</li>
 					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
 <!-- 						<ul> -->

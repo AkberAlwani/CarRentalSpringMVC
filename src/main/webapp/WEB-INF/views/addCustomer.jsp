@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <title>Customer</title>
 </head>
 <body>
@@ -17,40 +18,48 @@
 		</div>
 	</section>
 	<section class="container">
-		<form:form  modelAttribute="newCustomer" class="form-horizontal"  >
+		<form:form modelAttribute="newCustomer" class="form-horizontal">
 			<fieldset>
 				<legend>Register new customer</legend>
 
-				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
+				<form:errors path="*" cssClass="alert alert-danger" element="div" />
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="customerNumber"> Customer Number</label>
+					<label class="control-label col-lg-2 col-lg-2" for="customerNumber">
+						Customer Number</label>
 					<div class="col-lg-10">
-						<form:input id="customerNumber" path="customerNumber" type="text" class="form:input-large"/>
-						<form:errors path="customerNumber" cssClass="text-danger"/>
+						<form:input id="customerNumber" path="customerNumber" type="text"
+							class="form:input-large" />
+						<form:errors path="customerNumber" cssClass="text-danger" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="firstName">First Name</label>
+					<label class="control-label col-lg-2" for="firstName">First
+						Name</label>
 					<div class="col-lg-10">
-						<form:input id="firstName" path="firstName" type="text" class="form:input-large"/>
-						<form:errors path="firstName" cssClass="text-danger"/>
+						<form:input id="firstName" path="firstName" type="text"
+							class="form:input-large" />
+						<form:errors path="firstName" cssClass="text-danger" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="lastName">Last Name</label>
+					<label class="control-label col-lg-2" for="lastName">Last
+						Name</label>
 					<div class="col-lg-10">
-						<form:input id="lastName" path="lastName" type="text" class="form:input-large"/>
-						<form:errors path="lastName" cssClass="text-danger"/>
+						<form:input id="lastName" path="lastName" type="text"
+							class="form:input-large" />
+						<form:errors path="lastName" cssClass="text-danger" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="age">Phone Number</label>
+					<label class="control-label col-lg-2" for="age">Phone
+						Number</label>
 					<div class="col-lg-10">
-						<form:input id="phoneNumber" path="phoneNumber" type="text" class="form:input-large"/>
-						<form:errors path="phoneNumber" cssClass="text-danger"/>
+						<form:input id="phoneNumber" path="phoneNumber" type="text"
+							class="form:input-large" />
+						<form:errors path="phoneNumber" cssClass="text-danger" />
 					</div>
 				</div>
 
@@ -58,62 +67,71 @@
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="age">Email</label>
 					<div class="col-lg-10">
-						<form:input id="email" path="email" type="text" class="form:input-large"/>
-						<form:errors path="email" cssClass="text-danger"/>
+						<form:input id="email" path="email" type="text"
+							class="form:input-large" />
+						<form:errors path="email" cssClass="text-danger" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="userName">User Name</label>
+					<label class="control-label col-lg-2" for="userName">User
+						Name</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="username" path="account.username" type="text" class="form:input-large"/>
-							<form:errors path="account.username" cssClass="text-danger"/>
+							<form:input id="username" path="account.username" type="text"
+								class="form:input-large" />
+							<form:errors path="account.username" cssClass="text-danger" />
 						</div>
 					</div>
 				</div>
 
-	
+
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="password">Password</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:password id="password" path="account.password"  class="form:input-large"/>
-							<form:errors path="account.password" cssClass="text-danger"/>
+							<form:password id="password" path="account.password"
+								class="form:input-large" />
+							<form:errors path="account.password" cssClass="text-danger" />
 						</div>
 					</div>
 				</div>
 
-	
+
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="verifyPassword">Verify Password</label>
+					<label class="control-label col-lg-2" for="verifyPassword">Verify
+						Password</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:password  path="account.verifyPassword"  class="form:input-large"/>
-							<form:errors path="account.verifyPassword" cssClass="text-danger"/>
+							<form:password path="account.verifyPassword"
+								class="form:input-large" />
+							<form:errors path="account.verifyPassword" cssClass="text-danger" />
 						</div>
 					</div>
 				</div>
 
-					<div class="form-group">
-<!-- 					<label class="control-label col-lg-2" for="authority">Role</label> -->
+				<div class="form-group">
+					<!-- 					<label class="control-label col-lg-2" for="authority">Role</label> -->
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input  path="account.authority.authority" type="hidden" value="ROLE_USER" class="form:input-large"/>
-							<form:errors path="account.authority.authority" cssClass="text-danger"/>
+							<form:input path="account.authority.authority" type="hidden"
+								value="ROLE_USER" class="form:input-large" />
+							<form:errors path="account.authority.authority"
+								cssClass="text-danger" />
 						</div>
 					</div>
 				</div>
- 
- 							<form:hidden path="account.enabled" value="TRUE"  />
- 
+
+				<form:hidden path="account.enabled" value="TRUE" />
+
 
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
+						<input type="submit" id="btnAdd" class="btn btn-primary"
+							value="Add" />
 					</div>
 				</div>
-				
+
 			</fieldset>
 		</form:form>
 	</section>

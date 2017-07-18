@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
+
+import cs544.carrental.domain.Authority;
 import cs544.carrental.domain.Customer;
 import cs544.carrental.service.CustomerService;
 
@@ -23,7 +26,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping
+	@RequestMapping(value={"","/"})
 	public String listCustomers(Model model) {
 		model.addAttribute("customers", customerService.findAll());
 		return "customers";
@@ -76,17 +79,24 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = {"/add"}, method = RequestMethod.POST)
-	public String processAddNewCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customerToBeAdded,
+	public String processAddNewCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customer,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "addCustomer";
 		}
-
+		 
+		//customer.setAddress(address);
+		String password = customerService.MD5(customer.getAccount().getPassword());
+		customer.getAccount().setPassword(password);
+		Authority authority = new Authority();
+		authority.setAuthority("CUSTOMER");
+		authority.setUsername(customer.getAccount().getUsername());
+		customer.getAccount().setAuthority(authority);
 		// Error caught by ControllerAdvice IF no authorization...
-		customerService.saveFull(customerToBeAdded);
+		customerService.saveFull(customer);
 		
-		return "redirect:/customers/" + customerToBeAdded.getId();
+		return "redirect:/welcome/";
 
 	}
 
