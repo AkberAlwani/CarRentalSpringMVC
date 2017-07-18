@@ -27,11 +27,34 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 
+	@RequestMapping(value = "/admin/allPayment", method = RequestMethod.GET)
+	public String allPayment(Model model, HttpSession viewSession) {
+		List<Payment> paymentLst = paymentService.findAllPayment();
+		model.addAttribute("paymentList", paymentLst);
+		return "payment/admin/paymentList";
+	}
+
+	
+	@RequestMapping(value = "/admin/searchPayment", method = RequestMethod.POST)
+	public String searchPayment(@RequestParam("customerName") String customerName, Model model) {
+		List<Payment> paymentList = paymentService.searchPaymentByCustomerName(customerName);
+		model.addAttribute("paymentList", paymentList);
+		model.addAttribute("customerName", customerName);
+		return "payment/admin/paymentList";
+
+	}
+	
+	//========================================================
+	//========================================================
+	//========================================================
+	//========================================================
+	
+	
 	@RequestMapping(value = "/add-payment", method = RequestMethod.GET)
 	public String addPayment(Payment payment, HttpSession sessionAdd, Model model) {
-		System.out.println("shova"+sessionAdd.getAttribute("totalPriceSession"));
+		System.out.println("shova" + sessionAdd.getAttribute("totalPriceSession"));
 		sessionAdd.setAttribute("amountValue", sessionAdd.getAttribute("totalPriceSession"));
-		
+
 		return "payment/add-payment";
 	}
 
@@ -39,21 +62,21 @@ public class PaymentController {
 	public String payBill(@Valid Payment payment, BindingResult bindingResult, HttpSession sessionReservation) {
 		if (bindingResult.hasErrors())
 			return "payment/add-payment";
-		Reservation reservationObject = (Reservation) sessionReservation.getAttribute("reservationObject");		
+		Reservation reservationObject = (Reservation) sessionReservation.getAttribute("reservationObject");
 		paymentService.addPayment(payment, reservationObject);
 		return "redirect:view-all-payment";
 	}
 
 	@RequestMapping(value = "/view-payment/{paymentid}", method = RequestMethod.GET)
 	public String viewPayment(@PathVariable("paymentid") String paymentid, Model model, HttpSession mySession) {
-		Customer p=(Customer) mySession.getAttribute("customer");
-		
+		Customer p = (Customer) mySession.getAttribute("customer");
+
 		if (mySession.getAttribute("customer") != null) {
 			model.addAttribute("isAdmin", ((Customer) mySession.getAttribute("customer")).isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		
+
 		List<Payment> paymentList = paymentService.findPaymentByID(paymentid);
 		model.addAttribute("paymentList", paymentList);
 		return "payment/view-payment";
@@ -62,15 +85,15 @@ public class PaymentController {
 	@RequestMapping(value = "/view-all-payment", method = RequestMethod.GET)
 	public String viewAllPayment(Model model, HttpSession viewSession) {
 		List<Payment> paymentLst = paymentService.findAllPayment();
-		Customer p=(Customer) viewSession.getAttribute("customer");	
-		System.out.println("First Name"+ p.getFirstName());
-		System.out.println("Account Role"+ p.getAccount().getAuthority());
+		Customer p = (Customer) viewSession.getAttribute("customer");
+		System.out.println("First Name" + p.getFirstName());
+		System.out.println("Account Role" + p.getAccount().getAuthority());
 		if (viewSession.getAttribute("person") != null) {
 			model.addAttribute("isAdmin", ((Customer) viewSession.getAttribute("customer")).isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		System.out.println("Checking "+ p);
+		System.out.println("Checking " + p);
 		model.addAttribute("paymentList", paymentLst);
 		model.addAttribute("totalAmount", paymentService.findTotalAmount(paymentLst));
 		return "payment/view-all-payments";

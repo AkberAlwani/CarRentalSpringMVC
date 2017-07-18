@@ -12,6 +12,11 @@
 
 </head>
 <body>
+
+	<div class="row">
+		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+	</div>
+
 	<section>
 		<div class="jumbotron">
 			<div class="container">
