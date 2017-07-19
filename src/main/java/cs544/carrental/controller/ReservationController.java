@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import cs544.carrental.domain.Account;
 import cs544.carrental.domain.Customer;
@@ -36,7 +34,6 @@ import cs544.carrental.service.VehicleService;
 @RequestMapping("/reservation/")
 @Controller
 public class ReservationController {
-	private Logger logger = Logger.getLogger(ReservationController.class);
 
 	@Autowired
 	VehicleService vehicleService;
@@ -47,7 +44,33 @@ public class ReservationController {
 	@Autowired
 	AccountService accountService;
 
-	
+	// ========================Yong=============================
+
+	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
+	public String showList(@PathVariable("state") int state, Model model) {
+		List<Reservation> list = reservationService.getAll(state);
+		model.addAttribute("reservations", list);
+		model.addAttribute("stateName", state == 0 ? "Active" : state == 2 ? "History" : "");
+
+		return "reservation/admin/reservationList";
+
+	}
+
+	@RequestMapping(value = "admin/delete/{resid}", method = RequestMethod.GET)
+	public String delete(@PathVariable("resid") long resId) {
+		Reservation reservation = reservationService.findById(resId);
+		Vehicle vehicle = reservation.getVehicle();
+		System.out.println(vehicle.toString());
+		vehicle.setIsAvailable(true);
+		vehicleService.update(vehicle);
+		reservationService.delete(resId);
+
+		return "redirect:/reservation/admin/list";
+	}
+
+	// =====================================================
+
+	// ======================Tao===============================
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String showCustomerList(Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -66,130 +89,15 @@ public class ReservationController {
 		System.out.println(vehicle.toString());
 		vehicle.setIsAvailable(true);
 		vehicleService.update(vehicle);
-		
-		reservation.setState(1); //Cancelled
+
+		reservation.setState(1); // Cancelled
 		reservationService.update(reservation);
 
 		return "redirect:/reservation/list";
 	}
-	
-
-	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
-	public String showList(@PathVariable("state") int state, Model model) {
-		List<Reservation> list = reservationService.getAll(state);
-		model.addAttribute("reservations", list);
-		model.addAttribute("stateName", state == 0 ? "Active" : state == 2 ? "History" : "");
-
-		return "reservation/admin/reservationList";
-
-	 }
-	 
-	 
-	 @RequestMapping(value="admin/delete/{resid}",method=RequestMethod.GET)
-	 public String delete(@PathVariable("resid") long resId) {
-	  Reservation reservation = reservationService.findById(resId);
-	  Vehicle vehicle =  reservation.getVehicle();
-	  System.out.println(vehicle.toString());
-	  vehicle.setIsAvailable(true);
-	  vehicleService.update(vehicle);
-	  reservationService.delete(resId);
-
-	  return "redirect:/reservation/admin/list";
-	 }
-	
-		final private String URL1 = "/reservation/";
-
-		@InitBinder
-		public void initBinder(WebDataBinder binder) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			sdf.setLenient(true);
-			binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-		}
-
-
-
-		@RequestMapping("add/{carid}")
-		public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
-			model.addAttribute("carNumber", carNumber);
-			return "reservation/addreservation";
-		}
-
-		@RequestMapping(value="add/{carid}",method=RequestMethod.POST)
-		public String add1(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-				BindingResult bindingResult, HttpSession sessionRev) {
-			// Person person = (Person) session.getAttribute("person");
-			System.out.println("car number:" + carNumber);
-			Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
-			System.out.println(vehicle.getDailyRate());
-			//Person person = personService.findById(1);
-//			Customer customer= (Customer) sessionRev.getAttribute("customer");
-			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-				    .getAuthentication()
-				    .getPrincipal();
-			System.out.println("username:" + userDetails.getUsername());
-			Account acct = accountService.findByUserName(userDetails.getUsername());
-			Customer customer = acct.getCustomer();
-			System.out.println(customer.getEmail());
-			reservation.setCustomer(customer);
-			reservation.setVehicle(vehicle);
-			
-			vehicle.setVehicleId(carNumber);
-			reservationService.save(reservation);
-			vehicle.setIsAvailable(false);
-			vehicleService.update(vehicle);
-			
-			sessionRev.setAttribute("reservationObject", reservation);
-			double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
-			double dayPrice = vehicle.getDailyRate();
-			double totalPrice = totalDay * dayPrice;
-			System.out.println("totalPrice:"+totalPrice);
-			sessionRev.setAttribute("totalPriceSession", totalPrice);
-//			if(addPayment.equals("Yes")){
-				return "redirect:/payment/add-payment";
-//			}
-//			model.addAttribute("reservations", reservationService.getAll());
-//			return "redirect:/reservation/list";
-		}
-
-		@RequestMapping(value="update/{carid}",method = RequestMethod.GET)
-		public String update1(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-				BindingResult bindingResult, HttpSession session) {
-			// Person person = (Person) session.getAttribute("person");
-			Reservation res = reservationService.findById(reservation.getReservationId());
-			res.setPickUpDateTime(reservation.getPickUpDateTime());
-			res.setReservationDateTime(reservation.getReservationDateTime());
-			res.setReturnDateTime(reservation.getReturnDateTime());
-			reservationService.update(reservation);
-			return "redirect:/reservation/list";
-		}
-
-		
-		
-
-
-	@RequestMapping(value = "admin/delete/{resid}", method = RequestMethod.GET)
-	public String delete1(@PathVariable("resid") long resId) {
-		Reservation reservation = reservationService.findById(resId);
-		Vehicle vehicle = reservation.getVehicle();
-		System.out.println(vehicle.toString());
-		vehicle.setIsAvailable(true);
-		vehicleService.update(vehicle);
-		reservationService.delete(resId);
-
-		return "redirect:/reservation/admin/list";
-	}
-
-	final private String URL = "/reservation/";
-
-	@InitBinder
-	public void initBinder1(WebDataBinder binder) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		sdf.setLenient(true);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	}
 
 	@RequestMapping("add/{carid}")
-	public String showForm1(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
+	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
 		model.addAttribute("carNumber", carNumber);
 		return "reservation/addreservation";
 	}
@@ -227,6 +135,15 @@ public class ReservationController {
 		// }
 		// model.addAttribute("reservations", reservationService.getAll());
 		// return "redirect:/reservation/list";
+	}
+
+	// ======================Tao=========end======================
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
 
 	@RequestMapping(value = "update/{carid}", method = RequestMethod.GET)
