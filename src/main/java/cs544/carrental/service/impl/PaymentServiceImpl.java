@@ -37,6 +37,14 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
+	public Payment findPaymentByReservationID(long reservationId) {
+//		List<Payment> paymentList = paymentDao.findByPaymentId(paymentId);
+//		return paymentList;
+		Payment payment = paymentDao.findPaymentByReservationID(reservationId);
+		return payment;
+	}
+	
+	@Override
 	public List<Payment> findAllPayment() {
 		List<Payment> paymentList = paymentDao.findAll();
 		return paymentList;

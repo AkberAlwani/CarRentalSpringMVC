@@ -22,4 +22,5 @@ public interface PaymentService {
 	public double findTotalAmount(List<Payment> list);
 
 	public List<Payment> searchPaymentByCustomerName(String customerName);
+	public Payment findPaymentByReservationID(long reservationId);
 }
