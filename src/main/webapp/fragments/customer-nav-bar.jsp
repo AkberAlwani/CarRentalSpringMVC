@@ -15,11 +15,11 @@
 		<header>
 			<div class="nav">
 				<ul>
-					<li class="home"><a href="welcome">Home</a></li>
+					<li class="home"><a href="<%=request.getContextPath() %>/welcome">Home</a></li>
 					
 					<li class="about"><a href="#">Vehicle</a>
 						<ul>
-							<li><a href="vehicles/list">Show All </a></li>
+							<li><a href="<%=request.getContextPath() %>/vehicles/list">Show All </a></li>
 							<li><a href="<%=request.getContextPath()%>/reservation/returnlist">Return</a></li>
 						</ul>
 					</li>

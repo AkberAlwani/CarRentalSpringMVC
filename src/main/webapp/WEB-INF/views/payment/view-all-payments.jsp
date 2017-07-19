@@ -5,8 +5,26 @@
 <head>
 	<meta charset="ISO-8859-1" />
 	<title>Reading List</title>
-	<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
-	<link href="/css/main.css" rel="stylesheet" media="screen" />
+<link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
+<link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
+<style>
+body {
+	margin: 0 auto;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+</style>
 </head>
 
 
@@ -15,9 +33,9 @@
 		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
 
-	<h3>Search payment on the basic customer name</h3>
+	<h3>Search Payment</h3>
 	<form action="../payment/search-payment" method="post">
-		Input customer name <input type="text" name="customerName" /> 
+		Type Customer Name: <input type="text" name="customerName" /> 
 		<input type="submit" name="Search" value="Search" />
 	</form>
 	<h3>All payment Information</h3>
@@ -38,7 +56,7 @@
 				<tr>
 					<td>${list.paymentDateTime}</td>
 					<td>${list.paymentType}</td>
-					<td>${list.amount}</td>
+					<td>$${list.amount}</td>
 					<td>${list.reservation.reservationId}</td>
 					<td>${list.reservation.customer.firstName} ${list.reservation.customer.lastName}</td>
 					<td>${list.reservation.vehicle.plateNumber}</td>
@@ -64,7 +82,7 @@
 	</table>
 
 	<p>
-		Total Reservation Payment: <b>${totalAmount}</b>
+		Paid in Total: <b>$${totalAmount}</b>
 	</p>
 </body>
 
