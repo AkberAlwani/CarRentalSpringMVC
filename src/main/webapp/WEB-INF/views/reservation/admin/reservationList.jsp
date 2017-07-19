@@ -6,16 +6,12 @@
 <link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
 <link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
 <style>
-
-
-
-
 table {
 	border-collapse: collapse;
 	width: 100%;
 }
 
-th, td {
+th, td, h1 {
 	text-align: left;
 	padding: 8px;
 }
@@ -23,13 +19,23 @@ th, td {
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
+
+th {
+	background-color: #4CAF50;
+	color: white;
+}
+
+h3 {
+	background-color: #4CAF50;
+	color: white;
+}
 </style>
 </head>
 <body>
 	<div class="row">
 		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
 	</div>
-	<h1>Reservations ${stateName} List</h1>
+	<h2 style="padding-left: 10px;margin-top: -10px;">Reservations ${stateName} List</h2>
 	<div class="dataTable">
 		<table>
 			<tr>
