@@ -38,28 +38,44 @@ h3 {
 <body>
 	<h1>My Reservation Information</h1>
 	<table>
-		<tr>
-			<th>Reservation ID</th>
-			<th>Daily Rate</th>
-			<th>Daily Fine</th>
-			<th>Brand</th>
-			<th>Model</th>
-			<th>Plate Number</th>
-		</tr>
+<!-- 		<tr> -->
+<!-- 			<th>Reservation ID</th> -->
+<!-- 			<th>Daily Rate</th> -->
+<!-- 			<th>Daily Fine</th> -->
+<!-- 			<th>Brand</th> -->
+<!-- 			<th>Model</th> -->
+<!-- 			<th>Plate Number</th> -->
+<!-- 		</tr> -->
 		<tbody>
  			<c:forEach items="${reservations}" var="list">
 				<tr>
+					<td>Reservation ID</td>
 					<td>${list.reservationId}</td>
+				</tr>
+				<tr>	
+					<td>Daily Rate</td>
 					<td>${list.vehicle.dailyRate}</td>
+				</tr>
+				<tr>
+					<td>Daily Fine</td>	
 					<td>${list.vehicle.dailyFine}</td>
+				</tr>
+				<tr>
+					<td>Brand</td>	
 					<td>${list.vehicle.make}</td>
+				</tr>
+				<tr>
+					<td>Model</td>
 					<td>${list.vehicle.model}</td>
+				</tr>
+				<tr>
+					<td>Plate Number</td>
 					<td>${list.vehicle.plateNumber}</td>
-<%-- 					<c:forEach items="${totalPriceList}" var="totalPrice"> --%>
-<%-- 						<td>${totalPrice}</td> --%>
-<%-- 					</c:forEach> --%>
-				<td><a href="<%=request.getContextPath() %>/reservation/return/${list.reservationId}">Return</a></td>
-			</tr>
+				</tr>
+				<tr>
+					<td colspan="2"><a href="<%=request.getContextPath() %>/reservation/return/${list.reservationId}">Return</a></td>
+				</tr>
+				<tr><td colspan="2"><hr /></td></tr>
 			</c:forEach>
 		</tbody>
 	</table>
