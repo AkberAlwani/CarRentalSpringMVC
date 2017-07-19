@@ -37,7 +37,7 @@ public class Customer {
 	private String firstName;
 	
 	@Column(length = 16)
-	@EmptyOrSize(min=5, max = 9, message= "{EmptyOrSize}")
+	@EmptyOrSize(min=2, max = 15, message= "{EmptyOrSize}")
 	private String lastName;
 
 	@Column(unique = true)
