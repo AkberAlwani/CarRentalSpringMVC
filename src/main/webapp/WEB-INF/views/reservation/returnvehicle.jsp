@@ -39,18 +39,10 @@ h3 {
 	<div class="row">
 		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
-	<h1>My Reservation Information</h1>
-	<table>
-<!-- 		<tr> -->
-<!-- 			<th>Reservation ID</th> -->
-<!-- 			<th>Daily Rate</th> -->
-<!-- 			<th>Daily Fine</th> -->
-<!-- 			<th>Brand</th> -->
-<!-- 			<th>Model</th> -->
-<!-- 			<th>Plate Number</th> -->
-<!-- 		</tr> -->
-		<tbody>
+	<h1 style="margin-left:120px;">My Reservation Information</h1>
  			<c:forEach items="${reservations}" var="list">
+	<table style="border:1px solid gray;margin-top:10px;margin-left:120px;">
+		<tbody>
 				<tr>
 					<td>Reservation ID</td>
 					<td>${list.reservationId}</td>
@@ -76,12 +68,12 @@ h3 {
 					<td>${list.vehicle.plateNumber}</td>
 				</tr>
 				<tr>
-					<td colspan="2"><a href="<%=request.getContextPath() %>/reservation/return/${list.reservationId}">Return</a></td>
+					<td colspan="2" style="text-align:center"><div style="border:1px solid;display:inline-block;width:100px;height:20px;padding:5px;background-color:#EAEAEA">
+					<a href="<%=request.getContextPath() %>/reservation/return/${list.reservationId}">Return</a></div></td>
 				</tr>
-				<tr><td colspan="2"><hr /></td></tr>
-			</c:forEach>
 		</tbody>
 	</table>
+			</c:forEach>
 </body>
 
 </html>
