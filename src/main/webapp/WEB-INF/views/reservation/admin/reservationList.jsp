@@ -35,7 +35,7 @@ h3 {
 	<div class="row">
 		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
 	</div>
-	<h2 style="padding-left: 10px;margin-top: -10px;">Reservations ${stateName} List</h2>
+	<h2 style="padding-left: 10px;margin-top: 12px;">Reservations ${stateName} List</h2>
 	<div class="dataTable">
 		<table>
 			<tr>
@@ -56,7 +56,10 @@ h3 {
 					<td>${res.customer.firstName}  ${res.customer.lastName}</td>
 					<td>${res.vehicle.make} + ${res.vehicle.vehicleType.name} + ${res.vehicle.model}</td>
 					<td>
-						<a href="<%=request.getContextPath() %>/reservation/admin/delete/${res.reservationId}" onclick="return confirm('Are you sure?')">Delete</a></td>
+					<c:if test="${res.state == 0}" >
+						<a href="<%=request.getContextPath() %>/reservation/admin/delete/${res.reservationId}" onclick="return confirm('Are you sure?')">Delete</a>
+					</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

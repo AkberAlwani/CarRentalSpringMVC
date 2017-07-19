@@ -14,6 +14,7 @@ public interface PaymentService {
 	public List<Payment> findAllPayment();
 	public void save(Payment payment);
 	public void cancelPayment(long paymentId);
+	public void delete(long paymentId);
 
 	public Payment getPaymentObject(long paymentId);
 
@@ -22,4 +23,5 @@ public interface PaymentService {
 	public double findTotalAmount(List<Payment> list);
 
 	public List<Payment> searchPaymentByCustomerName(String customerName);
+	public Payment findPaymentByReservationID(long reservationId);
 }

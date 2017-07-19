@@ -23,5 +23,12 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 //		return query.setParameter("paymentId", paymentId).getResultList();
 		return (Payment)(query.setParameter("paymentId", paymentId).getSingleResult());
 	}
+	
+	@Override
+	public Payment findPaymentByReservationID(long reservationId) {
+		Query query = entityManager.createQuery("select p from Payment p  where p.reservation.reservationId =:reservationId");
+//		return query.setParameter("paymentId", paymentId).getResultList();
+		return (Payment)(query.setParameter("reservationId", reservationId).getSingleResult());
+	}
 
 }
