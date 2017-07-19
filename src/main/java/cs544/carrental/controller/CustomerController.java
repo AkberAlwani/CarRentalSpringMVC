@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cs544.carrental.domain.Authority;
 import cs544.carrental.domain.Customer;
 import cs544.carrental.service.CustomerService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 @RequestMapping({ "/customers" })
@@ -87,8 +89,14 @@ public class CustomerController {
 		}
 		 
 		//customer.setAddress(address);
+		
+		  //...
+
 		String password = customerService.MD5(customer.getAccount().getPassword());
-		customer.getAccount().setPassword(password);
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(password);
+
+		customer.getAccount().setPassword(hashedPassword);
 		Authority authority = new Authority();
 		authority.setAuthority("CUSTOMER");
 		authority.setUsername(customer.getAccount().getUsername());

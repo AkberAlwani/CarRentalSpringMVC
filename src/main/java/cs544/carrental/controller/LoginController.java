@@ -13,12 +13,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import cs544.carrental.domain.Account;
 import cs544.carrental.service.AccountService;
 
-
-
-
-
 @Controller
-@SessionAttributes("member")
+@SessionAttributes("customer")
 public class LoginController {
 
 	@Autowired
@@ -34,7 +30,7 @@ public class LoginController {
 	public String PostLogin(Account credentials, Model model) {
 
 		Account validCredentials = accountService.findByUserName(credentials.getUsername());
- 
+		System.out.println(validCredentials.getUsername());
 		if (validCredentials == null)
 			return  "login";
  

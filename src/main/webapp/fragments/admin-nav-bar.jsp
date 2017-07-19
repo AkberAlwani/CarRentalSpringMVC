@@ -13,13 +13,14 @@
 				<ul>
 					<li class="home"><a href="../user/homeRedicrect">Home</a></li>
 					<li class="cars"><a href="types/all">Car Types</a></li>
-					<li class="about"><a href="#">Vehicle</a>
+					<li class="vehicles"><a href="#">Vehicle</a>
 						<ul>
 							<li><a href="vehicles/all">Show All </a></li>
 							<li><a href="vehicles/add">Add</a></li>
 						</ul> 
 					</li>
 					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
+					<li class="cars"><a href="customers/all">View Customers</a></li>
 <!-- 						<ul>
 <%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
 <!-- 						</ul> 
