@@ -136,33 +136,67 @@ public class ReservationController {
 		// model.addAttribute("reservations", reservationService.getAll());
 		// return "redirect:/reservation/list";
 	}
+	
+	@SuppressWarnings("null")
+	@RequestMapping(value = "/returnlist", method = RequestMethod.GET)
+	public String showCustomerCurrentReservations(Model model) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Account account = accountService.findByUserName(userDetails.getUsername());
+		long customerId = account.getCustomer().getId();
+		List<Reservation> list = reservationService.findAllByCustomerId(customerId);
+		
+//		List<Double> totalPrices = null;
+//		for(Reservation reservation : list) {
+//			double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
+//			double dayPrice = reservation.getVehicle().getDailyRate();
+//			totalPrices.add(totalDay * dayPrice);
+//		}
+//
+//		model.addAttribute("totalPriceList", totalPrices);
+		model.addAttribute("reservations", list);
+		return "reservation/returnvehicle";
+	}
+	
+	@RequestMapping(value = "/return/{resid}", method = RequestMethod.GET)
+	public String returnVehicle(@PathVariable("resid") long resId) {
+		Reservation reservation = reservationService.findById(resId);
+		Vehicle vehicle = reservation.getVehicle();
+		System.out.println(vehicle.toString());
+		vehicle.setIsAvailable(true);
+		vehicleService.update(vehicle);
 
+		reservation.setState(2); // Returned
+		reservationService.update(reservation);
+
+		return "redirect:/reservation/returnlist";
+	}
+	
 	// ======================Tao=========end======================
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		sdf.setLenient(true);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	}
-
-	@RequestMapping(value = "update/{carid}", method = RequestMethod.GET)
-	public String update(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-			BindingResult bindingResult, HttpSession session) {
-		// Person person = (Person) session.getAttribute("person");
-		Reservation res = reservationService.findById(reservation.getReservationId());
-		res.setPickUpDateTime(reservation.getPickUpDateTime());
-		res.setReservationDateTime(reservation.getReservationDateTime());
-		res.setReturnDateTime(reservation.getReturnDateTime());
-		reservationService.update(reservation);
-		return "redirect:/reservation/list";
-	}
-
-	@RequestMapping(value = "edit/{resid}", method = RequestMethod.GET)
-	public String edit(@PathVariable("resid") int resId, Model model) {
-		Reservation res = reservationService.findById(resId);
-		model.addAttribute("carNumber", res.getVehicle().getVehicleId());
-		model.addAttribute("reservation", res);
-		return "editReservation";
-	}
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		sdf.setLenient(true);
+//		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+//	}
+//
+//	@RequestMapping(value = "update/{carid}", method = RequestMethod.GET)
+//	public String update(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
+//			BindingResult bindingResult, HttpSession session) {
+//		// Person person = (Person) session.getAttribute("person");
+//		Reservation res = reservationService.findById(reservation.getReservationId());
+//		res.setPickUpDateTime(reservation.getPickUpDateTime());
+//		res.setReservationDateTime(reservation.getReservationDateTime());
+//		res.setReturnDateTime(reservation.getReturnDateTime());
+//		reservationService.update(reservation);
+//		return "redirect:/reservation/list";
+//	}
+//
+//	@RequestMapping(value = "edit/{resid}", method = RequestMethod.GET)
+//	public String edit(@PathVariable("resid") int resId, Model model) {
+//		Reservation res = reservationService.findById(resId);
+//		model.addAttribute("carNumber", res.getVehicle().getVehicleId());
+//		model.addAttribute("reservation", res);
+//		return "editReservation";
+//	}
 }
