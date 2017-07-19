@@ -32,11 +32,21 @@ public class Reservation {
 	private double pricePerDay;
 	private double finePerDay;
 	
+	private int state; // 0 - Reserved 1 - Cancelled 2 - Returned
+	
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Vehicle vehicle;
 	
 	@OneToOne
 	private Customer customer;
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	public long getReservationId() {
 		return reservationId;
