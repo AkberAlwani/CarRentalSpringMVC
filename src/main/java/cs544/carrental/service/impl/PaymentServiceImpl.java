@@ -105,5 +105,9 @@ public class PaymentServiceImpl implements PaymentService {
 		paymentDao.save(payment);
 		
 	}
-
+	
+	@Override
+	public void delete(long paymentId) {
+		paymentDao.delete(paymentId);
+	}
 }

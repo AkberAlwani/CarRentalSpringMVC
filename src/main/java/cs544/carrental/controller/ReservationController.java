@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cs544.carrental.domain.Account;
 import cs544.carrental.domain.Customer;
+import cs544.carrental.domain.Payment;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.domain.Vehicle;
 import cs544.carrental.service.AccountService;
 import cs544.carrental.service.CustomerService;
+import cs544.carrental.service.PaymentService;
 import cs544.carrental.service.ReservationService;
 import cs544.carrental.service.VehicleService;
 
@@ -43,6 +45,8 @@ public class ReservationController {
 	ReservationService reservationService;
 	@Autowired
 	AccountService accountService;
+	@Autowired
+	PaymentService paymentService;
 
 	// ========================Yong=============================
 
@@ -59,13 +63,19 @@ public class ReservationController {
 	@RequestMapping(value = "admin/delete/{resid}", method = RequestMethod.GET)
 	public String delete(@PathVariable("resid") long resId) {
 		Reservation reservation = reservationService.findById(resId);
+		int state = reservation.getState();
+		
 		Vehicle vehicle = reservation.getVehicle();
 		System.out.println(vehicle.toString());
 		vehicle.setIsAvailable(true);
 		vehicleService.update(vehicle);
+		
+		Payment payment = paymentService.findPaymentByReservationID(resId);
+		paymentService.delete(payment.getPaymentId());
+		
 		reservationService.delete(resId);
 
-		return "redirect:/reservation/admin/list";
+		return "redirect:/reservation/admin/list/"+state+"";
 	}
 
 	// =====================================================

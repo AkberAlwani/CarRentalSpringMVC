@@ -14,6 +14,7 @@ public interface PaymentService {
 	public List<Payment> findAllPayment();
 	public void save(Payment payment);
 	public void cancelPayment(long paymentId);
+	public void delete(long paymentId);
 
 	public Payment getPaymentObject(long paymentId);
 
