@@ -50,18 +50,17 @@ h3 {
 			<th>Model</th>
 		</tr>
 		<tbody>
-			
-			<c:forEach items="${paymentList}" var="list">
+<%--  			<c:forEach items="${paymentList}" var="list"> --%>
 				<tr>
-					<td>${list.paymentDateTime}</td>
-					<td>${list.paymentType}</td>
-					<td>${list.amount}</td>
-					<td>${list.reservation.reservationId}</td>
-					<td>${list.reservation.customer.firstName} ${list.reservation.customer.lastName}</td>
-					<td>${list.reservation.vehicle.plateNumber}</td>
-					<td>${list.reservation.vehicle.make}</td>
-					<td>${list.reservation.vehicle.vehicleType.name}</td>
-					<td>${list.reservation.vehicle.model}</td>
+					<td>${paymentList.paymentDateTime}</td>
+					<td>${paymentList.paymentType}</td>
+					<td>${paymentList.amount}</td>
+					<td>${paymentList.reservation.reservationId}</td>
+					<td>${paymentList.reservation.customer.firstName} ${paymentList.reservation.customer.lastName}</td>
+					<td>${paymentList.reservation.vehicle.plateNumber}</td>
+					<td>${paymentList.reservation.vehicle.make}</td>
+					<td>${paymentList.reservation.vehicle.vehicleType.name}</td>
+					<td>${paymentList.reservation.vehicle.model}</td>
 <%-- 				<c:if test="${isAdmin}"> --%>
 <%-- 					<td><a href="<%=request.getContextPath() %>/payment/cancel-payment/${list.paymentId}">Delete</a></td> --%>
 <%-- 				</c:if> --%>
@@ -76,7 +75,7 @@ h3 {
 				<td><a href="<%=request.getContextPath() %>/payment/view-all-payment">View all
 						Payments</a></td>
 			</tr>
-			</c:forEach>
+<%-- 			</c:forEach> --%>
 		</tbody>
 	</table>
 </body>
