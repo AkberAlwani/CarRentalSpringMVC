@@ -42,7 +42,7 @@ h3 {
 
 <!-- 	<h3>Search payment on the basic customer name</h3> -->
 	<form action="<%=request.getContextPath() %>/payment/admin/searchPayment" method="post" style="margin:0">
-		<div style="padding-left: 10px;margin-top: -10px;">
+		<div style="padding-left: 10px;margin-top: 12px;">
 			<span style="font-size: 24px;font-weight: bold;">Input customer name:</span>
 			<input type="text" name="customerName" value="${customerName}" style="margin-top: 10px;height: 30px"/> 
 			<input type="submit" name="Search" value="Search" style="height: 30px"/>
