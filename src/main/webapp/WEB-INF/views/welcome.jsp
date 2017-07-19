@@ -12,12 +12,14 @@
 
 </head>
 <body>
-
 	<div class="row">
-		<security:authorize access="hasRole('ROLE_ADMIN')">
+		<security:authorize access="isAnonymous()">
+ 		   		<jsp:include page="/fragments/empty-nav-bar.jsp"></jsp:include>
+		</security:authorize>
+ 		<security:authorize access="hasRole('ROLE_ADMIN')">
 			<jsp:include page="/fragments/admin-nav-bar.jsp"></jsp:include>
 		</security:authorize>
-		<security:authorize access="!hasRole('ROLE_ADMIN')">
+		<security:authorize access="!isAnonymous() && !hasRole('ROLE_ADMIN')">
 			<jsp:include page="/fragments/customer-nav-bar.jsp"></jsp:include>
 		</security:authorize>
 	</div>
