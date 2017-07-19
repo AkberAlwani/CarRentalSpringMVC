@@ -55,7 +55,7 @@ public class ReservationDaoImpl extends GenericDaoImpl<Reservation> implements R
 	
 	@Override
 	public List<Reservation> findAllState(int state) {
-		Query query = entityManager.createQuery("select r from Reservation r ,Payment p  where r.state=:state and r = p.reservation and p.isConfirm = 1");
+		Query query = entityManager.createQuery("select r from Reservation r ,Payment p  where r.state=:state and r = p.reservation and p.isConfirm = 'PAID'");
 		return  query.setParameter("state", state).getResultList();
 	}
 

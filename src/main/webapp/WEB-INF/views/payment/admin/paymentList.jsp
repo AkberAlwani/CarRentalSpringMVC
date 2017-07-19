@@ -61,9 +61,10 @@ h3 {
 			<th>Brand</th>
 			<th>Type</th>
 			<th>Model</th>
+			<th></th>
 			</tr>
 		</thead>
-		<tbody>
+ 		
 		<c:forEach items="${paymentList}" var="list">
 				<tr>
 				<td><span>${list.paymentDateTime}</span></td>
@@ -75,6 +76,9 @@ h3 {
 				<td><span>${list.reservation.vehicle.make}</span></td>
 				<td><span>${list.reservation.vehicle.vehicleType.name}</span></td>
 				<td><span>${list.reservation.vehicle.model}</span></td>
+					<td>
+						<a href="<%=request.getContextPath() %>/payment/admin/viewPayment/${list.paymentId}" >View</a></td>
+
 			</tr>
 		</c:forEach>
 	

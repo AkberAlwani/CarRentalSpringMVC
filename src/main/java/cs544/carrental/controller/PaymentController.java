@@ -52,6 +52,15 @@ public class PaymentController {
 
 	}
 	
+	@RequestMapping(value = "/admin/viewPayment/{paymentid}", method = RequestMethod.GET)
+	public String viewPaymentAdmin(@PathVariable("paymentid") long paymentid, Model model) {
+		Payment payment = paymentService.findPaymentByID(paymentid);
+		model.addAttribute("payment", payment);
+		return "payment/admin/paymentView";
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/add-payment", method = RequestMethod.GET)
 	public String addPayment(Payment payment, HttpSession sessionAdd, Model model) {
