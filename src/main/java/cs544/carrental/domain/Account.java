@@ -35,6 +35,7 @@ public class Account {
 
 	
 	@NotEmpty(message="Please enter Your password")
+	
 	private String password;
 	
 	private String verifyPassword;
