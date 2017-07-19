@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="row">
-		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
 	<section>
 		<div class="jumbotron" style="height: 100px; padding-top: 0px;">
