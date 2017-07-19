@@ -29,7 +29,7 @@ tr:nth-child(even) {
 	<div class="row">
 		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
 	</div>
-	<h1>Reservations List</h1>
+	<h1>Reservations ${stateName} List</h1>
 	<div class="dataTable">
 		<table>
 			<tr>

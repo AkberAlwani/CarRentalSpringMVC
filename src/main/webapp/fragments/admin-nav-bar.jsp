@@ -19,10 +19,11 @@
 							<li><a href="vehicles/add">Add</a></li>
 						</ul> 
 					</li>
-					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
-<!-- 						<ul>
-<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
-<!-- 						</ul> 
+					<li class="about"><a href="#">Reservation</a>
+ 						<ul>
+ 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/0">Active </a></li>
+ 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History </a></li>
+ 						</ul> 
 					</li>
 					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
 <!-- 						<ul> -->

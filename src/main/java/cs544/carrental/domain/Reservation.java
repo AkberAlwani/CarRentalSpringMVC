@@ -37,8 +37,16 @@ public class Reservation {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Vehicle vehicle;
 	
+	
+	
 	@OneToOne
 	private Customer customer;
+
+
+	
+	
+	
+
 
 	public int getState() {
 		return state;
@@ -136,6 +144,7 @@ public class Reservation {
 		this.finePerDay = finePerDay;
 	}
 
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
