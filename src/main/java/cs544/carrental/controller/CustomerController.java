@@ -1,5 +1,7 @@
 package cs544.carrental.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +109,7 @@ public class CustomerController {
 		model.addAttribute("newCustomer", customer);		
 		
 		//return "addCustomer";
-		return "customer/admin/updateCustomer";
+		return "customer/updateCustomer";
 	}
 	
 	@RequestMapping(value = {"/update"}, method = RequestMethod.POST)
@@ -115,7 +117,7 @@ public class CustomerController {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "customer/admin/updateCustomer";
+			return "customer/updateCustomer";
 		}
 		// Error caught by ControllerAdvice IF no authorization...
 		
@@ -124,14 +126,14 @@ public class CustomerController {
 		customerToBeAdded.setId(c.getId());
 		customerService.update(customerToBeAdded);
 		
-		return "redirect:/customers/" + customerToBeAdded.getId();
+		return "redirect:/welcome";
 
 	}
 	
 
 	@RequestMapping(value = {"/reg"}, method = RequestMethod.GET)
 	public String getRegCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
-		return "customer/admin/addCustomer";
+		return "customer/regCustomer";
 	}
 	
 	@RequestMapping(value = {"/reg"}, method = RequestMethod.POST)
@@ -152,12 +154,10 @@ public class CustomerController {
 		authority.setUsername(customer.getAccount().getUsername());
 		customer.getAccount().setAuthority(authority);
 		// Error caught by ControllerAdvice IF no authorization...
-		customerService.saveFull(customer);
-		
+		customerService.saveFull(customer);		
 		return "redirect:/login";
 
 	}
-	
 	
 
 }
