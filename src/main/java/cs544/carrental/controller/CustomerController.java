@@ -28,22 +28,22 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping(value={"","/"})
+	@RequestMapping(value={"","/","/all"})
 	public String listCustomers(Model model) {
 		model.addAttribute("customers", customerService.findAll());
-		return "customers";
+		return "customer/admin/customerList";
 	}
 
 	@RequestMapping("/{id}")
 	public String getCustomerById(@PathVariable("id") Long id, Model model) {
 		Customer customer = customerService.findOne(id);
 		model.addAttribute("customer", customer);
-		return "customer";
+		return "admin/customer";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
-		return "addCustomer";
+		return "admin/addCustomer";
 	}
 	
 
@@ -59,7 +59,7 @@ public class CustomerController {
 		model.addAttribute("newCustomer", customer);		
 		
 		//return "addCustomer";
-		return "updateCustomer";
+		return "admin/updateCustomer";
 	}
 	
 	@RequestMapping(value = {"/update"}, method = RequestMethod.POST)
@@ -67,7 +67,7 @@ public class CustomerController {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "updateCustomer";
+			return "admin/updateCustomer";
 		}
 		// Error caught by ControllerAdvice IF no authorization...
 		
