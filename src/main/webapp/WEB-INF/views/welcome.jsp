@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-
+ 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -14,7 +14,12 @@
 <body>
 
 	<div class="row">
-		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+		<security:authorize access="hasRole('ROLE_ADMIN')">
+			<jsp:include page="/fragments/admin-nav-bar.jsp"></jsp:include>
+		</security:authorize>
+		<security:authorize access="!hasRole('ROLE_ADMIN')">
+			<jsp:include page="/fragments/customer-nav-bar.jsp"></jsp:include>
+		</security:authorize>
 	</div>
 
 	<section>

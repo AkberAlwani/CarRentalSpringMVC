@@ -57,7 +57,7 @@
 						</ul>
 					</li>
  					
- 					<li class="contact"><a href="../user/logout">Logout</a></li>
+ 					<li class="contact"><a href="<%=request.getContextPath() %>/logout">Logout</a></li>
 				</ul>
 			</div>
 		</header>

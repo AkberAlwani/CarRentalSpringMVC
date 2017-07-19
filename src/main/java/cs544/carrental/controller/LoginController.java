@@ -49,6 +49,6 @@ public class LoginController {
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
- 		return "redirect:/welcome";
+ 		return "redirect:/login";
  	}
 }
