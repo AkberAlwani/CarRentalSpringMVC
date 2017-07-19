@@ -19,44 +19,21 @@
 							<li><a href="vehicles/add">Add</a></li>
 						</ul> 
 					</li>
-					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
-					<li class="cars"><a href="customers/all">View Customers</a></li>
-<!-- 						<ul>
-<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
-<!-- 						</ul> 
+ 					
 					<li class="about"><a href="#">Reservation</a>
  						<ul>
  							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/0">Active </a></li>
  							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History </a></li>
  						</ul> 
-					<li class="about"><a href="#">Reservation</a>
- 						<ul>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/0">Active </a></li>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History </a></li>
- 						</ul> 
-					<li class="about"><a href="#">Reservation</a>
- 						<ul>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/0">Active </a></li>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History </a></li>
- 						</ul> 
-					<li class="about"><a href="#">Reservation</a>
- 						<ul>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/0">Active </a></li>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History </a></li>
- 						</ul> 
-					<li class="about"><a href="<%=request.getContextPath() %>/reservation/admin/list">Reservation</a>
-					<li class="cars"><a href="customers/all">View Customers</a></li>
-<!-- 						<ul>
-<%-- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list">Show All </a></li> %>
-<!-- 						</ul> 
-					</li>
-					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
-<!-- 						<ul> -->
-<%-- 							<li><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Show All</a></li> --%>
-<!-- 						</ul> -->
-					</li>
-					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
+ 					</li>
 					
+					<li class="cars"><a href="customers/all">View Customers</a></li>
+ 					<li class="news"><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Payment</a>
+ 						<ul>
+ 							<li><a href="<%=request.getContextPath() %>/payment/admin/allPayment">Show All</a></li>
+						</ul>
+					</li>
+ 					
 					<li class="contact"><a href="../user/logout">Logout</a></li>
 				</ul>
 			</div>
