@@ -35,7 +35,7 @@ tr:nth-child(even) {
 	<div class="container">
 		<div class="col-md-12 col-sm-6 col-xs-12">
 			<div class="row">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" style="border:0px;">
 					<div class="panel-heading">Pay your reservation fee</div>
 
 					<form:form modelAttribute="payment" action="pay-bill" method="post">
@@ -44,12 +44,6 @@ tr:nth-child(even) {
 								<td>Amount to be Paid</td>
 								<td><form:input path="amount" value="${sessionScope.totalPriceSession}" /></td>
 							</tr>
-
-<!-- 							<tr> -->
-<!-- 								<td>Amount:</td> -->
-<!-- 								<td><input type="text" path="amount" -->
-<%-- 									th:value="${session.totalPriceSession}" /></td> --%>
-<!-- 							</tr> -->
 							<tr>
 								<td>Selection Card Type</td>
 								<td><select name="paymentType">

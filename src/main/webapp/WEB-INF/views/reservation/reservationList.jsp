@@ -26,7 +26,7 @@ tr:nth-child(even) {
 </head>
 <body>
 	<div class="row">
-		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
 	<h1>Reservations List</h1>
 	<div class="dataTable">

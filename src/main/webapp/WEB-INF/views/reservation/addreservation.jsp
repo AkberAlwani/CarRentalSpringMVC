@@ -3,29 +3,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
-<link href="/css/main.css" rel="stylesheet" media="screen" />
+<link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
+<link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
 <style>
 body {
 	margin: 0 auto;
-}
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-th, td, h1 {
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2
-}
-
-th {
-	background-color: #4CAF50;
-	color: white;
 }
 
 h3 {
@@ -38,26 +20,33 @@ h3 {
 	<div class="row">
 		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
  	</div>
- 	<div style="margin:0 auto;">
-	<h1>Welcome to Car Rental System</h1>
-	<h1>Add Reservation</h1>
-    <form:form modelAttribute="reservation" action="${carNumber}" method="post">
-    	<p><form:label path="pickUpDateTime">Pickup Date:</form:label>
-    		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" />
-    	</p>
-        <p><form:label path="returnDateTime">Return Date:</form:label>
-    		<form:input path="returnDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Return Date" />
-    	</p>
-<!-- 		<p>Add Payment:  -->
-<!-- 			<select name="addPayment"> -->
-<!-- 				<option value="Yes">Yes</option> -->
-<!-- 				<option value="No">No</option> -->
-<!-- 			</select> -->
-<!-- 		</p> -->
-		<p>
-			<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-		</p>	
-    </form:form>
-    </div>
+	 <h1 style="padding-left:310px;">Add Reservation</h1>
+ 	
+ 	<table style="width:100%">
+ 		<tr>
+ 			<td style="text-align:center">
+ 			
+			 	<div style="margin:0 auto;">
+			    <form:form modelAttribute="reservation" action="${carNumber}" method="post">
+			    	<p><form:label path="pickUpDateTime">Pickup Date:</form:label>
+			    		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" />
+			    	</p>
+			        <p><form:label path="returnDateTime">Return Date:</form:label>
+			    		<form:input path="returnDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Return Date" />
+			    	</p>
+			<!-- 		<p>Add Payment:  -->
+			<!-- 			<select name="addPayment"> -->
+			<!-- 				<option value="Yes">Yes</option> -->
+			<!-- 				<option value="No">No</option> -->
+			<!-- 			</select> -->
+			<!-- 		</p> -->
+					<p>
+						<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+					</p>	
+			    </form:form>
+			    </div>
+ 			</td>
+ 		</tr>
+ 	</table>
 </body>
 </html>
