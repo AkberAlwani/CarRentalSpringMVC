@@ -1,0 +1,19 @@
+
+<!--  security:authorize access="isAuthenticated()">
+					<a href="<spring:url value="/types/all" />"
+						class="btn btn-default pull-right">Car Types</a>
+					<a href="<spring:url value="/vehicles/all" />"
+						class="btn btn-default pull-right">Vehicle List</a>
+					<br>
+					<a href="<spring:url value="/products/add" />"
+						class="btn btn-default pull-right">Add Product</a>
+					<a href="<spring:url value="/products/all" />"
+						class="btn btn-default pull-right">Product List</a>
+					<br>
+					<a href="<spring:url value='/dologout' />"
+						class="btn btn-default pull-right"> Logout</a>
+				</security:authorize>
+
+				<a href="<spring:url value='/customers' />" class="btn btn-default">
+					<span class="glyphicon-hand-left glyphicon"></span>Go to Guest!
+				</a> -->
