@@ -29,10 +29,10 @@ h3 {
 			 	<div style="margin:0 auto;">
 			    <form:form modelAttribute="reservation" action="${carNumber}" method="post">
 			    	<p><form:label path="pickUpDateTime">Pickup Date:</form:label>
-			    		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" />
+			    		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" style="height:30px"/>
 			    	</p>
 			        <p><form:label path="returnDateTime">Return Date:</form:label>
-			    		<form:input path="returnDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Return Date" />
+			    		<form:input path="returnDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Return Date" style="height:30px"/>
 			    	</p>
 			<!-- 		<p>Add Payment:  -->
 			<!-- 			<select name="addPayment"> -->

@@ -41,12 +41,12 @@ tr:nth-child(even) {
 					<form:form modelAttribute="payment" action="pay-bill" method="post">
 						<table>
 							<tr>
-								<td>Amount to be Paid</td>
-								<td><form:input path="amount" value="${sessionScope.totalPriceSession}" /></td>
+								<td>Amount to be Paid:</td>
+								<td><form:input path="amount" value="${sessionScope.totalPriceSession}" style="height:30px"/></td>
 							</tr>
 							<tr>
-								<td>Selection Card Type</td>
-								<td><select name="paymentType">
+								<td>Selection Card Type:</td>
+								<td><select name="paymentType" style="height:30px;width: 206px">
 										<option value="Credit Card">Credit Card</option>
 										<option value="Master Card">Master Card</option>
 										<option value="Visa Card">Visa Card</option>
@@ -55,7 +55,7 @@ tr:nth-child(even) {
 
 							<tr>
 								<td>Card Number:</td>
-								<td><form:input type="text" path="cardNumber" pattern="\d{4}-\d{4}-\d{4}-\d{4}" title="Invalid format!" />(xxxx-xxxx-xxxx-xxxx)</td>
+								<td><form:input type="text" path="cardNumber" pattern="\d{4}-\d{4}-\d{4}-\d{4}" title="Invalid format!" style="height:30px"/>(xxxx-xxxx-xxxx-xxxx)</td>
 <%-- 								<td th:if="${#fields.hasErrors('cardNumber')}" --%>
 <!-- 									th:errors="*{cardNumber}" bgcolor="#FF0000">Card number -->
 <!-- 									Error</td> -->
@@ -63,16 +63,16 @@ tr:nth-child(even) {
 
 
 							<tr>
-								<td>Expiry Date</td>
-								<td><form:input type="text" path="expiryDate" />(mm/yyyy)</td>
+								<td>Expiry Date:</td>
+								<td><form:input type="text" path="expiryDate" style="height:30px"/>(mm/yyyy)</td>
 
 <%-- 								<td th:if="${#fields.hasErrors('expiryDate')}" --%>
 <!-- 									th:errors="*{expiryDate}" bgcolor="#FF0000"></td> -->
 							</tr>
 
 							<tr>
-								<td>CVV</td>
-								<td><form:input type="text" path="cvvNumber" pattern="\d{3}" title="Invalid format!" />xxx</td>
+								<td>CVV:</td>
+								<td><form:input type="text" path="cvvNumber" pattern="\d{3}" title="Invalid format!" style="height:30px"/>xxx</td>
 <%-- 								<td th:if="${#fields.hasErrors('cvvNumber')}" --%>
 <!-- 									th:errors="*{cvvNumber}" bgcolor="#FF0000"></td> -->
 

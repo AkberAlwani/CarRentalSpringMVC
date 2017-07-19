@@ -14,32 +14,32 @@
 		<header>
 			<div class="nav">
 				<ul>
-					<li class="home"><a href="welcome">Home</a></li>
+					<li class="home"><a href="<%=request.getContextPath()%>/welcome">Home</a></li>
 					<li class="cars"><a href="#">Car Types</a>
 						<ul>
-							<li><a href="types/all">Show All </a></li>
-							<li><a href="types/add">Add</a></li>
+							<li><a href="<%=request.getContextPath()%>/types/all">Show All </a></li>
+							<li><a href="<%=request.getContextPath()%>/types/add">Add</a></li>
 						</ul>
 					</li>
 					
 					<li class="about"><a href="#">Vehicle</a>
 						<ul>
-							<li><a href="vehicles/all">Show All </a></li>
-							<li><a href="vehicles/add">Add</a></li>
+							<li><a href="<%=request.getContextPath()%>/vehicles/all">Show All </a></li>
+							<li><a href="<%=request.getContextPath()%>/vehicles/add">Add</a></li>
 						</ul>
 					</li>
 
-					<li class="cars"><a href="customers/all">Customers</a>
+					<li class="cars"><a href="<%=request.getContextPath()%>/customers/all">Customers</a>
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/customers/all">View All</a></li>
 							<li><a href="<%=request.getContextPath()%>/customers/add">Add</a></li>
 						</ul>
 					</li>
 					
-					<li class="cars"><a href="locations/all">Location</a>
+					<li class="cars"><a href="<%=request.getContextPath()%>/locations/all">Location</a>
 						<ul>
-							<li><a href="locations/all">Show All </a></li>
-							<li><a href="locations/add">Add</a></li>
+							<li><a href="<%=request.getContextPath()%>/locations/all">Show All </a></li>
+							<li><a href="<%=request.getContextPath()%>/locations/add">Add</a></li>
 						</ul>
 					</li>
 					
