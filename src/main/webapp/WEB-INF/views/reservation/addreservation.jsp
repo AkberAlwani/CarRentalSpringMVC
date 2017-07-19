@@ -3,24 +3,44 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-	<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
-	<link href="/css/main.css" rel="stylesheet" media="screen" />
+<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
+<link href="/css/main.css" rel="stylesheet" media="screen" />
+<style>
+body {
+	margin: 0 auto;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td, h1 {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+
+th {
+	background-color: #4CAF50;
+	color: white;
+}
+
+h3 {
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
 </head>
 <body>
+	<div class="row">
+		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+ 	</div>
+ 	<div style="margin:0 auto;">
 	<h1>Welcome to Car Rental System</h1>
 	<h1>Add Reservation</h1>
-<%-- 	<h1> For Car Id: <span th:text="${carNumber}" /></h1> --%>
-<%-- 	 <form action="#" th:action="@{/reservation/add/}+${carNumber}" th:object="${reservation}" method="post"> --%>
-<!-- 	 	<p>PickUp Date: <input type="date" required="required" pattern="yyyy-MM-dd" th:field="*{pickUpDateTime}" /></p> -->
-<%-- 	 	 <p th:if="${#fields.hasErrors('pickUpDateTime')}" th:errors="*{pickUpDateTime}">Return Date Error</p> --%>
-<!--         <p>Return Date: <input type="date" required="required" pattern="yyyy-MM-dd" th:field="*{returnDateTime}" /></p> -->
-<%--         <p th:if="${#fields.hasErrors('returnDateTime')}"  th:errors="*{returnDateTime}">Return Date Error</p> --%>
-<!--         <p>Add Payment: <select name="addPayment"> -->
-<!-- 						<option value="Yes">Yes</option> -->
-<!-- 						<option value="No">No</option> -->
-<!-- 				</select></p> -->
-<!--         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p> -->
-<!--     </form> -->
     <form:form modelAttribute="reservation" action="${carNumber}" method="post">
     	<p><form:label path="pickUpDateTime">Pickup Date:</form:label>
     		<form:input path="pickUpDateTime"  type="date" required="required" pattern="yyyy-MM-dd" title="Invalid Pickup Date" />
@@ -38,5 +58,6 @@
 			<input type="submit" value="Submit" /> <input type="reset" value="Reset" />
 		</p>	
     </form:form>
+    </div>
 </body>
 </html>

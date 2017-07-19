@@ -3,13 +3,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-<link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
-<link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
+<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
+<link href="/css/main.css" rel="stylesheet" media="screen" />
 <style>
-
-
-
-
+body {
+	margin: 0 auto;
+}
 table {
 	border-collapse: collapse;
 	width: 100%;
