@@ -38,8 +38,8 @@ public class Location {
 	private String zipcode;
 	private String phone;
 		
-	@OneToMany(mappedBy = "location",cascade=CascadeType.PERSIST)
-	private Set<Vehicle> vehicles;
+//	@OneToMany(mappedBy = "location",cascade=CascadeType.PERSIST)
+//	private Set<Vehicle> vehicles;
 
 	public long getId() {
 		return Id;
@@ -81,18 +81,18 @@ public class Location {
 		this.phone = phone;
 	}
 
-	public Set<Vehicle> getVehicles() {
-		return vehicles;
-	}
-
-	public void setVehicles(Set<Vehicle> vehicles) {
-		this.vehicles = vehicles;
-	}
+//	public Set<Vehicle> getVehicles() {
+//		return vehicles;
+//	}
+//
+//	public void setVehicles(Set<Vehicle> vehicles) {
+//		this.vehicles = vehicles;
+//	}
 
 	@Override
 	public String toString() {
 		return "Location [Id=" + Id + ", location=" + location + ", city=" + city + ", zipcode=" + zipcode + ", phone="
-				+ phone + ", vehicles=" + vehicles + "]";
+				+ phone + ",]";
 	}
 	
 	

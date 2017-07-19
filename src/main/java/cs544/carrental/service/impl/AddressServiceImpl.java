@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cs544.carrental.dao.AddressDao;
 import cs544.carrental.dao.GenericDao;
-import cs544.carrental.domain.Address2;
+import cs544.carrental.domain.Address;
 
 @Service
 @Transactional 
@@ -18,21 +18,21 @@ public class AddressServiceImpl implements cs544.carrental.service.AddressServic
  	@Autowired
 	private AddressDao memberDao;
 
-    public void save( Address2 address) {  		
+    public void save( Address address) {  		
 		memberDao.save(address);
 	}
 	
 	
-    public void update( Address2 address) {  		
+    public void update( Address address) {  		
 		memberDao.update(address);
 	}
 	
 	
-	public List<Address2> findAll() {
-		return (List<Address2>)memberDao.findAll();
+	public List<Address> findAll() {
+		return (List<Address>)memberDao.findAll();
 	}
 
- 	public Address2 findOne(Long id) {
+ 	public Address findOne(Long id) {
 		return memberDao.findOne(id);
 	}
 

@@ -18,22 +18,20 @@
 
 	<section class="container">
 			<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-		<security:authorize access="isAuthenticated()">
-					<a href="<spring:url value="/types/add" />"
-						class="btn btn-default pull-right">Add Location</a>
-					
-		</security:authorize>
+		
 		</div>
 		<div class="row">
-			<c:forEach items="${types}" var="type">
+			<c:forEach items="${locations}" var="loc">
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
 					<div class="thumbnail">
 						<div class="caption">
-							<h3>${type.name}</h3>
-							<p>${type.description}</p>
+							<p>${loc.location}</p>
+							<h3>${loc.city}</h3>
+							<h3>${loc.phone}</h3>
+							<h3>${loc.zipcode}</h3>
  							<p>
 								<a
-									href=" <spring:url value="/types/type?id=${type.id}" /> "
+									href=" <spring:url value="/locations/location?id=${loc.id}" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sign glyphicon" /></span> Details
 								</a>

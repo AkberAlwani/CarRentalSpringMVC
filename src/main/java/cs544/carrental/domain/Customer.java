@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import cs544.carrental.validation.EmptyOrSize;
-import cs544.carrental.validation.NullMinNumber;
+
 
 
 @Entity 

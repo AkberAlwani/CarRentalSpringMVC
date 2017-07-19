@@ -7,13 +7,13 @@
 <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 	<script src="<spring:url value="/resource/js/controllers.js"/>"></script>
-<title>Types</title>
+<title>Location</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Vehicle Types</h1>
+				<h1>Location </h1>
 			</div>
 		</div>
 	</section>
@@ -22,15 +22,17 @@
 		<div class="row">
  		
 			<div class="col-md-5">
-				<h3>${type.name}</h3>
-				<p>${type.description}</p>
+				<h3>${location.location}</h3>
+				<p>${location.city}</p>
+				<p>${location.phone}</p>
+				<p>${location.zipcode}</p>
 				<p>
-					<strong>Type Id: </strong><span class="label label-warning">${type.id}</span>
+					<strong>Location Id: </strong><span class="label label-warning">${location.id}</span>
 				</p>
  				<p ng-controller="cartCtrl">
  
  <a href="<spring:url value="/types" />" class="btn btn-default">
-						<span class="glyphicon-hand-left glyphicon"></span> back
+						<span class="glyphicon-hand-left glyphicon"></span> Back
 					</a>
 
 				</p>
