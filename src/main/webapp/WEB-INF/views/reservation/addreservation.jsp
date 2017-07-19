@@ -36,7 +36,7 @@ h3 {
 </head>
 <body>
 	<div class="row">
-		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
  	</div>
  	<div style="margin:0 auto;">
 	<h1>Welcome to Car Rental System</h1>

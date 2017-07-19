@@ -36,6 +36,9 @@ h3 {
 </head>
 
 <body>
+	<div class="row">
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
+	</div>
 	<h1>My Reservation Information</h1>
 	<table>
 <!-- 		<tr> -->

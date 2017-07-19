@@ -7,11 +7,29 @@
 	<title>Add Payment</title>
 	<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
 	<link href="/css/main.css" rel="stylesheet" media="screen" />
+<style>
+body {
+	margin: 0 auto;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2
+}
+</style>
 </head>
 
 <body>
 	<div class="row">
-		<div th:include="../fragments/nav-bar :: header"></div>
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
 
 	<div class="container">
@@ -67,7 +85,7 @@
 							</tr>
 
 							<tr>
-								<td><input type="submit" value="Pay" /></td>
+								<td colspan="2" style="text-align:center"><input type="submit" value="Make Payment" /></td>
 							</tr>
 						</table>
 					</form:form>

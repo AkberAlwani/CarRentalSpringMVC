@@ -12,7 +12,7 @@
 
 <body>
 	<div class="row">
-		<div th:include="../fragments/nav-bar :: header"></div>
+		<c:import url="/fragments/customer-nav-bar.jsp"></c:import>
 	</div>
 
 	<h3>Search payment on the basic customer name</h3>
