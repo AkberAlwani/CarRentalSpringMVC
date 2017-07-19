@@ -11,17 +11,21 @@
 </head>
 <body>
 	<section>
+	<div class="row">
+			<jsp:include page="/fragments/admin-nav-bar.jsp"></jsp:include>
+	</div>
+	</section>
+	
+	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Customer Registration</h1>
+				<h1>Add Customer</h1>
 			</div>
 		</div>
 	</section>
 	<section class="container">
 		<form:form modelAttribute="newCustomer" class="form-horizontal">
 			<fieldset>
-				<legend>Register new customer</legend>
-
 				<form:errors path="*" cssClass="alert alert-danger" element="div" />
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="customerNumber">
@@ -180,7 +184,7 @@
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary"
-							value="Register" />
+							value="Add" />
 					</div>
 				</div>
 

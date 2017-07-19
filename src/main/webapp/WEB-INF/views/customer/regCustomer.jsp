@@ -12,7 +12,7 @@
 <body>
 	<section>
 	<div class="row">
-			<jsp:include page="/fragments/customer-nav-bar.jsp"></jsp:include>
+			<jsp:include page="/fragments/empty-nav-bar.jsp"></jsp:include>
 	</div>
 	</section>
 	
