@@ -10,6 +10,12 @@
 </head>
 <body>
 	<section>
+	<div class="row">
+			<jsp:include page="/fragments/admin-nav-bar.jsp"></jsp:include>
+	</div>
+	</section>
+
+	<section>
 		<div class="jumbotron">
 			<div class="container">
 				<h1>Customer Profile</h1>
