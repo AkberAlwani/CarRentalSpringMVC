@@ -109,6 +109,58 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="country">Country</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="country" path="address.country" type="text" class="form:input-large"/>
+							<form:errors path="address.country" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="street">Street</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="street" path="address.street" type="text" class="form:input-large"/>
+							<form:errors path="address.street" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="city">City</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="city" path="address.city" type="text" class="form:input-large"/>
+							<form:errors path="address.city" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="state">State</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="city" path="address.state" type="text" class="form:input-large"/>
+							<form:errors path="address.state" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="zip">Zip</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="city" path="address.zip" type="text" class="form:input-large"/>
+							<form:errors path="address.zip" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
 
 				<div class="form-group">
 					<!-- 					<label class="control-label col-lg-2" for="authority">Role</label> -->
@@ -128,7 +180,7 @@
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary"
-							value="Add" />
+							value="Register" />
 					</div>
 				</div>
 

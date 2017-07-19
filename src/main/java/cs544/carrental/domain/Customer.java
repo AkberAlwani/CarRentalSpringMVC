@@ -49,8 +49,8 @@ public class Customer {
 	@NotEmpty(message = "Please enter Your phoneNumber")
 	private String phoneNumber;
 	
-	@NotEmpty(message = "Please enter Your phoneNumber")
-	@Email(message = "Ivvalid email address")
+	@NotEmpty(message = "Please enter Your email address")
+	@Email(message = "Invalid email address")
 	private String email;
 	
 	@Valid
