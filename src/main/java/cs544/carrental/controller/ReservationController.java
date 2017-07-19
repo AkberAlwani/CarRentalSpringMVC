@@ -57,15 +57,14 @@ public class ReservationController {
 	 
 	 @RequestMapping(value="admin/delete/{resid}",method=RequestMethod.GET)
 	 public String delete(@PathVariable("resid") long resId) {
-	//  Reservation reservation = reservationService.findById(resId);
-	//  Vehicle vehicle =  reservation.getVehicle();
-	//  vehicle.getVehicleType();
-	//  System.out.println(vehicle.toString());
-	//  vehicle.setIsAvailable(true);
-	//  vehicleService.update(vehicle);
+	  Reservation reservation = reservationService.findById(resId);
+	  Vehicle vehicle =  reservation.getVehicle();
+	  System.out.println(vehicle.toString());
+	  vehicle.setIsAvailable(true);
+	  vehicleService.update(vehicle);
 	  reservationService.delete(resId);
 
-	  return "redirect:/admin/reservation/list";
+	  return "redirect:/reservation/admin/list";
 	 }
 	
 		final private String URL = "/reservation/";
