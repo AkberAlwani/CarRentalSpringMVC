@@ -47,7 +47,7 @@ public class CustomerController {
 		return "customer/admin/customer";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = {"/add"}, method = RequestMethod.GET)
 	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
 		return "customer/admin/addCustomer";
 	}
@@ -80,9 +80,10 @@ public class CustomerController {
 		// Error caught by ControllerAdvice IF no authorization...
 		customerService.saveFull(customer);
 		
-		return "redirect:/welcome/";
+		return "redirect:/customer/admin/customerList";
 
 	}
+	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") long Id) {
 		Customer customer = customerService.findOne(Id);
@@ -124,6 +125,36 @@ public class CustomerController {
 		customerService.update(customerToBeAdded);
 		
 		return "redirect:/customers/" + customerToBeAdded.getId();
+
+	}
+	
+
+	@RequestMapping(value = {"/reg"}, method = RequestMethod.GET)
+	public String getRegCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
+		return "customer/admin/addCustomer";
+	}
+	
+	@RequestMapping(value = {"/reg"}, method = RequestMethod.POST)
+	public String processRegCustomerForm(@ModelAttribute("newCustomer") @Valid Customer customer,
+			BindingResult result) {
+
+		if (result.hasErrors()) {
+			return "customer/regCustomer";
+		}
+		 
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String password = passwordEncoder.encode(customer.getAccount().getPassword());
+		
+		customer.getAccount().setPassword(password);
+		Authority authority = new Authority();
+		authority.setAuthority("CUSTOMER");
+		authority.setUsername(customer.getAccount().getUsername());
+		customer.getAccount().setAuthority(authority);
+		// Error caught by ControllerAdvice IF no authorization...
+		customerService.saveFull(customer);
+		
+		return "redirect:/login";
 
 	}
 	
