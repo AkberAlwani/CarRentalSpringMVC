@@ -47,11 +47,13 @@ public class ReservationController {
 	@Autowired
 	AccountService accountService;
 	
-	@RequestMapping(value="admin/list",method=RequestMethod.GET)
-	 public String showList(Model model) {
-	  List<Reservation> list = reservationService.getAll();
-	  model.addAttribute("reservations", list);
-	  return "reservation/admin/reservationList";
+	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
+	public String showList(@PathVariable("state") int state, Model model) {
+		List<Reservation> list = reservationService.getAll(state);
+		model.addAttribute("reservations", list);
+		model.addAttribute("stateName", state == 0 ? "Active" : state == 2 ? "History" : "");
+		
+		return "reservation/admin/reservationList";
 	 }
 	 
 	 

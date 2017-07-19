@@ -7,7 +7,7 @@ import cs544.carrental.domain.Reservation;
 
 public interface ReservationService {
 	void save(Reservation reservation);
-	List<Reservation> getAll();
+	List<Reservation> getAll(int state);
 	
 	void delete(long id);
 	Reservation findById(long id);
