@@ -29,9 +29,11 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<Payment> findPaymentByID(long paymentId) {
-		List<Payment> paymentList = paymentDao.findByPaymentId(paymentId);
-		return paymentList;
+	public Payment findPaymentByID(long paymentId) {
+//		List<Payment> paymentList = paymentDao.findByPaymentId(paymentId);
+//		return paymentList;
+		Payment payment = paymentDao.findByPaymentId(paymentId);
+		return payment;
 	}
 
 	@Override
@@ -41,13 +43,14 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public void cancelPayment(String paymentId) {
-		List<Payment> paymentList = paymentDao.findByPaymentId(Integer.parseInt(paymentId));
-		for (Payment p : paymentList) {
-			if (paymentId.equals(p.getPaymentId() + "")) {
-				paymentDao.delete(p.getPaymentId());
-			}
-		}
+	public void cancelPayment(long paymentId) {
+		Payment paymentList = paymentDao.findByPaymentId(paymentId);
+//		for (Payment p : paymentList) {
+//			if (paymentId == p.getPaymentId()) {
+//				paymentDao.delete(p.getPaymentId());
+//			}
+//		}
+		paymentDao.delete(paymentList.getPaymentId());
 	}
 
 	@Override
@@ -59,13 +62,11 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public Payment getPaymentObject(String paymentId) {
-		List<Payment> paymentList = paymentDao.findByPaymentId(Integer.parseInt(paymentId));
-		for (Payment p : paymentList) {
-			if (paymentId.equals(p.getPaymentId() + "")) {
-				return p;
-			}
-		}
+	public Payment getPaymentObject(long paymentId) {
+		Payment paymentList = paymentDao.findByPaymentId(paymentId);
+		if(paymentList.getPaymentId() != 0)
+			return paymentList;
+		
 		return null;
 		
 	}

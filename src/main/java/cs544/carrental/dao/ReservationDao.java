@@ -19,8 +19,13 @@ public interface ReservationDao extends  GenericDao<Reservation> {
 //	@Query("select r from Reservation r order by reservation_id Desc ")
 	List<Reservation> findAllOrderbyreservationIdDesc();
 	
+
+	List<Reservation> findAllByCustomerId(long id);
+//	void update(Date date, Date pickUpDateTime, Date returnDateTime, long reservationId);
+
 	List<Reservation> findAllState(int state);
 
 
 	void update(Date date, Date pickUpDateTime, Date returnDateTime, long reservationId);
+
 }

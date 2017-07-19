@@ -48,17 +48,22 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public void update(Reservation res) {
-		java.text.SimpleDateFormat sdf = 
-			     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		sdf.format(res.getPickUpDateTime());
-		sdf.format( res.getReturnDateTime());
+//		java.text.SimpleDateFormat sdf = 
+//			     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		sdf.format(res.getPickUpDateTime());
+//		sdf.format( res.getReturnDateTime());
 		
-		reservationDao.update(new Date(),res.getPickUpDateTime(),res.getReturnDateTime(),res.getReservationId());
+//		reservationDao.update(new Date(),res.getPickUpDateTime(),res.getReturnDateTime(),res.getReservationId());
+		reservationDao.update(res);
 	}
 
 	@Override
 	public Reservation findById(long id) {
 		return reservationDao.findOne(id);
 	}
-
+	
+	@Override
+	public List<Reservation> findAllByCustomerId(long id) {
+		return reservationDao.findAllByCustomerId(id);
+	}
 }
