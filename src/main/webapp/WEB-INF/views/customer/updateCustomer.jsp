@@ -11,7 +11,7 @@
 <body>
 	<section>
 	<div class="row">
-			<jsp:include page="/fragments/admin-nav-bar.jsp"></jsp:include>
+			<jsp:include page="/fragments/customer-nav-bar.jsp"></jsp:include>
 	</div>
 	</section>
 
@@ -116,7 +116,7 @@
 
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Submit"/>
 					</div>
 				</div>
 				

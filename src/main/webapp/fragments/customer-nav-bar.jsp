@@ -2,9 +2,8 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link
-	href="<%=request.getContextPath()%>/resources/static/css/bootstrap.css"
-	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <link
 	href="<%=request.getContextPath()%>/resources/static/css/main.css"
 	rel="stylesheet" />
@@ -38,7 +37,8 @@
 						</ul>
 					</li>
 					
-	 
+	 				
+ 					<li class="contact"><a href="<%=request.getContextPath() %>/customers/update">Edit Profile</a></li>
  					
  					<li class="contact"><a href="<%=request.getContextPath() %>/logout">Logout</a></li>
 				</ul>
