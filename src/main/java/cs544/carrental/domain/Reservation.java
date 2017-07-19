@@ -37,6 +37,8 @@ public class Reservation {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Vehicle vehicle;
 	
+//	@OneToOne(mappedBy="reservation",cascade= CascadeType.ALL)
+//	private Payment payment;
 	
 	
 	@OneToOne

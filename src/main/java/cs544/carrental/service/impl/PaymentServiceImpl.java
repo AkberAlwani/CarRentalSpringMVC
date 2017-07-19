@@ -20,13 +20,13 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	PaymentDao paymentDao;
 
-	@Override
-	public void addPayment(Payment payment, Reservation reservation) {
-		payment.setPaymentDateTime(new Date());
-		payment.setReservation(reservation);
-		payment.setIsConfirm("PAID");
-		paymentDao.save(payment);
-	}
+//	@Override
+//	public void addPayment(Payment payment, Reservation reservation) {
+//		payment.setPaymentDateTime(new Date());
+//		payment.setReservation(reservation);
+//		payment.setIsConfirm("PAID");
+//		paymentDao.save(payment);
+//	}
 
 	@Override
 	public Payment findPaymentByID(long paymentId) {
@@ -88,6 +88,14 @@ public class PaymentServiceImpl implements PaymentService {
 				paymentList.add(p);
 		}
 		return paymentList;
+	}
+
+	@Override
+	public void save(Payment payment) {
+		payment.setPaymentDateTime(new Date());
+		payment.setIsConfirm("PAID");
+		paymentDao.save(payment);
+		
 	}
 
 }

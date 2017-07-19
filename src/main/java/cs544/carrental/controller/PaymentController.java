@@ -52,11 +52,6 @@ public class PaymentController {
 
 	}
 	
-	//========================================================
-	//========================================================
-	//========================================================
-	//========================================================
-	
 	
 	@RequestMapping(value = "/add-payment", method = RequestMethod.GET)
 	public String addPayment(Payment payment, HttpSession sessionAdd, Model model) {
@@ -70,8 +65,10 @@ public class PaymentController {
 	public String payBill(@Valid Payment payment, BindingResult bindingResult, HttpSession sessionReservation) {
 		if (bindingResult.hasErrors())
 			return "payment/add-payment";
-		Reservation reservationObject = (Reservation) sessionReservation.getAttribute("reservationObject");		
-		paymentService.addPayment(payment, reservationObject);
+		
+		Reservation reservation = (Reservation) sessionReservation.getAttribute("reservationObject");
+		payment.setReservation(reservation);
+		paymentService.save(payment);
 		return "redirect:view-all-payment";
 	}
 

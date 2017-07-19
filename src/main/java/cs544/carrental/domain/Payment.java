@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -38,6 +39,7 @@ public class Payment {
 	private String expiryDate;
 
 	@OneToOne
+	@JoinColumn(name="resevartionId")
 	private Reservation reservation;
 
 	public long getPaymentId() {
