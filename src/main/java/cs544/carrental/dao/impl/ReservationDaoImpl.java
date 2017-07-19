@@ -29,14 +29,27 @@ public class ReservationDaoImpl extends GenericDaoImpl<Reservation> implements R
 		Query query = entityManager.createQuery("select r from Reservation r  order by r.reservationId desc");
 		return  query.getResultList();
 	}
-
+	
 	@Override
-	public void update(Date date, Date pickUpDateTime, Date returnDateTime, long reservationId) {
-		Query query = entityManager.createQuery("Update Reservation set ");
+	public List<Reservation> findAllByCustomerId(long customerId) {
+		Query query = entityManager.createQuery("select r from Reservation r where r.customer.id=:customerId and r.state = 0");
+		return  (List<Reservation>)query.setParameter("customerId", customerId).getResultList();
+	}
+	
+//	@Override
+//	public void update(Date date, Date pickUpDateTime, Date returnDateTime, long reservationId) {
+//		Query query = entityManager.createQuery("Update Reservation set ");
+//		//return  query.getResultList();
+//		
+//		
+//	}
+	
+//	@Override
+//	public Reservation update(Reservation reserve) {
+//		entityManager.merge(reserve);
 		//return  query.getResultList();
 		
 		
-	}
-	
+//	}
 	
 }

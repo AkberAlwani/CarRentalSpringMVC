@@ -23,6 +23,7 @@ import cs544.carrental.domain.Payment;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.service.AccountService;
 import cs544.carrental.service.PaymentService;
+import cs544.carrental.service.ReservationService;
 
 @Controller
 @RequestMapping("/payment")
@@ -31,6 +32,8 @@ public class PaymentController {
 	PaymentService paymentService;
 	@Autowired
 	AccountService accountService;
+	@Autowired
+	ReservationService reservationService;
 	
 	@RequestMapping(value = "/admin/allPayment", method = RequestMethod.GET)
 	public String allPayment(Model model, HttpSession viewSession) {
@@ -87,7 +90,7 @@ public class PaymentController {
 			model.addAttribute("isAdmin", false);
 		}
 		
-		List<Payment> paymentList = paymentService.findPaymentByID(paymentid);
+		Payment paymentList = paymentService.findPaymentByID(paymentid);
 		model.addAttribute("paymentList", paymentList);
 		return "payment/view-payment";
 	}
@@ -121,14 +124,20 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "/cancel-payment/{paymentid}", method = RequestMethod.GET)
-	public String cancelPayment(@PathVariable("paymentid") String paymentid) {
+	public String cancelPayment(@PathVariable("paymentid") long paymentid) {
+		Payment payment = paymentService.findPaymentByID(paymentid);
+		Reservation reserve = payment.getReservation();
+		reserve.setState(1); //Set Cancelled
+//		reserve.setReservationId(reserve.getReservationId());
+		reservationService.update(reserve);
 		paymentService.cancelPayment(paymentid);
+		
 		return "redirect:/payment/view-all-payment";
 
 	}
 
 	@RequestMapping(value = "/update-payment/{paymentid}", method = RequestMethod.GET)
-	public String updatePayment(@PathVariable("paymentid") String paymentid, Model model, HttpSession sessionObj) {
+	public String updatePayment(@PathVariable("paymentid") long paymentid, Model model, HttpSession sessionObj) {
 		sessionObj.setAttribute("paymentObject", paymentService.getPaymentObject(paymentid));
 		model.addAttribute("paymentObject", paymentService.getPaymentObject(paymentid));
 		return "payment/update-payment-form";

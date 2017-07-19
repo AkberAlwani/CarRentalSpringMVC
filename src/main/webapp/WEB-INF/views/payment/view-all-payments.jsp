@@ -45,11 +45,11 @@
 					<td>${list.reservation.vehicle.make}</td>
 					<td>${list.reservation.vehicle.vehicleType.name}</td>
 					<td>${list.reservation.vehicle.model}</td>
-					<c:if test="${isAdmin}">
-						<td>
-						 	<a href="cancel-payment/${list.paymentId}">Delete</a>
-						 </td> 
-					 </c:if>
+<%-- 					<c:if test="${isAdmin}"> --%>
+<!-- 						<td> -->
+<%-- 						 	<a href="cancel-payment/${list.paymentId}">Cancel</a> --%>
+<!-- 						 </td>  -->
+<%-- 					 </c:if> --%>
 					<!-- <td><a th:href="@{cancel-payment/{id}(id=${list.paymentId})}">Delete</a></td> -->
 					<!-- <td><a th:href="@{update-payment/{id}(id=${list.paymentId})}">Update</a></td> -->
 					<c:if test="${isAdmin}">
