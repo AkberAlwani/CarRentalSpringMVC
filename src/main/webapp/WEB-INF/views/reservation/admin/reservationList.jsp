@@ -45,6 +45,7 @@ h3 {
 				<th>Reservation Date</th>
 				<th>Person Name</th>
 				<th>Vehicle Name</th>
+				<th></th>
 			</tr>
 			<c:forEach items="${reservations}" var="res">
 				<tr>
