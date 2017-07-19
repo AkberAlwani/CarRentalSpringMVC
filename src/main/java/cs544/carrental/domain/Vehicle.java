@@ -46,10 +46,19 @@ public class Vehicle {
 //  @JoinTable ( name="VehicleType_Vehicle", joinColumns={@JoinColumn(name="VehicleType_Id")},  
 //  inverseJoinColumns={ @JoinColumn(name="Vehicle_Id")} )  
 //  Set<Vehicle> vehicles = new HashSet<Vehicle>();
-
     private VehicleType vehicleType;
+
+    @ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+    private Location location;
 	
-	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public long getVehicleId() {
 		return vehicleId;
 	}

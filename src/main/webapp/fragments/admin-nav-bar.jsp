@@ -38,7 +38,14 @@
 					</li>
 					<li class="cars"><a href="customers/all">Customers</a>
 						<ul>
-							<li><a href="<%=request.getContextPath()%>/customers/all">Listing</a></li>
+							<li><a href="<%=request.getContextPath()%>/customers/all">View All</a></li>
+							<li><a href="<%=request.getContextPath()%>/customers/add">Add</a></li>
+						</ul>
+					</li>
+					<li class="cars"><a href="locations/all">Location</a>
+						<ul>
+							<li><a href="locations/all">Show All </a></li>
+							<li><a href="locations/add">Add</a></li>
 						</ul>
 					</li>
 					<li class="news"><a href="<%=request.getContextPath()%>/payment/admin/allPayment">Payment</a>

@@ -39,10 +39,10 @@ tr:nth-child(even) {
 			<c:forEach items="${customers}" var="cust">
 				<tr>
 					<td>${cust.customerNumber}</td>
-					<td>${cust..firstName}  ${customer.lastName}</td>
+					<td>${cust.firstName}  ${cust.lastName}</td>
 					<td>${cust.email}</td>
 					<td>${cust.phoneNumber}
-					<td>${cust.city}	
+					<td>${cust.address.city}</td>
 					
 					<td>
 						<a href="<%=request.getContextPath() %>/customers/delete/${cust.id}" onclick="return confirm('Are you sure?')">Delete</a></td>
