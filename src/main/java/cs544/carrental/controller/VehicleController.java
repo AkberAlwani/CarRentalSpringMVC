@@ -45,6 +45,13 @@ public class VehicleController {
 		return "vehicles";
 	}
 
+	@RequestMapping({ "/list" })
+	public String listForCustomer(Model model) {
+//		setRole(session, model);
+		model.addAttribute("vehicles",  vehicleService.getAllVehicles());
+		return "vehiclesCustomer";
+	}
+	
 // @Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 //	public String getAddNewProductForm(@ModelAttribute("newVehicle") Vehicle newVehicle, Model model) {

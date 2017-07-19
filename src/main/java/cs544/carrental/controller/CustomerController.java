@@ -57,19 +57,22 @@ public class CustomerController {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "addCustomer";
+			return "customer/admin/addCustomer";
 		}
 		 
 		//customer.setAddress(address);
 		
 		  //...
 
-		String password = customerService.MD5(customer.getAccount().getPassword());
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		Address address = new Address();
+		//String password = customerService.MD5(customer.getAccount().getPassword());
+		//PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		//String hashedPassword = passwordEncoder.encode(password);
+		//Address address = new Address();
 		
-		customer.getAccount().setPassword(hashedPassword);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String password = passwordEncoder.encode(customer.getAccount().getPassword());
+		
+		customer.getAccount().setPassword(password);
 		Authority authority = new Authority();
 		authority.setAuthority("CUSTOMER");
 		authority.setUsername(customer.getAccount().getUsername());
