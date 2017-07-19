@@ -35,8 +35,8 @@ import cs544.carrental.service.VehicleService;
 
 @RequestMapping("/reservation/")
 @Controller
-public class ReservationController1 {
-	private Logger logger = Logger.getLogger(ReservationController1.class);
+public class ReservationController {
+	private Logger logger = Logger.getLogger(ReservationController.class);
 	
 	@Autowired
 	VehicleService vehicleService;
@@ -46,6 +46,31 @@ public class ReservationController1 {
 	ReservationService reservationService;
 	@Autowired
 	AccountService accountService;
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String showCustomerList(Model model) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Account account = accountService.findByUserName(userDetails.getUsername());
+		long customerId = account.getCustomer().getId();
+		List<Reservation> list = reservationService.findAllByCustomerId(customerId);
+
+		model.addAttribute("reservations", list);
+		return "reservation/reservationList";
+	}
+
+	@RequestMapping(value = "cancel/{resid}", method = RequestMethod.GET)
+	public String cancelCustomerReservation(@PathVariable("resid") long resId) {
+		Reservation reservation = reservationService.findById(resId);
+		Vehicle vehicle = reservation.getVehicle();
+		System.out.println(vehicle.toString());
+		vehicle.setIsAvailable(true);
+		vehicleService.update(vehicle);
+		
+		reservation.setState(1); //Cancelled
+		reservationService.update(reservation);
+
+		return "redirect:/reservation/list";
+	}
 	
 	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
 	public String showList(@PathVariable("state") int state, Model model) {
