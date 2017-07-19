@@ -3,14 +3,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-<meta charset="ISO-8859-1" />
-<title>View Individual Payment</title>
-<link href="/css/bootstrap.css" rel="stylesheet" media="screen" />
-<link href="/css/main.css" rel="stylesheet" media="screen" />
+<link href="<%=request.getContextPath() %>/resources/static/css/bootstrap.css" rel="stylesheet"  />
+<link href="<%=request.getContextPath() %>/resources/static/css/main.css" rel="stylesheet"  />
 <style>
 table {
 	border-collapse: collapse;
-	width: 80%;
+	width: 100%;
 }
 
 th, td, h1 {
@@ -32,52 +30,51 @@ h3 {
 	color: white;
 }
 </style>
-
 </head>
-
 <body>
-	<h1>Payment Information Page</h1>
-	<table>
-		<tr>
-			<th>Reservation ID</th>
-			<th>Amount</th>
-			<th>Status</th>
-			<th>Customer ID</th>
-			<th>Customer name</th>
-			<th>Vehicle plat No.</th>
-			<th>Brand</th>
-			<th>Type</th>
-			<th>Model</th>
-		</tr>
-		<tbody>
-<%--  			<c:forEach items="${paymentList}" var="list"> --%>
+	<div class="row">
+		<c:import url="/fragments/admin-nav-bar.jsp"></c:import>
+	</div>
+	<h2 style="padding-left: 10px;margin-top: -10px;">Payment View</h2>
+	<div class="dataTable">
+		<table>
 				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Transaction Date-Time:</td>
 					<td>${paymentList.paymentDateTime}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Payment Type:</td>
 					<td>${paymentList.paymentType}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Amount:</td>
 					<td>${paymentList.amount}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Reservation ID:</td>
 					<td>${paymentList.reservation.reservationId}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Customer name:</td>
 					<td>${paymentList.reservation.customer.firstName} ${paymentList.reservation.customer.lastName}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Vehicle plat No.:</td>
 					<td>${paymentList.reservation.vehicle.plateNumber}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Make:</td>
 					<td>${paymentList.reservation.vehicle.make}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Type:</td>
 					<td>${paymentList.reservation.vehicle.vehicleType.name}</td>
+				</tr>
+				<tr>
+					<td width="20%" style="padding-left: 20px;font-weight: bold;">Model:</td>
 					<td>${paymentList.reservation.vehicle.model}</td>
-<%-- 				<c:if test="${isAdmin}"> --%>
-<%-- 					<td><a href="<%=request.getContextPath() %>/payment/cancel-payment/${list.paymentId}">Delete</a></td> --%>
-<%-- 				</c:if> --%>
-
-				<!-- <td><a	th:href="@{~/payment/cancel-payment/{id}(id=${list.paymentId})}">Delete</a></td> -->
-				<!-- <td><a	th:href="@{~/payment/update-payment/{id}(id=${list.paymentId})}">Update</a></td> -->
-<%-- 				<c:if test="${isAdmin}"> --%>
-<%-- 					<td><a href="<%=request.getContextPath() %>/payment/update-payment/${list.paymentId}">Update</a></td> --%>
-<%-- 				</c:if> --%>
-
-
-				<td><a href="<%=request.getContextPath() %>/payment/view-all-payment">View all
-						Payments</a></td>
-			</tr>
-<%-- 			</c:forEach> --%>
-		</tbody>
-	</table>
+				</tr>
+		</table>
+	</div>
 </body>
-
 </html>
