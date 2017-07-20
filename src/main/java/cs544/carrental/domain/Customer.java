@@ -42,15 +42,15 @@ public class Customer {
 
 	@Column(unique = true)
 	@Size(min = 5, max = 8)
-	@NotEmpty(message = "Please enter Your customerNumber")
+	@NotEmpty(message = "{NotEmpty}")
 	private String customerNumber;
 	
 	@Size(min = 10, max = 15)
-	@NotEmpty(message = "Please enter Your phoneNumber")
+	@NotEmpty(message = "{NotEmpty}")
 	private String phoneNumber;
 	
-	@NotEmpty(message = "Please enter Your email address")
-	@Email(message = "Invalid email address")
+	@NotEmpty(message = "{NotEmpty}")
+	@Email(message = "{Email}")
 	private String email;
 	
 	@Valid
@@ -58,7 +58,7 @@ public class Customer {
 	private Address address;
 	
 	@Valid
-	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.MERGE)
 	// @JoinColumn(name = "account_person_id", referencedColumnName =
 	// "accountId")
 	@JoinColumn(name = "account_id")
