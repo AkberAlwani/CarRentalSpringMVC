@@ -107,20 +107,23 @@ public class ReservationController {
 	}
 
 	@RequestMapping("add/{carid}")
-	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
+	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model,
+			HttpSession session) {
 		model.addAttribute("carNumber", carNumber);
+		session.setAttribute("order", reservation);	
 		return "reservation/addreservation";
 	}
 
 	@RequestMapping(value = "add/{carid}", method = RequestMethod.POST)
 	public String add(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-			BindingResult bindingResult, HttpSession sessionRev) {
+			BindingResult bindingResult, HttpSession session) {
 		// Person person = (Person) session.getAttribute("person");
 		System.out.println("car number:" + carNumber);
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		System.out.println(vehicle.getDailyRate());
 		// Person person = personService.findById(1);
 		// Customer customer= (Customer) sessionRev.getAttribute("customer");
+		Reservation cart = (Reservation) session.getAttribute("order");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("username:" + userDetails.getUsername());
 		Account acct = accountService.findByUserName(userDetails.getUsername());
@@ -134,12 +137,12 @@ public class ReservationController {
 		vehicle.setIsAvailable(false);
 		vehicleService.update(vehicle);
 
-		sessionRev.setAttribute("reservationObject", reservation);
+		session.setAttribute("reservationObject", reservation);
 		double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
 		double dayPrice = vehicle.getDailyRate();
 		double totalPrice = totalDay * dayPrice;
 		System.out.println("totalPrice:" + totalPrice);
-		sessionRev.setAttribute("totalPriceSession", totalPrice);
+		session.setAttribute("totalPriceSession", totalPrice);
 		// if(addPayment.equals("Yes")){
 		return "redirect:/payment/add-payment";
 		// }

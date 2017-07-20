@@ -20,7 +20,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired 
 	ReservationDao reservationDao;
-	
+
 	@Override
 	public void save(Reservation reservation) {
 		
@@ -48,12 +48,6 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public void update(Reservation res) {
-//		java.text.SimpleDateFormat sdf = 
-//			     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		sdf.format(res.getPickUpDateTime());
-//		sdf.format( res.getReturnDateTime());
-		
-//		reservationDao.update(new Date(),res.getPickUpDateTime(),res.getReturnDateTime(),res.getReservationId());
 		reservationDao.update(res);
 	}
 
@@ -66,4 +60,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<Reservation> findAllByCustomerId(long id) {
 		return reservationDao.findAllByCustomerId(id);
 	}
+
+	@Override
+	public Reservation getReport(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

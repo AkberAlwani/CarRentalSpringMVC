@@ -44,6 +44,10 @@ public class Reservation {
 	@OneToOne
 	private Customer customer;
 
+
+
+	
+
 	public int getState() {
 		return state;
 	}
@@ -150,5 +154,21 @@ public class Reservation {
 				+ ",Person:" + this.getCustomer() + ",Vehicle" + this.getVehicle() + "}";
 		return str;
 	}
+
+	public Reservation(Date reservationDateTime, Date pickUpDateTime, int mileageIn, double dailyRate,
+			double pricePerDay, double finePerDay, int state, Vehicle vehicle, Customer customer) {
+		super();
+		this.reservationDateTime = reservationDateTime;
+		this.pickUpDateTime = pickUpDateTime;
+		this.mileageIn = mileageIn;
+		this.dailyRate = dailyRate;
+		this.pricePerDay = pricePerDay;
+		this.finePerDay = finePerDay;
+		this.state = state;
+		this.vehicle = vehicle;
+		this.customer = customer;
+	}
+	
+	public Reservation() {}
 
 }

@@ -27,7 +27,7 @@
 					<li class="about"><a href="#">Reservation</a>
  						<ul>
  							<li><a href="<%=request.getContextPath() %>/reservation/list">Show All</a></li>
- 							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History</a></li>
+<%--  							<li><a href="<%=request.getContextPath() %>/reservation/admin/list/2">History</a></li> --%>
  						</ul> 
  					</li>
 					

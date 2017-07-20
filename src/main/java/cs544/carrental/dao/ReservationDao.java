@@ -28,4 +28,6 @@ public interface ReservationDao extends  GenericDao<Reservation> {
 
 	void update(Date date, Date pickUpDateTime, Date returnDateTime, long reservationId);
 
+
+
 }
