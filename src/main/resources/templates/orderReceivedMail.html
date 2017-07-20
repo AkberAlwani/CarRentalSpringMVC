@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Template for Booking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<div style="font-size: 20px">
+		<em>What ever you need ---</em>
+		<div style="text-indent: 8em;">
+			<img src="cid:imtheguy" height="80" width="80" /><em> .com</em>
+		</div>
+	</div>
+	<p th:text="#{greeting(${name})}" />
+
+	<H4>We have received your booking reservation and will be Processing it !</H4>
+
+	<p>Here are your Order details:</p>
+	<b>Order Number: </b>
+<!-- 	<span th:text="${reservation.reservationId}"></span> -->
+
+	<div>
+		<div style="text-indent: 3em;">
+<!-- 			<p> -->
+<!-- 				<b>Vehicle: </b> <span th:text="${reservation.vehicle.make} ${reservation.vehicle.model}"></span> -->
+<!-- 			</p> -->
+<!-- 			<p> -->
+<!-- 				<b>Daily Rate: </b> <span th:text="${reservation.pricePerDay}"></span> -->
+<!-- 			</p> -->
+<!-- 			<p> -->
+<!-- 				<b>Daily Fine: </b> <span th:text="${reservation..price}"></span> -->
+<!-- 			</p> -->
+		</div>
+		<p>
+			<b>Total: </b> <span></span>
+<!-- 				th:text="${reservation.pricePerDay}"></span> -->
+		</p>
+	</div>
+
+	<br />
+	<p>
+		As a special bonus, you can find <b>The Alarm Clock Specifications</b>
+		attached to this message.
+	</p>
+
+	<p>
+		<br /> Thanks for your order, <br /> &emsp; <em><b>I'm the
+				Guy! - Online</b></em>
+	</p>
+</body>
+</html>
