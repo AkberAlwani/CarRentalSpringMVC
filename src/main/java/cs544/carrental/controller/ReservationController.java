@@ -1,21 +1,16 @@
 package cs544.carrental.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -48,8 +43,6 @@ public class ReservationController {
 	@Autowired
 	PaymentService paymentService;
 
-	// ========================Yong=============================
-
 	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
 	public String showList(@PathVariable("state") int state, Model model) {
 		List<Reservation> list = reservationService.getAll(state);
@@ -78,9 +71,6 @@ public class ReservationController {
 		return "redirect:/reservation/admin/list/"+state+"";
 	}
 
-	// =====================================================
-
-	// ======================Tao===============================
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String showCustomerList(Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -117,12 +107,10 @@ public class ReservationController {
 	@RequestMapping(value = "add/{carid}", method = RequestMethod.POST)
 	public String add(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
 			BindingResult bindingResult, HttpSession session) {
-		// Person person = (Person) session.getAttribute("person");
 		System.out.println("car number:" + carNumber);
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		System.out.println(vehicle.getDailyRate());
-		// Person person = personService.findById(1);
-		// Customer customer= (Customer) sessionRev.getAttribute("customer");
+		
 		Reservation cart = (Reservation) session.getAttribute("order");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("username:" + userDetails.getUsername());
@@ -143,11 +131,8 @@ public class ReservationController {
 		double totalPrice = totalDay * dayPrice;
 		System.out.println("totalPrice:" + totalPrice);
 		session.setAttribute("totalPriceSession", totalPrice);
-		// if(addPayment.equals("Yes")){
+		
 		return "redirect:/payment/add-payment";
-		// }
-		// model.addAttribute("reservations", reservationService.getAll());
-		// return "redirect:/reservation/list";
 	}
 	
 	@SuppressWarnings("null")
@@ -158,14 +143,6 @@ public class ReservationController {
 		long customerId = account.getCustomer().getId();
 		List<Reservation> list = reservationService.findAllByCustomerId(customerId);
 		
-//		List<Double> totalPrices = null;
-//		for(Reservation reservation : list) {
-//			double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
-//			double dayPrice = reservation.getVehicle().getDailyRate();
-//			totalPrices.add(totalDay * dayPrice);
-//		}
-//
-//		model.addAttribute("totalPriceList", totalPrices);
 		model.addAttribute("reservations", list);
 		return "reservation/returnvehicle";
 	}
@@ -183,33 +160,4 @@ public class ReservationController {
 
 		return "redirect:/reservation/returnlist";
 	}
-	
-	// ======================Tao=========end======================
-
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder) {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		sdf.setLenient(true);
-//		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-//	}
-//
-//	@RequestMapping(value = "update/{carid}", method = RequestMethod.GET)
-//	public String update(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-//			BindingResult bindingResult, HttpSession session) {
-//		// Person person = (Person) session.getAttribute("person");
-//		Reservation res = reservationService.findById(reservation.getReservationId());
-//		res.setPickUpDateTime(reservation.getPickUpDateTime());
-//		res.setReservationDateTime(reservation.getReservationDateTime());
-//		res.setReturnDateTime(reservation.getReturnDateTime());
-//		reservationService.update(reservation);
-//		return "redirect:/reservation/list";
-//	}
-//
-//	@RequestMapping(value = "edit/{resid}", method = RequestMethod.GET)
-//	public String edit(@PathVariable("resid") int resId, Model model) {
-//		Reservation res = reservationService.findById(resId);
-//		model.addAttribute("carNumber", res.getVehicle().getVehicleId());
-//		model.addAttribute("reservation", res);
-//		return "editReservation";
-//	}
 }
