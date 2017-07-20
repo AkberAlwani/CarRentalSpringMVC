@@ -40,17 +40,17 @@ public class Customer {
 	@EmptyOrSize(min=2, max = 15, message= "{EmptyOrSize}")
 	private String lastName;
 
-	@Column(unique = true)
+	@Column(unique = true)	
 	@Size(min = 5, max = 8)
-	@NotEmpty(message = "Please enter Your customerNumber")
+	@NotEmpty(message = "{NotEmpty}")
 	private String customerNumber;
 	
 	@Size(min = 10, max = 15)
-	@NotEmpty(message = "Please enter Your phoneNumber")
+	@NotEmpty(message = "{NotEmpty}")
 	private String phoneNumber;
 	
-	@NotEmpty(message = "Please enter Your email address")
-	@Email(message = "Invalid email address")
+	@NotEmpty(message = "{NotEmpty}")
+	@Email(message = "{Email}")
 	private String email;
 	
 	@Valid
