@@ -64,7 +64,7 @@ tr:nth-child(even) {
 
 							<tr>
 								<td>Expiry Date:</td>
-								<td><form:input type="text" path="expiryDate" style="height:30px"/>(mm/yyyy)</td>
+								<td><form:input type="text" path="expiryDate" style="height:30px" pattern="(0[1-9]|1[0-2])/[12]\d{3}" title="Invalid format!" />(mm/yyyy)</td>
 
 <%-- 								<td th:if="${#fields.hasErrors('expiryDate')}" --%>
 <!-- 									th:errors="*{expiryDate}" bgcolor="#FF0000"></td> -->
