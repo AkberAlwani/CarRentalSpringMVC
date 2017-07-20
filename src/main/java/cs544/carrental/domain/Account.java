@@ -37,7 +37,7 @@ public class Account {
 	
 	private Boolean enabled;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "authority_id")
 	Authority authority;
 //	List<Authority> authority = new ArrayList<Authority>();
