@@ -55,7 +55,7 @@ tr:nth-child(even) {
 
 							<tr>
 								<td>Card Number:</td>
-								<td><form:input type="text" path="cardNumber" pattern="\d{4}-\d{4}-\d{4}-\d{4}" title="Invalid format!" style="height:30px"/>(xxxx-xxxx-xxxx-xxxx)</td>
+								<td><form:input type="text" path="cardNumber" style="height:30px"/>(xxxx-xxxx-xxxx-xxxx)</td>
 <%-- 								<td th:if="${#fields.hasErrors('cardNumber')}" --%>
 <!-- 									th:errors="*{cardNumber}" bgcolor="#FF0000">Card number -->
 <!-- 									Error</td> -->
@@ -64,7 +64,7 @@ tr:nth-child(even) {
 
 							<tr>
 								<td>Expiry Date:</td>
-								<td><form:input type="text" path="expiryDate" style="height:30px" pattern="(0[1-9]|1[0-2])/[12]\d{3}" title="Invalid format!" />(mm/yyyy)</td>
+								<td><form:input type="text" path="expiryDate" style="height:30px" />(mm/yyyy)</td>
 
 <%-- 								<td th:if="${#fields.hasErrors('expiryDate')}" --%>
 <!-- 									th:errors="*{expiryDate}" bgcolor="#FF0000"></td> -->
@@ -72,7 +72,7 @@ tr:nth-child(even) {
 
 							<tr>
 								<td>CVV:</td>
-								<td><form:input type="text" path="cvvNumber" pattern="\d{3}" title="Invalid format!" style="height:30px"/>xxx</td>
+								<td><form:input type="text" path="cvvNumber" style="height:30px"/>xxx</td>
 <%-- 								<td th:if="${#fields.hasErrors('cvvNumber')}" --%>
 <!-- 									th:errors="*{cvvNumber}" bgcolor="#FF0000"></td> -->
 
