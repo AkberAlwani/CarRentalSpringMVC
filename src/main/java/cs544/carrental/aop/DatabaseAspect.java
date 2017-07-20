@@ -1,6 +1,7 @@
 package cs544.carrental.aop;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import org.springframework.util.StopWatch;
 
 import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Reservation;
-import cs544.carrental.emailSender.EmailService;
+import cs544.carrental.emailservice.EmailService;
 import cs544.carrental.log.LogWriter;
 
 
@@ -49,20 +50,23 @@ public class DatabaseAspect {
 	@After("execution(* cs544.carrental.ReservationController.add(..))")
 
 	public void afterPlaceaorder(JoinPoint jp) throws IOException{
-		Customer user = (Customer) jp.getArgs()[0];
+		Customer cust = (Customer) jp.getArgs()[0];
 		HttpServletRequest request = (HttpServletRequest) jp.getArgs()[1];
 		HttpSession session = request.getSession();
 		
 		Reservation cart = (Reservation ) session.getAttribute("order");
-		String msg="Dear "+user.getFirstName()+" "+user.getLastName()+", <br>";
+		String msg="Dear "+cust.getFirstName()+" "+cust.getLastName()+", <br>";
 		msg+="<ul>";
 			msg+="<li>"+cart.getVehicle().getMake() +"-"+cart.getVehicle().getModel()+"-"+cart.getVehicle().getMakeyear()+" has been Booked"+"</li>";
 			msg+="<li> Order From "+cart.getPickUpDateTime()+" To " + cart.getReservationDateTime()+"/<li>"; 
 		msg+="</ul>";
 		msg+="Total Price : $"+cart.getPricePerDay();
 		
-		emailService.sendMail("aali@mum.edu;boliu@mum.edu", user.getEmail(), "Your New Orders", msg);
-		String message = "Email send to "+user.getFirstName()+" "+user.getEmail();
+		
+		emailService.sendMail("admin@4dots.com", cust.getEmail(), "Your Booking Has been Confirmed", msg,new Locale("en"));
+		
+//		emailService.sendMail("aali@mum.edu;boliu@mum.edu", user.getEmail(), "Your New Orders", msg);
+		String message = "Email send to "+cust.getFirstName()+" "+cust.getEmail();
 		logWriter.writeInfoLog(message);
 		//System.out.println();
 	}

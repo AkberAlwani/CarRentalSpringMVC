@@ -1,7 +1,13 @@
 package cs544.carrental.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +28,14 @@ import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Payment;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.domain.Vehicle;
+import cs544.carrental.emailservice.EmailService;
 import cs544.carrental.service.AccountService;
 import cs544.carrental.service.CustomerService;
 import cs544.carrental.service.PaymentService;
 import cs544.carrental.service.ReservationService;
 import cs544.carrental.service.VehicleService;
+import cs544.carrental.service.impl.CustomerServiceImpl;
+import cs544.carrental.service.impl.VehicleServiceImpl;
 
 @RequestMapping("/reservation/")
 @Controller
@@ -42,6 +51,9 @@ public class ReservationController {
 	AccountService accountService;
 	@Autowired
 	PaymentService paymentService;
+	
+	@Autowired
+	EmailService emailServiceJAVA;
 
 	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
 	public String showList(@PathVariable("state") int state, Model model) {
@@ -106,7 +118,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "add/{carid}", method = RequestMethod.POST)
 	public String add(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-			BindingResult bindingResult, HttpSession session) {
+			BindingResult bindingResult, HttpSession session) throws MessagingException {
 		System.out.println("car number:" + carNumber);
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		System.out.println(vehicle.getDailyRate());
@@ -132,8 +144,11 @@ public class ReservationController {
 		System.out.println("totalPrice:" + totalPrice);
 		session.setAttribute("totalPriceSession", totalPrice);
 
+		sendEmail(reservation);
 		return "redirect:/payment/add-payment";
 	}
+
+	
 
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/returnlist", method = RequestMethod.GET)
@@ -159,5 +174,24 @@ public class ReservationController {
 		reservationService.update(reservation);
 
 		return "redirect:/reservation/returnlist";
+	}
+	
+	private void sendEmail(Reservation reservation) throws MessagingException {
+//		Calendar cal = Calendar.getInstance(); 
+//	    DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+//	    Date d1 = df.parse("07-18-2017"); // for example, today's date
+//	    Date d2 = df.parse("07-20-2017"); // use your own dates, of course
+	    
+		Vehicle vehicle = reservation.getVehicle();
+		Customer customer = reservation.getCustomer();
+	    
+	    Reservation order = new Reservation(reservation.getPickUpDateTime(),reservation.getReservationDateTime() 
+	    		,reservation.getMileageIn(),reservation.getDailyRate(),reservation.getFinePerDay(),reservation.getPricePerDay(),1,vehicle,customer);
+	    String documentName = "AlarmClock.docx";
+//	    EmailService emailService = (EmailService) context.getBean("emailService");
+	    emailServiceJAVA.sendOrderReceivedMail("CarRental", customer.getCustomerNumber(),order,documentName,new Locale("en"));
+	  
+	    System.out.println("You Have BOOKED with us Car !!");
+		
 	}
 }
