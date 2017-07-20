@@ -1,20 +1,16 @@
 package cs544.carrental.domain;
 
  
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
@@ -35,14 +31,13 @@ public class Account {
 
 	
 	@NotEmpty(message="Please enter Your password")
-	
 	private String password;
 	
 	private String verifyPassword;
 	
 	private Boolean enabled;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "authority_id")
 	Authority authority;
 //	List<Authority> authority = new ArrayList<Authority>();

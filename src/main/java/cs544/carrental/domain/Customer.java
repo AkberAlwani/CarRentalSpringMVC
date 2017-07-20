@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import cs544.carrental.validation.EmptyOrSize;
-import cs544.carrental.validation.NullMinNumber;
+
 
 
 @Entity 
@@ -32,25 +32,25 @@ public class Customer {
 	@GeneratedValue(strategy=GenerationType.AUTO)
  	private long id;
 	
-	@Column(length = 16)
+	@Column(length = 25)
 	@NotEmpty
 	private String firstName;
 	
-	@Column(length = 16)
+	@Column(length = 25)
 	@EmptyOrSize(min=2, max = 15, message= "{EmptyOrSize}")
 	private String lastName;
 
 	@Column(unique = true)
 	@Size(min = 5, max = 8)
-	@NotEmpty(message = "{NotEmpty}")
+	@NotEmpty(message = "Please enter Your customerNumber")
 	private String customerNumber;
 	
 	@Size(min = 10, max = 15)
-	@NotEmpty(message = "{NotEmpty}")
+	@NotEmpty(message = "Please enter Your phoneNumber")
 	private String phoneNumber;
 	
-	@NotEmpty(message = "{NotEmpty}")
-	@Email(message = "{Email}")
+	@NotEmpty(message = "Please enter Your email address")
+	@Email(message = "Invalid email address")
 	private String email;
 	
 	@Valid
@@ -58,7 +58,7 @@ public class Customer {
 	private Address address;
 	
 	@Valid
-	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
 	// @JoinColumn(name = "account_person_id", referencedColumnName =
 	// "accountId")
 	@JoinColumn(name = "account_id")
