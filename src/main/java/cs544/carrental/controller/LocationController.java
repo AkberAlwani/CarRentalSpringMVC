@@ -20,40 +20,39 @@ import cs544.carrental.service.VehicleTypeService;;
 @Controller
 @RequestMapping("/locations")
 public class LocationController {
-	
+
 	@Autowired
 	private LocationService locationService;
- 
- 	@RequestMapping({"","/all"})
+
+	@RequestMapping({ "", "/all" })
 	public String list(Model model) {
 		model.addAttribute("locations", locationService.findAll());
 		return "location/admin/locations";
 	}
-	
- 	@RequestMapping("/location")
+
+	@RequestMapping("/location")
 	public String getLocationId(Model model, @RequestParam("id") Long id) {
 
-		Location location= locationService.findById(id);
+		Location location = locationService.findById(id);
 		model.addAttribute("locatioin", location);
 		return "location/admin/location";
 	}
 
-	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(@ModelAttribute("newLocation") Location newLoc) {
-	   return "location/admin/addLocation";
+		return "location/admin/addLocation";
 	}
-	   
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newLocation") @Valid Location newLocation, BindingResult result) {
-		if(result.hasErrors()) {
+	public String processAddNewProductForm(@ModelAttribute("newLocation") @Valid Location newLocation,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "location/admin/addLocation";
 		}
 
 		locationService.save(newLocation);
-		
-	   	return "redirect:/location/admin/locations";
+
+		return "redirect:/location/admin/locations";
 	}
-	
-   
+
 }

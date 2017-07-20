@@ -1,21 +1,22 @@
 package cs544.carrental.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -27,11 +28,14 @@ import cs544.carrental.domain.Customer;
 import cs544.carrental.domain.Payment;
 import cs544.carrental.domain.Reservation;
 import cs544.carrental.domain.Vehicle;
+import cs544.carrental.emailservice.EmailService;
 import cs544.carrental.service.AccountService;
 import cs544.carrental.service.CustomerService;
 import cs544.carrental.service.PaymentService;
 import cs544.carrental.service.ReservationService;
 import cs544.carrental.service.VehicleService;
+import cs544.carrental.service.impl.CustomerServiceImpl;
+import cs544.carrental.service.impl.VehicleServiceImpl;
 
 @RequestMapping("/reservation/")
 @Controller
@@ -47,8 +51,9 @@ public class ReservationController {
 	AccountService accountService;
 	@Autowired
 	PaymentService paymentService;
-
-	// ========================Yong=============================
+	
+	@Autowired
+	EmailService emailServiceJAVA;
 
 	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
 	public String showList(@PathVariable("state") int state, Model model) {
@@ -64,23 +69,20 @@ public class ReservationController {
 	public String delete(@PathVariable("resid") long resId) {
 		Reservation reservation = reservationService.findById(resId);
 		int state = reservation.getState();
-		
+
 		Vehicle vehicle = reservation.getVehicle();
 		System.out.println(vehicle.toString());
 		vehicle.setIsAvailable(true);
 		vehicleService.update(vehicle);
-		
+
 		Payment payment = paymentService.findPaymentByReservationID(resId);
 		paymentService.delete(payment.getPaymentId());
-		
+
 		reservationService.delete(resId);
 
-		return "redirect:/reservation/admin/list/"+state+"";
+		return "redirect:/reservation/admin/list/" + state + "";
 	}
 
-	// =====================================================
-
-	// ======================Tao===============================
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String showCustomerList(Model model) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -107,20 +109,21 @@ public class ReservationController {
 	}
 
 	@RequestMapping("add/{carid}")
-	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model) {
+	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model,
+			HttpSession session) {
 		model.addAttribute("carNumber", carNumber);
+		session.setAttribute("order", reservation);
 		return "reservation/addreservation";
 	}
 
 	@RequestMapping(value = "add/{carid}", method = RequestMethod.POST)
 	public String add(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-			BindingResult bindingResult, HttpSession sessionRev) {
-		// Person person = (Person) session.getAttribute("person");
+			BindingResult bindingResult, HttpSession session) throws MessagingException {
 		System.out.println("car number:" + carNumber);
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		System.out.println(vehicle.getDailyRate());
-		// Person person = personService.findById(1);
-		// Customer customer= (Customer) sessionRev.getAttribute("customer");
+
+		Reservation cart = (Reservation) session.getAttribute("order");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("username:" + userDetails.getUsername());
 		Account acct = accountService.findByUserName(userDetails.getUsername());
@@ -134,19 +137,19 @@ public class ReservationController {
 		vehicle.setIsAvailable(false);
 		vehicleService.update(vehicle);
 
-		sessionRev.setAttribute("reservationObject", reservation);
+		session.setAttribute("reservationObject", reservation);
 		double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
 		double dayPrice = vehicle.getDailyRate();
 		double totalPrice = totalDay * dayPrice;
 		System.out.println("totalPrice:" + totalPrice);
-		sessionRev.setAttribute("totalPriceSession", totalPrice);
-		// if(addPayment.equals("Yes")){
+		session.setAttribute("totalPriceSession", totalPrice);
+
+		sendEmail(reservation);
 		return "redirect:/payment/add-payment";
-		// }
-		// model.addAttribute("reservations", reservationService.getAll());
-		// return "redirect:/reservation/list";
 	}
+
 	
+
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/returnlist", method = RequestMethod.GET)
 	public String showCustomerCurrentReservations(Model model) {
@@ -154,19 +157,11 @@ public class ReservationController {
 		Account account = accountService.findByUserName(userDetails.getUsername());
 		long customerId = account.getCustomer().getId();
 		List<Reservation> list = reservationService.findAllByCustomerId(customerId);
-		
-//		List<Double> totalPrices = null;
-//		for(Reservation reservation : list) {
-//			double totalDay = reservation.getReturnDateTime().getDay() - reservation.getPickUpDateTime().getDay();
-//			double dayPrice = reservation.getVehicle().getDailyRate();
-//			totalPrices.add(totalDay * dayPrice);
-//		}
-//
-//		model.addAttribute("totalPriceList", totalPrices);
+
 		model.addAttribute("reservations", list);
 		return "reservation/returnvehicle";
 	}
-	
+
 	@RequestMapping(value = "/return/{resid}", method = RequestMethod.GET)
 	public String returnVehicle(@PathVariable("resid") long resId) {
 		Reservation reservation = reservationService.findById(resId);
@@ -181,32 +176,22 @@ public class ReservationController {
 		return "redirect:/reservation/returnlist";
 	}
 	
-	// ======================Tao=========end======================
-
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder) {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		sdf.setLenient(true);
-//		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-//	}
-//
-//	@RequestMapping(value = "update/{carid}", method = RequestMethod.GET)
-//	public String update(@PathVariable("carid") int carNumber, @ModelAttribute Reservation reservation, Model model,
-//			BindingResult bindingResult, HttpSession session) {
-//		// Person person = (Person) session.getAttribute("person");
-//		Reservation res = reservationService.findById(reservation.getReservationId());
-//		res.setPickUpDateTime(reservation.getPickUpDateTime());
-//		res.setReservationDateTime(reservation.getReservationDateTime());
-//		res.setReturnDateTime(reservation.getReturnDateTime());
-//		reservationService.update(reservation);
-//		return "redirect:/reservation/list";
-//	}
-//
-//	@RequestMapping(value = "edit/{resid}", method = RequestMethod.GET)
-//	public String edit(@PathVariable("resid") int resId, Model model) {
-//		Reservation res = reservationService.findById(resId);
-//		model.addAttribute("carNumber", res.getVehicle().getVehicleId());
-//		model.addAttribute("reservation", res);
-//		return "editReservation";
-//	}
+	private void sendEmail(Reservation reservation) throws MessagingException {
+//		Calendar cal = Calendar.getInstance(); 
+//	    DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+//	    Date d1 = df.parse("07-18-2017"); // for example, today's date
+//	    Date d2 = df.parse("07-20-2017"); // use your own dates, of course
+	    
+		Vehicle vehicle = reservation.getVehicle();
+		Customer customer = reservation.getCustomer();
+	    
+	    Reservation order = new Reservation(reservation.getPickUpDateTime(),reservation.getReservationDateTime() 
+	    		,reservation.getMileageIn(),reservation.getDailyRate(),reservation.getFinePerDay(),reservation.getPricePerDay(),1,vehicle,customer);
+	    String documentName = "AlarmClock.docx";
+//	    EmailService emailService = (EmailService) context.getBean("emailService");
+	    emailServiceJAVA.sendOrderReceivedMail("CarRental", customer.getCustomerNumber(),order,documentName,new Locale("en"));
+	  
+	    System.out.println("You Have BOOKED with us Car !!");
+		
+	}
 }

@@ -2,14 +2,14 @@ package cs544.carrental.service;
 
 import java.util.List;
 
-import cs544.carrental.domain.Address2;
+import cs544.carrental.domain.Address;
  
 public interface AddressService {
 
-	public void save(Address2 address);
-	public void update(Address2 address);
-	public List<Address2> findAll();
+	public void save(Address address);
+	public void update(Address address);
+	public List<Address> findAll();
  
-	public Address2 findOne(Long id);
+	public Address findOne(Long id);
 
 }
