@@ -57,18 +57,18 @@ public class ReservationController {
 	public String delete(@PathVariable("resid") long resId) {
 		Reservation reservation = reservationService.findById(resId);
 		int state = reservation.getState();
-		
+
 		Vehicle vehicle = reservation.getVehicle();
 		System.out.println(vehicle.toString());
 		vehicle.setIsAvailable(true);
 		vehicleService.update(vehicle);
-		
+
 		Payment payment = paymentService.findPaymentByReservationID(resId);
 		paymentService.delete(payment.getPaymentId());
-		
+
 		reservationService.delete(resId);
 
-		return "redirect:/reservation/admin/list/"+state+"";
+		return "redirect:/reservation/admin/list/" + state + "";
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -100,7 +100,7 @@ public class ReservationController {
 	public String showForm(@PathVariable("carid") int carNumber, Reservation reservation, Model model,
 			HttpSession session) {
 		model.addAttribute("carNumber", carNumber);
-		session.setAttribute("order", reservation);	
+		session.setAttribute("order", reservation);
 		return "reservation/addreservation";
 	}
 
@@ -110,7 +110,7 @@ public class ReservationController {
 		System.out.println("car number:" + carNumber);
 		Vehicle vehicle = vehicleService.findByVehicleId(carNumber);
 		System.out.println(vehicle.getDailyRate());
-		
+
 		Reservation cart = (Reservation) session.getAttribute("order");
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("username:" + userDetails.getUsername());
@@ -131,10 +131,10 @@ public class ReservationController {
 		double totalPrice = totalDay * dayPrice;
 		System.out.println("totalPrice:" + totalPrice);
 		session.setAttribute("totalPriceSession", totalPrice);
-		
+
 		return "redirect:/payment/add-payment";
 	}
-	
+
 	@SuppressWarnings("null")
 	@RequestMapping(value = "/returnlist", method = RequestMethod.GET)
 	public String showCustomerCurrentReservations(Model model) {
@@ -142,11 +142,11 @@ public class ReservationController {
 		Account account = accountService.findByUserName(userDetails.getUsername());
 		long customerId = account.getCustomer().getId();
 		List<Reservation> list = reservationService.findAllByCustomerId(customerId);
-		
+
 		model.addAttribute("reservations", list);
 		return "reservation/returnvehicle";
 	}
-	
+
 	@RequestMapping(value = "/return/{resid}", method = RequestMethod.GET)
 	public String returnVehicle(@PathVariable("resid") long resId) {
 		Reservation reservation = reservationService.findById(resId);

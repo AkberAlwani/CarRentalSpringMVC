@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import cs544.carrental.domain.Account;
 import cs544.carrental.domain.AccountType;
@@ -25,8 +24,6 @@ import cs544.carrental.domain.Address;
 import cs544.carrental.domain.Customer;
 import cs544.carrental.service.AccountService;
 import cs544.carrental.service.CustomerService;
-
-
 
 @Controller
 @RequestMapping("/user/")
@@ -37,19 +34,16 @@ public class UserController {
 	@Autowired
 	private AccountService accountService;
 
-	
-
-
-	//for the purpose redirecting user or admin
+	// for the purpose redirecting user or admin
 	@RequestMapping(value = "/homeRedicrect", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-		Customer p= (Customer) session.getAttribute("customer");
-		if(p.getAccount().getAuthority().equals(AccountType.ADMIN))
-		  return "redirect:/user/adminHomePage";
+		Customer p = (Customer) session.getAttribute("customer");
+		if (p.getAccount().getAuthority().equals(AccountType.ADMIN))
+			return "redirect:/user/adminHomePage";
 		else
-			 return "redirect:/user/userHomePage";
+			return "redirect:/user/userHomePage";
 	}
-	
+
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listUsers(Model model) {
 
@@ -68,7 +62,7 @@ public class UserController {
 
 	@RequestMapping(value = "update/{PersonId}")
 	public String update(@PathVariable Integer PersonId, Model model) {
-		Customer customer= this.customerService.findOne(PersonId);
+		Customer customer = this.customerService.findOne(PersonId);
 		Address address = customer.getAddress();
 		Account account = customer.getAccount();
 		model.addAttribute("customer", customer);
@@ -78,7 +72,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid Customer customer , BindingResult result, Address address, Account account, Model model) {
+	public String update(@Valid Customer customer, BindingResult result, Address address, Account account,
+			Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("customer", customer);
 			model.addAttribute("address", address);
@@ -86,11 +81,10 @@ public class UserController {
 			return "/users/user/updateUser";
 		} else {
 			account.setEnabled(true);
-			if(account.getAuthority().equals(AccountType.ADMIN)){
-//				account.setAuthority(AccountType.ADMIN);
-			}
-			else{
-//				account.setAccountType(AccountType.CUSTOMER);
+			if (account.getAuthority().equals(AccountType.ADMIN)) {
+				// account.setAuthority(AccountType.ADMIN);
+			} else {
+				// account.setAccountType(AccountType.CUSTOMER);
 			}
 			String password = accountService.MD5(account.getPassword());
 			account.setPassword(password);
@@ -103,7 +97,7 @@ public class UserController {
 			System.out.println(account.toString());
 			System.out.println(address.toString());
 			System.out.println(account.getAccountId());
-			//personService.updatePerson(person, account.getAccountId());
+			// personService.updatePerson(person, account.getAccountId());
 			customerService.update(customer);
 			return "redirect:/user/users";
 		}
@@ -118,21 +112,22 @@ public class UserController {
 	 * "redirect:/users"; }
 	 */
 
-	/*@RequestMapping(value = "delete/{PersonId}", method = RequestMethod.GET)
-	public @ResponseBody String delete(@PathVariable Integer PersonId, Model data) {
-		Integer AccountId = personService.find(PersonId).getAccount().getAccountId();
-		personService.deletePerson(PersonId);
-		accountService.deleteAccount(AccountId);
-		return "redirect:"+"/user/users";
-		// System.out.println("deleted");
-		// return "redirect:/users";
-	}*/
+	/*
+	 * @RequestMapping(value = "delete/{PersonId}", method = RequestMethod.GET)
+	 * public @ResponseBody String delete(@PathVariable Integer PersonId, Model
+	 * data) { Integer AccountId =
+	 * personService.find(PersonId).getAccount().getAccountId();
+	 * personService.deletePerson(PersonId);
+	 * accountService.deleteAccount(AccountId); return
+	 * "redirect:"+"/user/users"; // System.out.println("deleted"); // return
+	 * "redirect:/users"; }
+	 */
 	@RequestMapping(value = "delete/{PersonId}", method = RequestMethod.GET)
-	public  String delete(@PathVariable Integer PersonId, Model data) {
+	public String delete(@PathVariable Integer PersonId, Model data) {
 		long AccountId = customerService.findOne(PersonId).getAccount().getAccountId();
 		customerService.delete(PersonId);
 		accountService.delete(AccountId);
-		return "redirect:"+"/user/users"; 
+		return "redirect:" + "/user/users";
 	}
 
 	@RequestMapping(value = "userHomePage", method = RequestMethod.GET)
@@ -143,6 +138,7 @@ public class UserController {
 		// model.addAttribute("user", "sample name");
 		return "users/user/userHomePage";
 	}
+
 	@RequestMapping(value = "adminHomePage", method = RequestMethod.GET)
 	public String adminHomePage(Model model, Principal principal, HttpSession session) {
 
@@ -159,7 +155,5 @@ public class UserController {
 		}
 		return "redirect:/login?logout";
 	}
-
-	
 
 }

@@ -34,7 +34,7 @@ public class PaymentController {
 	AccountService accountService;
 	@Autowired
 	ReservationService reservationService;
-	
+
 	@RequestMapping(value = "/admin/allPayment", method = RequestMethod.GET)
 	public String allPayment(Model model, HttpSession viewSession) {
 		List<Payment> paymentLst = paymentService.findAllPayment();
@@ -42,7 +42,6 @@ public class PaymentController {
 		return "payment/admin/paymentList";
 	}
 
-	
 	@RequestMapping(value = "/admin/searchPayment", method = RequestMethod.POST)
 	public String searchPayment(@RequestParam("customerName") String customerName, Model model) {
 		List<Payment> paymentList = paymentService.searchPaymentByCustomerName(customerName);
@@ -51,22 +50,19 @@ public class PaymentController {
 		return "payment/admin/paymentList";
 
 	}
-	
+
 	@RequestMapping(value = "/admin/viewPayment/{paymentid}", method = RequestMethod.GET)
 	public String viewPaymentAdmin(@PathVariable("paymentid") long paymentid, Model model) {
 		Payment payment = paymentService.findPaymentByID(paymentid);
 		model.addAttribute("payment", payment);
 		return "payment/admin/paymentView";
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/add-payment", method = RequestMethod.GET)
 	public String addPayment(Payment payment, HttpSession sessionAdd, Model model) {
-		System.out.println("shova"+sessionAdd.getAttribute("totalPriceSession"));
+		System.out.println("shova" + sessionAdd.getAttribute("totalPriceSession"));
 		sessionAdd.setAttribute("amountValue", sessionAdd.getAttribute("totalPriceSession"));
-		
+
 		return "payment/add-payment";
 	}
 
@@ -74,7 +70,7 @@ public class PaymentController {
 	public String payBill(@Valid Payment payment, BindingResult bindingResult, HttpSession sessionReservation) {
 		if (bindingResult.hasErrors())
 			return "payment/add-payment";
-		
+
 		Reservation reservation = (Reservation) sessionReservation.getAttribute("reservationObject");
 		payment.setReservation(reservation);
 		paymentService.save(payment);
@@ -83,19 +79,17 @@ public class PaymentController {
 
 	@RequestMapping(value = "/view-payment/{paymentid}", method = RequestMethod.GET)
 	public String viewPayment(@PathVariable("paymentid") long paymentid, Model model, HttpSession mySession) {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-			    .getAuthentication()
-			    .getPrincipal();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Account acct = accountService.findByUserName(userDetails.getUsername());
 		Customer p = acct.getCustomer();
-		//Customer p=(Customer) mySession.getAttribute("customer");
-		
+		// Customer p=(Customer) mySession.getAttribute("customer");
+
 		if (p.isAdmin()) {
 			model.addAttribute("isAdmin", p.isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		
+
 		Payment paymentList = paymentService.findPaymentByID(paymentid);
 		model.addAttribute("paymentList", paymentList);
 		return "payment/view-payment";
@@ -105,25 +99,23 @@ public class PaymentController {
 	public String viewAllPayment(Model model, HttpSession viewSession) {
 		System.out.println("view-all-payment");
 		List<Payment> paymentLst = paymentService.findAllPayment();
-		
-		for(Payment payment : paymentLst)
+
+		for (Payment payment : paymentLst)
 			System.out.print("Amount" + payment.getAmount());
-		
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-			    .getAuthentication()
-			    .getPrincipal();
-//		Customer p=(Customer) viewSession.getAttribute("customer");	
+
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		// Customer p=(Customer) viewSession.getAttribute("customer");
 		Account acct = accountService.findByUserName(userDetails.getUsername());
 		Customer p = acct.getCustomer();
-		
-		System.out.println("First Name"+ p.getFirstName());
-		System.out.println("Account Role"+ p.getAccount().getAuthority());
+
+		System.out.println("First Name" + p.getFirstName());
+		System.out.println("Account Role" + p.getAccount().getAuthority());
 		if (viewSession.getAttribute("person") != null) {
 			model.addAttribute("isAdmin", p.isAdmin());
 		} else {
 			model.addAttribute("isAdmin", false);
 		}
-		System.out.println("Checking "+ p);
+		System.out.println("Checking " + p);
 		model.addAttribute("paymentList", paymentLst);
 		model.addAttribute("totalAmount", paymentService.findTotalAmount(paymentLst));
 		return "payment/view-all-payments";
@@ -133,11 +125,11 @@ public class PaymentController {
 	public String cancelPayment(@PathVariable("paymentid") long paymentid) {
 		Payment payment = paymentService.findPaymentByID(paymentid);
 		Reservation reserve = payment.getReservation();
-		reserve.setState(1); //Set Cancelled
-//		reserve.setReservationId(reserve.getReservationId());
+		reserve.setState(1); // Set Cancelled
+		// reserve.setReservationId(reserve.getReservationId());
 		reservationService.update(reserve);
 		paymentService.cancelPayment(paymentid);
-		
+
 		return "redirect:/payment/view-all-payment";
 
 	}

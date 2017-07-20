@@ -18,40 +18,39 @@ import cs544.carrental.service.VehicleTypeService;;
 @Controller
 @RequestMapping("/types")
 public class VehicleTypeController {
-	
+
 	@Autowired
 	private VehicleTypeService typeService;
- 
- 	@RequestMapping({"","/all"})
+
+	@RequestMapping({ "", "/all" })
 	public String list(Model model) {
 		model.addAttribute("types", typeService.findAll());
 		return "types";
 	}
-	
- 	@RequestMapping("/type")
+
+	@RequestMapping("/type")
 	public String getProductById(Model model, @RequestParam("id") Long id) {
 
-		VehicleType type= typeService.findById(id);
+		VehicleType type = typeService.findById(id);
 		model.addAttribute("type", type);
 		return "type";
 	}
 
-	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(@ModelAttribute("newType") VehicleType newType) {
-	   return "addType";
+		return "addType";
 	}
-	   
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newType") @Valid VehicleType typeToBeAdded, BindingResult result) {
-		if(result.hasErrors()) {
+	public String processAddNewProductForm(@ModelAttribute("newType") @Valid VehicleType typeToBeAdded,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "addType";
 		}
 
 		typeService.save(typeToBeAdded);
-		
-	   	return "redirect:/types";
+
+		return "redirect:/types";
 	}
-	
-   
+
 }
