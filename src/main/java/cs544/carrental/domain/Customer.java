@@ -32,11 +32,11 @@ public class Customer {
 	@GeneratedValue(strategy=GenerationType.AUTO)
  	private long id;
 	
-	@Column(length = 16)
+	@Column(length = 25)
 	@NotEmpty
 	private String firstName;
 	
-	@Column(length = 16)
+	@Column(length = 25)
 	@EmptyOrSize(min=2, max = 15, message= "{EmptyOrSize}")
 	private String lastName;
 
