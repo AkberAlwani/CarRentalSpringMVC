@@ -66,5 +66,6 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="sql"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
