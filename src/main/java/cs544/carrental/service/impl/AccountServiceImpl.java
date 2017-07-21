@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import cs544.carrental.dao.AccountDao;
@@ -22,11 +23,13 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDao accountDao;
  	
 	@Override
+	
 	public void save(Account account) {
 		accountDao.save(account);
 	}
 
 	@Override
+	
 	public void update(Account account) {
 		accountDao.update(account);
 	}

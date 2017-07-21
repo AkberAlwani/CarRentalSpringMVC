@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import cs544.carrental.dao.VehicleDao;
@@ -20,6 +21,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	private VehicleTypeDao vehicleTypeDao;
 	
 	@Override
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void save(VehicleType vehicleType) {
 		vehicleTypeDao.save(vehicleType);
 
@@ -31,6 +33,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(long Id) {
 		vehicleTypeDao.delete(Id);
 
