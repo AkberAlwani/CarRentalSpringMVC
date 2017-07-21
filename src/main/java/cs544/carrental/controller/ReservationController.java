@@ -37,8 +37,8 @@ import cs544.carrental.service.VehicleService;
 import cs544.carrental.service.impl.CustomerServiceImpl;
 import cs544.carrental.service.impl.VehicleServiceImpl;
 
-@RequestMapping("/reservation/")
 @Controller
+@RequestMapping("/reservation/")
 public class ReservationController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class ReservationController {
 	PaymentService paymentService;
 	
 	@Autowired
-	EmailService emailServiceJAVA;
+	EmailService emailService;
 
 	@RequestMapping(value = "admin/list/{state}", method = RequestMethod.GET)
 	public String showList(@PathVariable("state") int state, Model model) {
@@ -189,7 +189,7 @@ public class ReservationController {
 	    		,reservation.getMileageIn(),reservation.getDailyRate(),reservation.getFinePerDay(),reservation.getPricePerDay(),1,vehicle,customer);
 	    String documentName = "AlarmClock.docx";
 //	    EmailService emailService = (EmailService) context.getBean("emailService");
-	    emailServiceJAVA.sendOrderReceivedMail("CarRental", customer.getCustomerNumber(),order,documentName,new Locale("en"));
+	    emailService.sendOrderReceivedMail("CarRental", customer.getCustomerNumber(),order,documentName,new Locale("en"));
 	  
 	    System.out.println("You Have BOOKED with us Car !!");
 		

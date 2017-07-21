@@ -1,7 +1,5 @@
 package cs544.carrental.domain;
 
- 
-
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
