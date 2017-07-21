@@ -32,7 +32,7 @@
 			<c:forEach items="${vehicles}" var="vehicle">
 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
 					<div class="thumbnail">
-					    <img src="<c:url value="/resource/images/car${vehicle.vehicleId}.jpg"></c:url>" alt="image"  style = "width:50px: height:25px"/>
+					    <img src="<c:url value="/resources/images/car${vehicle.vehicleId}.jpg"></c:url>" alt="image"  style = "width:50px: height:25px"/>
 						<div class="caption">
 							<h3>${vehicle.make}</h3>
 							<p>${vehicle.makeyear}</p>
