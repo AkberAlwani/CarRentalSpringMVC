@@ -32,7 +32,7 @@
  			<prop key="use_sql_comments">${use_sql_comments}</prop>
 <!--  			  <prop  key="hibernate.hbm2ddl.import_files_sql_extractor">org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor </prop> -->
 			<prop  key="hibernate.hbm2ddl.import_files_sql_extractor">org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor </prop>
-			<prop key="hibernate.hbm2ddl.import_files">sql/populate.sql,sql/vehicletype.sql,sql/location.sql,sql/vehicle.sql,sql/customer.sql</prop>
+			<prop key="hibernate.hbm2ddl.import_files">populate.sql,vehicletype.sql,location.sql,vehicle.sql,customer.sql</prop>
  			<prop key="hibernate.format_sql">${hibernate.format_sql}</prop> 
              <!-- prop key="hibernate.hbm2ddl.import_files">populate.sql</prop-->
           </props>
