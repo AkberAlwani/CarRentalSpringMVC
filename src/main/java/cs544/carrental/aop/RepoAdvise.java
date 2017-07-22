@@ -20,6 +20,7 @@ public class RepoAdvise {
 			log.info(arg);
 		}
 	}
+	
 	@After("execution(* cs544.carretnal.service.ReservationServiceImpl.*(..))")
 	public void afterCall(JoinPoint jp)
 	{

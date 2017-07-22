@@ -61,7 +61,7 @@ public class CustomerController {
 
 		customer.getAccount().setPassword(password);
 		Authority authority = new Authority();
-		authority.setAuthority("CUSTOMER");
+		authority.setAuthority("ROLE_CUSTOMER");
 		authority.setUsername(customer.getAccount().getUsername());
 		customer.getAccount().setAuthority(authority);
 		// Error caught by ControllerAdvice IF no authorization...

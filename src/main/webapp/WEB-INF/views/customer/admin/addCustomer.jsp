@@ -171,7 +171,7 @@
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
 							<form:input path="account.authority.authority" type="hidden"
-								value="ROLE_USER" class="form:input-large" />
+								value="ROLE_CUSTOMER" class="form:input-large" />
 							<form:errors path="account.authority.authority"
 								cssClass="text-danger" />
 						</div>
